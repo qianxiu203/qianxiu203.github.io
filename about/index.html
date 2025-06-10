@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="/css/layout.css" />
   <link rel="stylesheet" href="/css/iconfont.css" />
   <link rel="stylesheet" href="/css/fallback.css" />
+  <link rel="stylesheet" href="/css/background-themes.css" />
 
   <!-- 预加载关键背景图片 -->
   <link rel="preload" href="/imgs/bg-cover.jpeg" as="image" />
@@ -21,6 +22,7 @@
   <script src="/js/jquery.min.js"></script>
   <script src="/js/jquery.pjax.min.js"></script>
   <script src="/js/resource-fallback.js"></script>
+  <script src="/js/theme-switcher.js"></script>
 
   <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <script>
@@ -201,7 +203,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"搭建Hexo博客","cover":"https://cdn4.winhlb.com/2025/06/08/68449247315f0.jpeg","path":"2025/06/08/HEXO使用指南/"},{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2e3187c.png","path":"2025/06/08/LobeChat/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"lade节点完整部署与优化指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2757fbd.png","path":"2025/06/08/lade节点教程/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448f0c64165.png","path":"2025/06/06/libretv-yingshi/"},{"title":"n8n工作流","cover":"https://cdn4.winhlb.com/2025/06/08/68448d271ac2a.png","path":"2025/06/08/n8n工作流/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://cdn4.winhlb.com/2025/06/08/68448f4a15b4b.jpeg","path":"2025/06/05/新闻快递/"},{"title":"订阅转换 - 在Cloudflare上高效管理节点订阅","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2e680df.png","path":"2025/06/08/订阅转换/"},{"title":"webhout自建节点","cover":"https://cdn4.winhlb.com/2025/06/08/684490eaad887.jpeg","path":"2025/06/05/自建节点/"}]`)
+  const posts = JSON.parse(`[{"title":"搭建Hexo博客","cover":"https://cdn4.winhlb.com/2025/06/08/68449247315f0.jpeg","path":"2025/06/08/HEXO使用指南/"},{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2e3187c.png","path":"2025/06/08/LobeChat/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"lade节点完整部署与优化指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2757fbd.png","path":"2025/06/08/lade节点教程/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448f0c64165.png","path":"2025/06/06/libretv-yingshi/"},{"title":"n8n工作流","cover":"https://cdn4.winhlb.com/2025/06/08/68448d271ac2a.png","path":"2025/06/08/n8n工作流/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://cdn4.winhlb.com/2025/06/08/68448f4a15b4b.jpeg","path":"2025/06/05/新闻快递/"},{"title":"webhout自建节点","cover":"https://cdn4.winhlb.com/2025/06/08/684490eaad887.jpeg","path":"2025/06/05/自建节点/"},{"title":"订阅转换 - 在Cloudflare上高效管理节点订阅","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2e680df.png","path":"2025/06/08/订阅转换/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -475,6 +477,51 @@
 </script></div>
     </section>
   </div>
+
+  <!-- 主题切换器 -->
+  <div id="theme-switcher" class="theme-switcher">
+    <button id="theme-toggle" class="theme-toggle" title="切换主题">
+      <span class="theme-icon">🎨</span>
+      <span class="theme-text">主题</span>
+    </button>
+    <div id="theme-panel" class="theme-panel">
+      <div class="theme-panel-header">
+        <h3>选择主题</h3>
+        <button id="theme-close" class="theme-close">&times;</button>
+      </div>
+      <div class="theme-grid">
+        <div class="theme-option" data-theme="default">
+          <div class="theme-preview theme-preview-default"></div>
+          <span class="theme-name">梦幻紫蓝</span>
+        </div>
+        <div class="theme-option" data-theme="tech-blue">
+          <div class="theme-preview theme-preview-tech-blue"></div>
+          <span class="theme-name">科技蓝</span>
+        </div>
+        <div class="theme-option" data-theme="warm-orange">
+          <div class="theme-preview theme-preview-warm-orange"></div>
+          <span class="theme-name">温暖橙</span>
+        </div>
+        <div class="theme-option" data-theme="forest-green">
+          <div class="theme-preview theme-preview-forest-green"></div>
+          <span class="theme-name">森林绿</span>
+        </div>
+        <div class="theme-option" data-theme="sakura-pink">
+          <div class="theme-preview theme-preview-sakura-pink"></div>
+          <span class="theme-name">樱花粉</span>
+        </div>
+        <div class="theme-option" data-theme="deep-space">
+          <div class="theme-preview theme-preview-deep-space"></div>
+          <span class="theme-name">深空紫</span>
+        </div>
+        <div class="theme-option" data-theme="sunset-yellow">
+          <div class="theme-preview theme-preview-sunset-yellow"></div>
+          <span class="theme-name">日落黄</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div id="progress" class="progress"></div>
   <div id="gray" class="gray"></div>
 
