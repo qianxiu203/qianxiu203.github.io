@@ -1,0 +1,14 @@
+<svg width="400" height="260" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="defaultGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffecd2;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#fcb69f;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="400" height="260" fill="url(#defaultGradient)"/>
+  <circle cx="100" cy="100" r="40" fill="rgba(255,255,255,0.2)"/>
+  <circle cx="300" cy="160" r="30" fill="rgba(255,255,255,0.2)"/>
+  <rect x="50" y="200" width="80" height="6" fill="rgba(255,255,255,0.3)" rx="3"/>
+  <rect x="270" y="50" width="60" height="6" fill="rgba(255,255,255,0.3)" rx="3"/>
+  <text x="200" y="140" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="bold">博客文章</text>
+</svg>

@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>千修lade节点完整部署与优化指南 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="/imgs/shortcut-icon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/css/public.css" />
+  <link rel="stylesheet" href="/css/layout.css" />
+  <link rel="stylesheet" href="/css/iconfont.css" />
+  <link rel="stylesheet" href="/css/fallback.css" />
+
+  <!-- 预加载关键背景图片 -->
+  <link rel="preload" href="/imgs/bg-cover.jpeg" as="image" />
+  <link rel="preload" href="/imgs/top-cover.jpeg" as="image" />
+
+  <!-- 音乐播放器CSS和JS已禁用 -->
+  <!-- <link rel="stylesheet" href="/css/APlayer.min.css" /> -->
+  <!-- <script src="/js/APlayer.min.js"></script> -->
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.pjax.min.js"></script>
+  <script src="/js/resource-fallback.js"></script>
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script>
+    document.title = `千修lade节点完整部署与优化指南`
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<style>
+  .load {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(37, 35, 40);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 9999;
+  }
+  .load-circle {
+    width: 80px;
+    height: 80px;
+    border: 8px solid orange;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotate 1s linear infinite;
+    filter: drop-shadow(0 0 3px orange);
+  }
+  .load-circle-inner {
+    width: 40px;
+    height: 40px;
+    border: 8px solid orange;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: rotate-reverse .5s linear infinite;
+  }
+  .load-text {
+    margin-top: 20px;
+    font-size: 24px;
+    color: orange;
+    display: flex;
+  }
+  .load-text span {
+    margin: 0 5px;
+    text-shadow: 5px 5px 5px orange;
+    animation: move 1s linear infinite;
+  }
+  .load-text span:nth-child(1) {
+    animation-delay: -0.6s;
+  }
+  .load-text span:nth-child(2) {
+    animation-delay: -0.5s;
+  }
+  .load-text span:nth-child(3) {
+    animation-delay: -0.4s;
+  }
+  .load-text span:nth-child(4) {
+    animation-delay: -0.3s;
+  }
+  .load-text span:nth-child(5) {
+    animation-delay: -0.2s;
+  }
+  .load-text span:nth-child(6) {
+    animation-delay: -0.1s;
+  }
+  @keyframes rotate {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes rotate-reverse {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(-360deg); }
+  }
+  @keyframes move {
+    0% { transform: translateY(0%) rotate(0) scale(1); }
+    20% { transform: translateY(20%) rotate(10deg) scale(1.2); }
+    80% { transform: translateY(-10%) rotate(-20deg) scale(.8);}
+    100% { transform: translateY(0) rotate(0) scale(1); }
+  }
+
+  .progress {
+    position: fixed;
+    left: 0; top: 0;
+    width: 0;
+    height: 3px;
+    background-color: green;
+    transition: all cubic-bezier(0.215, 0.610, 0.355, 1) .1s;
+    z-index: 9999;
+  }
+
+  .to-up {
+    animation: toUp .5s 1;
+  }
+  .gray {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999;
+    display: none;
+    pointer-events: none;
+    background-color: #000;
+    mix-blend-mode: color;
+  }
+  @keyframes toUp {
+    from { transform: translateY(15px); opacity: 0; }
+    to { transform: translateY(0) ; opacity: 1; }
+  }
+</style>
+<body>
+  <div id="load" class="load">
+    <div class="load-circle">
+      <div class="load-circle-inner"></div>
+    </div>
+    <p class="load-text">
+      <span>L</span>
+      <span>O</span>
+      <span>A</span>
+      <span>D</span>
+      <span>I</span>
+      <span>N</span>
+      <span>G</span>
+    </p>
+  </div>
+  <div id="container" class="container w-100 vh-100" style="display: none;">
+    <header class="header">
+  <div class="header-wrapper">
+    <div class="header-left">
+      <div class="header-search">
+        <input id="search-input" type="text" class="header-search--input" placeholder="请输入要检索的文章标题" />
+        <span id="search-btn" class="header-search--icon"><i class="iconfont icon-sousuo"></i></span>
+      </div>
+      <div id="search-layer" class="header-search--layer hidden">
+        <p class="title">
+          <span>以下是搜索内容：</span>
+          <span id="close-layer-btn">关闭</span>
+        </p>
+        <ul>
+        </ul>
+      </div>
+    </div>
+    <div class="header-right">
+      <ul class="header-menu">
+        <li>
+          <a href="/">
+            <i class="header-menu--icon iconfont icon-shouye"></i>
+            <span class="header-menu--span">首页</span>
+          </a>
+        </li>
+        <li>
+          <a href="/log">
+            <i class="header-menu--icon iconfont icon-rizhi"></i>
+            <span class="header-menu--span">日志</span>
+          </a>
+        </li>
+        <li>
+          <a href="/link">
+            <i class="header-menu--icon iconfont icon-youqinglianjie"></i>
+            <span class="header-menu--span">友情链接</span>
+          </a>
+        </li>
+        <li>
+          <a href="/about">
+            <i class="header-menu--icon iconfont icon-guanyuwomen"></i>
+            <span class="header-menu--span">关于我</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<script>
+  const ipt = document.querySelector('#search-input')
+  const btn = document.querySelector('#search-btn')
+  const layer = document.querySelector('#search-layer')
+  const posts = JSON.parse(`[{"title":"搭建Hexo博客","cover":"https://cdn4.winhlb.com/2025/06/08/68449247315f0.jpeg","path":"2025/06/08/HEXO使用指南/"},{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2e3187c.png","path":"2025/06/08/LobeChat/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"lade节点完整部署与优化指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2757fbd.png","path":"2025/06/08/lade节点教程/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448f0c64165.png","path":"2025/06/06/libretv-yingshi/"},{"title":"n8n工作流","cover":"https://cdn4.winhlb.com/2025/06/08/68448d271ac2a.png","path":"2025/06/08/n8n工作流/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://cdn4.winhlb.com/2025/06/08/68448f4a15b4b.jpeg","path":"2025/06/05/新闻快递/"},{"title":"订阅转换 - 在Cloudflare上高效管理节点订阅","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2e680df.png","path":"2025/06/08/订阅转换/"},{"title":"webhout自建节点","cover":"https://cdn4.winhlb.com/2025/06/08/684490eaad887.jpeg","path":"2025/06/05/自建节点/"}]`)
+  ipt.addEventListener('keyup', e => {
+    if (e.key === 'Enter') {
+      handleSearch()
+    }
+  })
+  btn.addEventListener('click', () => {
+    handleSearch()
+  })
+
+  document.querySelector('#close-layer-btn').addEventListener('click', () => {
+    layer.classList.toggle('hidden')
+  })
+
+  function handleSearch() {
+    if (ipt.value.trim() === '') {
+      return
+    }
+    let html = ''
+    const targetPosts = posts.filter(post => post.title.includes(ipt.value))
+    targetPosts.forEach(post => {
+      html += `
+        <li>
+          <div>
+            <a href="/${post.path}">${post.title.replace(new RegExp(ipt.value), `<span>${ipt.value}</span>`)}</a>
+          </div>
+          <img src="${post.cover || '/imgs/default-cover.webp' }" />
+        </li>
+      `
+    })
+    if (html.trim () === '') {
+      html += '<p class="empty">没有搜索到内容</p>'
+    }
+    layer.querySelector('ul').innerHTML = html
+    layer.classList.remove('hidden')
+  }
+</script> 
+    <section id="main" class="main">
+      <div class="main-left-wrapper">
+<div class="main-left">
+  <div class="main-left--block">
+    <div class="main-left--info">
+      <img src="/imgs/avatar.jpg"" class="main-left--avatar" />
+      <div class="main-left--intro">
+        <p class="main-left--name">Cola.</p>
+        <div class="main-left--tags">
+          <span class="main-left--tag">宅</span>
+          <span class="main-left--tag"></span>
+        </div>
+      </div>
+    </div>
+  
+    <div>
+      <div class="main-left--motto">
+        <p>“花有重开日，人无再少年”</p>
+        <p>“一个简单普通的男孩”</p>
+      </div>
+      <div class="main-left--github">
+        <span class="line"></span>
+        <a target="_blank" rel="noopener" href="https://github.com/qianxiu203"><i class="logo iconfont icon-github-fill"></i></a>
+        <span class="line"></span>
+      </div>
+      <div class="main-left--statics">
+        <a href="/categories">
+          <div>
+            <span>7</span>
+            <span>分类</span>
+          </div>
+        </a>
+        <a href="/tags">
+          <div>
+            <span>29</span>
+            <span>标签</span>
+          </div>
+        </a>
+        <a href="/archives">
+          <div>
+            <span>1 </span>
+            <span>归档</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-left--block">
+    <ul class="main-left--menu">
+      
+        <li>
+          <a href="/">
+            <span class="header-menu--span">小站首页</span>
+            <i class="header-menu--icon iconfont icon-shouye"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/log">
+            <span class="header-menu--span">个人日志</span>
+            <i class="header-menu--icon iconfont icon-rizhi"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/link">
+            <span class="header-menu--span">友情链接</span>
+            <i class="header-menu--icon iconfont icon-youqinglianjie"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/about">
+            <span class="header-menu--span">关于自己</span>
+            <i class="header-menu--icon iconfont icon-guanyuwomen"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/tools">
+            <span class="header-menu--span">我的工具</span>
+            <i class="header-menu--icon iconfont icon-gongju"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="main-left--block">
+    <div class="main-left--site">
+      <h5 class="main-left--title">
+        <span>站点信息</span>
+        <i class="iconfont icon-zhandian"></i>
+      </h5>
+      <p class="main-left--subtitle">
+        <span>文章数目：</span>
+        <span>9 篇</span>
+      </p>
+      <p class="main-left--subtitle">
+        <span>最近动态：</span>
+        <span>今天</span>
+      </p>
+      <p class="main-left--subtitle">
+        <span>上线时间：</span>
+        <span>3天</span>
+      </p>
+      <p class="main-left--subtitle">
+        <span>当前版本：</span>
+        <span>v1.0.2</span>
+      </p>
+    </div>
+  </div>
+</div></div>
+      <div id="main-container" class="main-container">
+
+
+  <link rel="stylesheet" href="/css/partial/article.css" />
+
+<div class="article-container">
+  <div class="article">
+    <h1 class="article-title">lade节点完整部署与优化指南</h1>
+    <div class="article-info">
+      <div class="article-info--item">
+        <div class="article-info--info">
+          
+          <div class="article-info--categories">
+            <span>分类：</span>
+            <a class="category-link" href="/categories/%E7%BD%91%E7%BB%9C%E6%8A%80%E6%9C%AF/">网络技术</a>
+          </div>
+          
+          
+          <div class="article-info--tags">
+            <span>标签：</span>
+            <a class="tag-link" href="/tags/lade/" rel="tag">lade</a><a class="tag-link" href="/tags/singbox/" rel="tag">singbox</a><a class="tag-link" href="/tags/%E4%BA%91%E6%9C%8D%E5%8A%A1/" rel="tag">云服务</a><a class="tag-link" href="/tags/%E8%8A%82%E7%82%B9%E9%83%A8%E7%BD%B2/" rel="tag">节点部署</a>
+          </div>
+          
+          <p class="article-info--date">日期：2025-06-08 00:40:32</p>
+        </div>
+        <img src="https://cdn4.winhlb.com/2025/06/08/68448d2757fbd.png" alt="" class="article-cover">
+      </div>
+    </div>
+    <article class="article-content markdown-body">
+      <p>本教程将详细介绍lade节点的完整部署流程。</p>
+<p><strong>官方网址：</strong> <a target="_blank" rel="noopener" href="https://www.lade.io/">https://www.lade.io/</a></p>
+<h2 id="一、注册验证账号"><a href="#一、注册验证账号" class="headerlink" title="一、注册验证账号"></a>一、注册验证账号</h2><p><strong>1. 访问官网注册：</strong> <a target="_blank" rel="noopener" href="https://www.lade.io/register">https://www.lade.io/register</a></p>
+<p><strong>2. 在GitHub创建公开Gist：</strong> <a target="_blank" rel="noopener" href="https://gist.github.com/">https://gist.github.com/</a></p>
+<ol start="3">
+<li>打开官网Live Chat提供：<ul>
+<li>注册邮箱</li>
+<li>Gist链接<blockquote>
+<p>客服将在24小时内完成验证</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="二、下载配置应用"><a href="#二、下载配置应用" class="headerlink" title="二、下载配置应用"></a>二、下载配置应用</h2><p><strong>推荐使用eooce的singbox方案：</strong> <a target="_blank" rel="noopener" href="https://github.com/eooce/Sing-box.git">https://github.com/eooce/Sing-box.git</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 克隆仓库</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/eooce/Sing-box.git</span><br><span class="line"><span class="built_in">cd</span> Sing-box/nodejs</span><br><span class="line"></span><br><span class="line"><span class="comment"># 编辑启动脚本</span></span><br><span class="line">nano start.sh</span><br></pre></td></tr></table></figure>
+
+<p>修改以下参数：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ARGO_DOMAIN=<span class="string">&quot;your-domain&quot;</span>  <span class="comment"># Cloudflare Argo域名</span></span><br><span class="line">JSON=<span class="string">&#x27;&#123;&quot;content&quot;:&quot;your-config&quot;&#125;&#x27;</span>  <span class="comment"># 从fscarmen ArgoX生成</span></span><br><span class="line">PORT=8080  <span class="comment"># 应用端口</span></span><br><span class="line">NAME=<span class="string">&quot;lade-node&quot;</span>  <span class="comment"># 节点名称</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>fscarmen ArgoX配置生成：</strong> <a target="_blank" rel="noopener" href="https://fscarmen.cloudflare.now.cc/">https://fscarmen.cloudflare.now.cc</a></p>
+<h2 id="三、安装lade客户端"><a href="#三、安装lade客户端" class="headerlink" title="三、安装lade客户端"></a>三、安装lade客户端</h2><p><strong>Windows系统：</strong></p>
+<p><strong>1. 下载lade.exe：</strong> <a target="_blank" rel="noopener" href="https://www.lade.io/download">https://www.lade.io/download</a><br>2. 将exe文件放入系统PATH目录：<br>   <figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">:: 以管理员身份运行<span class="built_in">CMD</span></span><br><span class="line"><span class="built_in">move</span> lade.exe <span class="variable">%SystemRoot%</span>\system32</span><br></pre></td></tr></table></figure></p>
+<blockquote>
+<p>完成后可删除源文件保证安全</p>
+</blockquote>
+<h2 id="四、部署节点服务"><a href="#四、部署节点服务" class="headerlink" title="四、部署节点服务"></a>四、部署节点服务</h2><h3 id="1-登录账户"><a href="#1-登录账户" class="headerlink" title="1. 登录账户"></a>1. 登录账户</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lade login</span><br><span class="line"><span class="comment"># 输入验证通过的邮箱密码</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-创建应用"><a href="#2-创建应用" class="headerlink" title="2. 创建应用"></a>2. 创建应用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> path/to/Sing-box/nodejs</span><br><span class="line">lade apps create zxcs  <span class="comment"># zxcs可自定义</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-部署应用"><a href="#3-部署应用" class="headerlink" title="3. 部署应用"></a>3. 部署应用</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lade deploy --app zxcs</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-查看日志获取节点"><a href="#4-查看日志获取节点" class="headerlink" title="4. 查看日志获取节点"></a>4. 查看日志获取节点</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lade logs -a zxcs | grep <span class="string">&quot;node&quot;</span>  <span class="comment"># 筛选节点信息</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="5-管理应用"><a href="#5-管理应用" class="headerlink" title="5. 管理应用"></a>5. 管理应用</h3><p>查看状态：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lade apps show zxcs</span><br></pre></td></tr></table></figure>
+<p>删除应用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lade apps remove zxcs</span><br></pre></td></tr></table></figure>
+
+<h2 id="五、性能优化建议"><a href="#五、性能优化建议" class="headerlink" title="五、性能优化建议"></a>五、性能优化建议</h2><ol>
+<li><p><strong>CDN加速</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在Cloudflare中配置Argo Tunnel</span></span><br><span class="line">lade tunnel create --app zxcs</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>负载均衡</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建多个实例</span></span><br><span class="line">lade scale --app zxcs --count 3</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>资源监控</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lade metrics --app zxcs</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="六、安全配置"><a href="#六、安全配置" class="headerlink" title="六、安全配置"></a>六、安全配置</h2><ol>
+<li><p><strong>访问控制</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 设置IP白名单</span></span><br><span class="line">lade network allow --app zxcs --cidr 192.168.1.0/24</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>密钥轮换</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lade secrets rotate --app zxcs</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>日志审计</strong>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lade audit --app zxcs</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h2 id="七、常见问题与解决方案"><a href="#七、常见问题与解决方案" class="headerlink" title="七、常见问题与解决方案"></a>七、常见问题与解决方案</h2><h3 id="1-验证失败"><a href="#1-验证失败" class="headerlink" title="1. 验证失败"></a>1. 验证失败</h3><ul>
+<li>检查Gist是否为public状态</li>
+<li>确认GitHub账号已验证邮箱</li>
+<li>联系客服确认审核进度</li>
+</ul>
+<h3 id="2-部署错误"><a href="#2-部署错误" class="headerlink" title="2. 部署错误"></a>2. 部署错误</h3><ul>
+<li>检查JSON格式是否正确</li>
+<li>验证端口是否被占用</li>
+<li>查看完整错误日志：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lade logs -a zxcs --<span class="built_in">tail</span> 100</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="3-连接问题"><a href="#3-连接问题" class="headerlink" title="3. 连接问题"></a>3. 连接问题</h3><ul>
+<li>等待5-10分钟再查询</li>
+<li>检查防火墙设置</li>
+<li>测试基础连接：<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -v http://localhost:8080</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="4-性能问题"><a href="#4-性能问题" class="headerlink" title="4. 性能问题"></a>4. 性能问题</h3><ul>
+<li>增加实例数量</li>
+<li>启用CDN加速</li>
+<li>优化singbox配置</li>
+</ul>
+<h2 id="八、进阶资源"><a href="#八、进阶资源" class="headerlink" title="八、进阶资源"></a>八、进阶资源</h2><p><strong>1. lade官方文档：</strong> <a target="_blank" rel="noopener" href="https://docs.lade.io/">https://docs.lade.io</a></p>
+<p><strong>2. singbox配置指南：</strong> <a target="_blank" rel="noopener" href="https://sing-box.sagernet.org/">https://sing-box.sagernet.org</a></p>
+<p><strong>3. Cloudflare Argo教程：</strong> <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/argo-tunnel">https://developers.cloudflare.com/argo-tunnel</a></p>
+<p><strong>4. 节点监控方案：</strong> <a target="_blank" rel="noopener" href="https://github.com/lade-io/monitoring">https://github.com/lade-io/monitoring</a></p>
+<blockquote>
+<p>安全提示：生产环境务必定期轮换密钥并删除本地lade.exe</p>
+</blockquote>
+
+    </article>
+    
+    <div class="read-nums">
+      <!-- id 将作为查询条件 -->
+      <span id="2025/06/08/lade节点教程/" class="leancloud_visitors" data-flag-title="Your Article Title">
+        <em class="post-meta-item-text">浏览量</em>
+        <i class="leancloud-visitors-count"></i>
+      </span>
+    </div>
+    <div class="comments-intro">
+      <h2>评论区</h2>
+      <p>欢迎你留下宝贵的意见，昵称输入QQ号会显示QQ头像哦~</p>
+    </div>
+    <div id="vcomments" class="vcomments"></div>
+    
+  </div>
+  <div class="article-catelogue">
+    <div class="article-catelogue--wrapper">
+      <div class="catelogue catelogue-1">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%B3%A8%E5%86%8C%E9%AA%8C%E8%AF%81%E8%B4%A6%E5%8F%B7"><span class="toc-number">1.</span> <span class="toc-text">一、注册验证账号</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%B8%8B%E8%BD%BD%E9%85%8D%E7%BD%AE%E5%BA%94%E7%94%A8"><span class="toc-number">2.</span> <span class="toc-text">二、下载配置应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%AE%89%E8%A3%85lade%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">3.</span> <span class="toc-text">三、安装lade客户端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E9%83%A8%E7%BD%B2%E8%8A%82%E7%82%B9%E6%9C%8D%E5%8A%A1"><span class="toc-number">4.</span> <span class="toc-text">四、部署节点服务</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%99%BB%E5%BD%95%E8%B4%A6%E6%88%B7"><span class="toc-number">4.1.</span> <span class="toc-text">1. 登录账户</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%88%9B%E5%BB%BA%E5%BA%94%E7%94%A8"><span class="toc-number">4.2.</span> <span class="toc-text">2. 创建应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E9%83%A8%E7%BD%B2%E5%BA%94%E7%94%A8"><span class="toc-number">4.3.</span> <span class="toc-text">3. 部署应用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%9F%A5%E7%9C%8B%E6%97%A5%E5%BF%97%E8%8E%B7%E5%8F%96%E8%8A%82%E7%82%B9"><span class="toc-number">4.4.</span> <span class="toc-text">4. 查看日志获取节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E7%AE%A1%E7%90%86%E5%BA%94%E7%94%A8"><span class="toc-number">4.5.</span> <span class="toc-text">5. 管理应用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E5%BB%BA%E8%AE%AE"><span class="toc-number">5.</span> <span class="toc-text">五、性能优化建议</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%AE%89%E5%85%A8%E9%85%8D%E7%BD%AE"><span class="toc-number">6.</span> <span class="toc-text">六、安全配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">7.</span> <span class="toc-text">七、常见问题与解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%AA%8C%E8%AF%81%E5%A4%B1%E8%B4%A5"><span class="toc-number">7.1.</span> <span class="toc-text">1. 验证失败</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%83%A8%E7%BD%B2%E9%94%99%E8%AF%AF"><span class="toc-number">7.2.</span> <span class="toc-text">2. 部署错误</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%BF%9E%E6%8E%A5%E9%97%AE%E9%A2%98"><span class="toc-number">7.3.</span> <span class="toc-text">3. 连接问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E6%80%A7%E8%83%BD%E9%97%AE%E9%A2%98"><span class="toc-number">7.4.</span> <span class="toc-text">4. 性能问题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E8%BF%9B%E9%98%B6%E8%B5%84%E6%BA%90"><span class="toc-number">8.</span> <span class="toc-text">八、进阶资源</span></a></li></ol>
+      </div>
+      
+        <div class="catelogue catelogue-2">
+          
+            <p>
+              <span>上一篇：</span>
+              <a href="/2025/06/08/订阅转换/">订阅转换 - 在Cloudflare上高效管理节点订阅</a>
+            </p>
+           
+          
+            <p>
+              <span>下一篇</span>
+              <a href="/2025/06/08/HEXO使用指南/">搭建Hexo博客</a>
+            </p>
+          
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // var定义，避免pjax重新进来造成的重复声明错误
+  var config = JSON.parse('{"enable":true,"appId":"Pf8zCXGEH1qsprnWfikVVujL-gzGzoHsz","appKey":"qOqoiUHhH1TGtLRUYURkLRQX","placeholder":"请留下你宝贵的意见吧~","meta":["nick"],"recordIP":true,"visitor":true,"enableQQ":true}')
+  new Valine({
+    el: '#vcomments',
+    appId: config.appId,
+    appKey: config.appKey,
+    placeholder: config.placeholder,
+    meta: config.meta,
+    recordIP: config.recordIP,
+    visitor: config.visitor,
+    enableQQ: config.enableQQ,
+    path: '2025/06/08/lade节点教程/'
+  })
+</script>
+
+
+<script>
+  $(document).on('pjax:complete', function() {
+    const tocs = document.querySelector('.toc')
+    const links = tocs ? tocs.querySelectorAll('a') : []
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        const href = decodeURIComponent(e.href)
+        href.search(/#(.*)/)
+        const id = RegExp.$1
+        const target = document.querySelector('#' + id)
+        const top = target.offsetTop
+        document.documentElement.scrollTo({
+          top: top - 100,
+          behavior: 'smooth'
+        })
+        e.preventDefault()
+      })
+    })
+  })
+</script> 
+
+</div>
+      <div class="main-right-wrapper"><div class="main-right">
+  <div class="main-right--board">
+    <div class="main-right--title">
+      <h5>公告栏</h5>
+      <i class="iconfont icon-gonggao"></i>
+    </div>
+    <div class="main-right--content">
+      Hello~大家好。欢迎你们来到我的博客小站。 
+    </div>
+  </div>
+
+  <!-- 音乐播放器已禁用 -->
+
+  <div class="operate-items">
+    <div class="operate-item backtop">
+      <i class="iconfont icon-huidaodingbu"></i>
+      <span>回到顶部</span>
+    </div>
+    
+    <div class="operate-item turn-comment hidden">
+      <i class="iconfont icon-pinglun"></i>
+      <span>查看评论</span>
+    </div>
+    
+  </div>
+
+  <div class="main-right--site">
+    <div class="main-right--power">
+      <p>Power By <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a>.</p>
+      <p>Theme：<a target="_blank" rel="noopener" href="https://github.com/Aizener/hexo-theme-cola">Cola.</a></p>
+    </div>
+    <p class="main-right--refer"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index">蜀ICP备2022005384号-1</a> </p>
+  </div>
+</div>
+
+<script>
+  function setOperateItem () {
+    const reg = /\d{4}\/\d{2}\/\d{2}\/.+/
+    const path = location.pathname
+    const operateDom = document.querySelector('.main-right .operate-items')
+    const commentDom = document.querySelector('.turn-comment')
+    const cateloguDom = document.querySelector('.article-catelogue > .article-catelogue--wrapper');
+
+    if (commentDom) {
+      if (reg.test(path) || path.match(/\/log\/.+/)) {
+        commentDom.classList.remove('hidden')
+        const newDom = operateDom.cloneNode(true);
+        const _backtopDom = newDom.querySelector('.backtop');
+        const _commentDom = newDom.querySelector('.turn-comment');
+        _backtopDom.addEventListener('click', () => backTopEvent());
+        _commentDom.addEventListener('click', () => commentDomEvent());
+        cateloguDom.appendChild(newDom);
+      } else {
+        commentDom.classList.add('hidden')
+      }
+    }
+  }
+
+  setOperateItem()
+  // 音乐播放器已禁用
+  // const musics = JSON.parse(`[]`)
+  // const ap = new APlayer({
+  //   container: document.querySelector('#aplayer'),
+  //   audio: musics,
+  // })
+
+  $(document).on('pjax:complete', function() {
+    setOperateItem()
+  })
+
+  document.querySelector('.backtop').addEventListener('click', () => {
+    backTopEvent();
+  })
+  const dom = document.querySelector('.turn-comment')
+  dom && dom.addEventListener('click', () => {
+    commentDomEvent();
+  })
+
+  function backTopEvent() {
+    document.documentElement.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  function commentDomEvent() {
+    const commentDom = document.querySelector('.comments-intro')
+    if (!commentDom) return
+    const top = commentDom.offsetTop, height = commentDom.offsetHeight
+    document.documentElement.scrollTo({
+      top: top - 2 * height,
+      behavior: 'smooth'
+    })
+  }
+</script></div>
+    </section>
+  </div>
+  <div id="progress" class="progress"></div>
+  <div id="gray" class="gray"></div>
+
+  <script>
+    function initScroll () {
+      document.addEventListener('scroll', () => {
+        const doc = document.documentElement
+        const scrollTop = doc.scrollTop
+        const pageHeight = doc.offsetHeight
+        const clientHeight = doc.clientHeight
+        const ratio = scrollTop / (pageHeight - clientHeight)
+        const progress = document.querySelector('#progress')
+        const avatarImg = document.querySelector('.main-left--avatar')
+        progress.style.width = (100 * ratio) + '%'
+        avatarImg.style.transform = `rotate(${360 * ratio}deg)`
+      })
+    }
+
+    const rootPath = "/"
+
+    const checkAndSetArticlePageLayout = () => {
+      const path = location.pathname.replace(rootPath, '');
+      if (
+        /^\/?\d{4}\/\d{2}\/\d{2}\/.*/.test(path) ||
+        /^log\/.+/.test(path)
+      ) {
+        $('.main-container, .main-right, .main-right-wrapper').addClass('is-article')
+      } else {
+        $('.main-container, .main-right, .main-right-wrapper').removeClass('is-article')
+      }
+    }
+
+    const gray = "none"
+    const setGrayStyle = () => {
+      if (gray === 'none') {
+        return
+      } else if (gray === 'index') {
+        location.pathname === '/' ? $('#gray').show() : $('#gray').hide()
+      } else if (gray === 'all') {
+        $('#gray').show()
+      }
+    }
+    setGrayStyle()
+
+
+    window.onload = function () {
+      checkAndSetArticlePageLayout()
+      setTimeout(() => {
+        $('#load').slideUp()
+        $('#container').slideToggle()
+        setTimeout(() => {
+          initScroll();
+        }, 500)
+      }, 500)
+    }
+    
+    let status = 0
+    // 对所有链接跳转事件绑定pjax容器container
+    $(document).pjax('a[target!=_blank]', '#main-container', {
+      container: '#main-container',
+      fragment: '#main-container',
+      timeout: 8000
+    })
+
+    $(document).on('pjax:start', function() {
+    })
+    $(document).on('pjax:complete', function() {
+      status = 0
+      $('.main-container').addClass('to-up').on('animationend', function() {
+        $(this).removeClass('to-up')
+      })
+      setGrayStyle()
+      checkAndSetArticlePageLayout()
+    })
+    $(document).on('pjax:popstate', function() {
+      status = -1
+      checkAndSetArticlePageLayout()
+    });
+  </script>
+</body>
+</html>

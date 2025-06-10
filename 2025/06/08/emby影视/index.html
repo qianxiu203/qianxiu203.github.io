@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>千修emby影视 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="/imgs/shortcut-icon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="/css/public.css" />
+  <link rel="stylesheet" href="/css/layout.css" />
+  <link rel="stylesheet" href="/css/iconfont.css" />
+  <link rel="stylesheet" href="/css/fallback.css" />
+
+  <!-- 预加载关键背景图片 -->
+  <link rel="preload" href="/imgs/bg-cover.jpeg" as="image" />
+  <link rel="preload" href="/imgs/top-cover.jpeg" as="image" />
+
+  <!-- 音乐播放器CSS和JS已禁用 -->
+  <!-- <link rel="stylesheet" href="/css/APlayer.min.css" /> -->
+  <!-- <script src="/js/APlayer.min.js"></script> -->
+  <script src="/js/jquery.min.js"></script>
+  <script src="/js/jquery.pjax.min.js"></script>
+  <script src="/js/resource-fallback.js"></script>
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script>
+    document.title = `千修emby影视`
+  </script>
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<style>
+  .load {
+    width: 100%;
+    height: 100vh;
+    background-color: rgb(37, 35, 40);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 9999;
+  }
+  .load-circle {
+    width: 80px;
+    height: 80px;
+    border: 8px solid orange;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: rotate 1s linear infinite;
+    filter: drop-shadow(0 0 3px orange);
+  }
+  .load-circle-inner {
+    width: 40px;
+    height: 40px;
+    border: 8px solid orange;
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: rotate-reverse .5s linear infinite;
+  }
+  .load-text {
+    margin-top: 20px;
+    font-size: 24px;
+    color: orange;
+    display: flex;
+  }
+  .load-text span {
+    margin: 0 5px;
+    text-shadow: 5px 5px 5px orange;
+    animation: move 1s linear infinite;
+  }
+  .load-text span:nth-child(1) {
+    animation-delay: -0.6s;
+  }
+  .load-text span:nth-child(2) {
+    animation-delay: -0.5s;
+  }
+  .load-text span:nth-child(3) {
+    animation-delay: -0.4s;
+  }
+  .load-text span:nth-child(4) {
+    animation-delay: -0.3s;
+  }
+  .load-text span:nth-child(5) {
+    animation-delay: -0.2s;
+  }
+  .load-text span:nth-child(6) {
+    animation-delay: -0.1s;
+  }
+  @keyframes rotate {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes rotate-reverse {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(-360deg); }
+  }
+  @keyframes move {
+    0% { transform: translateY(0%) rotate(0) scale(1); }
+    20% { transform: translateY(20%) rotate(10deg) scale(1.2); }
+    80% { transform: translateY(-10%) rotate(-20deg) scale(.8);}
+    100% { transform: translateY(0) rotate(0) scale(1); }
+  }
+
+  .progress {
+    position: fixed;
+    left: 0; top: 0;
+    width: 0;
+    height: 3px;
+    background-color: green;
+    transition: all cubic-bezier(0.215, 0.610, 0.355, 1) .1s;
+    z-index: 9999;
+  }
+
+  .to-up {
+    animation: toUp .5s 1;
+  }
+  .gray {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100vh;
+    z-index: 9999;
+    display: none;
+    pointer-events: none;
+    background-color: #000;
+    mix-blend-mode: color;
+  }
+  @keyframes toUp {
+    from { transform: translateY(15px); opacity: 0; }
+    to { transform: translateY(0) ; opacity: 1; }
+  }
+</style>
+<body>
+  <div id="load" class="load">
+    <div class="load-circle">
+      <div class="load-circle-inner"></div>
+    </div>
+    <p class="load-text">
+      <span>L</span>
+      <span>O</span>
+      <span>A</span>
+      <span>D</span>
+      <span>I</span>
+      <span>N</span>
+      <span>G</span>
+    </p>
+  </div>
+  <div id="container" class="container w-100 vh-100" style="display: none;">
+    <header class="header">
+  <div class="header-wrapper">
+    <div class="header-left">
+      <div class="header-search">
+        <input id="search-input" type="text" class="header-search--input" placeholder="请输入要检索的文章标题" />
+        <span id="search-btn" class="header-search--icon"><i class="iconfont icon-sousuo"></i></span>
+      </div>
+      <div id="search-layer" class="header-search--layer hidden">
+        <p class="title">
+          <span>以下是搜索内容：</span>
+          <span id="close-layer-btn">关闭</span>
+        </p>
+        <ul>
+        </ul>
+      </div>
+    </div>
+    <div class="header-right">
+      <ul class="header-menu">
+        <li>
+          <a href="/">
+            <i class="header-menu--icon iconfont icon-shouye"></i>
+            <span class="header-menu--span">首页</span>
+          </a>
+        </li>
+        <li>
+          <a href="/log">
+            <i class="header-menu--icon iconfont icon-rizhi"></i>
+            <span class="header-menu--span">日志</span>
+          </a>
+        </li>
+        <li>
+          <a href="/link">
+            <i class="header-menu--icon iconfont icon-youqinglianjie"></i>
+            <span class="header-menu--span">友情链接</span>
+          </a>
+        </li>
+        <li>
+          <a href="/about">
+            <i class="header-menu--icon iconfont icon-guanyuwomen"></i>
+            <span class="header-menu--span">关于我</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</header>
+
+<script>
+  const ipt = document.querySelector('#search-input')
+  const btn = document.querySelector('#search-btn')
+  const layer = document.querySelector('#search-layer')
+  const posts = JSON.parse(`[{"title":"搭建Hexo博客","cover":"https://cdn4.winhlb.com/2025/06/08/68449247315f0.jpeg","path":"2025/06/08/HEXO使用指南/"},{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2e3187c.png","path":"2025/06/08/LobeChat/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"lade节点完整部署与优化指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2757fbd.png","path":"2025/06/08/lade节点教程/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448f0c64165.png","path":"2025/06/06/libretv-yingshi/"},{"title":"n8n工作流","cover":"https://cdn4.winhlb.com/2025/06/08/68448d271ac2a.png","path":"2025/06/08/n8n工作流/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://cdn4.winhlb.com/2025/06/08/68448f4a15b4b.jpeg","path":"2025/06/05/新闻快递/"},{"title":"订阅转换 - 在Cloudflare上高效管理节点订阅","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2e680df.png","path":"2025/06/08/订阅转换/"},{"title":"webhout自建节点","cover":"https://cdn4.winhlb.com/2025/06/08/684490eaad887.jpeg","path":"2025/06/05/自建节点/"}]`)
+  ipt.addEventListener('keyup', e => {
+    if (e.key === 'Enter') {
+      handleSearch()
+    }
+  })
+  btn.addEventListener('click', () => {
+    handleSearch()
+  })
+
+  document.querySelector('#close-layer-btn').addEventListener('click', () => {
+    layer.classList.toggle('hidden')
+  })
+
+  function handleSearch() {
+    if (ipt.value.trim() === '') {
+      return
+    }
+    let html = ''
+    const targetPosts = posts.filter(post => post.title.includes(ipt.value))
+    targetPosts.forEach(post => {
+      html += `
+        <li>
+          <div>
+            <a href="/${post.path}">${post.title.replace(new RegExp(ipt.value), `<span>${ipt.value}</span>`)}</a>
+          </div>
+          <img src="${post.cover || '/imgs/default-cover.webp' }" />
+        </li>
+      `
+    })
+    if (html.trim () === '') {
+      html += '<p class="empty">没有搜索到内容</p>'
+    }
+    layer.querySelector('ul').innerHTML = html
+    layer.classList.remove('hidden')
+  }
+</script> 
+    <section id="main" class="main">
+      <div class="main-left-wrapper">
+<div class="main-left">
+  <div class="main-left--block">
+    <div class="main-left--info">
+      <img src="/imgs/avatar.jpg"" class="main-left--avatar" />
+      <div class="main-left--intro">
+        <p class="main-left--name">Cola.</p>
+        <div class="main-left--tags">
+          <span class="main-left--tag">宅</span>
+          <span class="main-left--tag"></span>
+        </div>
+      </div>
+    </div>
+  
+    <div>
+      <div class="main-left--motto">
+        <p>“花有重开日，人无再少年”</p>
+        <p>“一个简单普通的男孩”</p>
+      </div>
+      <div class="main-left--github">
+        <span class="line"></span>
+        <a target="_blank" rel="noopener" href="https://github.com/qianxiu203"><i class="logo iconfont icon-github-fill"></i></a>
+        <span class="line"></span>
+      </div>
+      <div class="main-left--statics">
+        <a href="/categories">
+          <div>
+            <span>7</span>
+            <span>分类</span>
+          </div>
+        </a>
+        <a href="/tags">
+          <div>
+            <span>29</span>
+            <span>标签</span>
+          </div>
+        </a>
+        <a href="/archives">
+          <div>
+            <span>1 </span>
+            <span>归档</span>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="main-left--block">
+    <ul class="main-left--menu">
+      
+        <li>
+          <a href="/">
+            <span class="header-menu--span">小站首页</span>
+            <i class="header-menu--icon iconfont icon-shouye"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/log">
+            <span class="header-menu--span">个人日志</span>
+            <i class="header-menu--icon iconfont icon-rizhi"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/link">
+            <span class="header-menu--span">友情链接</span>
+            <i class="header-menu--icon iconfont icon-youqinglianjie"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/about">
+            <span class="header-menu--span">关于自己</span>
+            <i class="header-menu--icon iconfont icon-guanyuwomen"></i>
+          </a>
+        </li>
+      
+        <li>
+          <a href="/tools">
+            <span class="header-menu--span">我的工具</span>
+            <i class="header-menu--icon iconfont icon-gongju"></i>
+          </a>
+        </li>
+      
+    </ul>
+  </div>
+
+  <div class="main-left--block">
+    <div class="main-left--site">
+      <h5 class="main-left--title">
+        <span>站点信息</span>
+        <i class="iconfont icon-zhandian"></i>
+      </h5>
+      <p class="main-left--subtitle">
+        <span>文章数目：</span>
+        <span>9 篇</span>
+      </p>
+      <p class="main-left--subtitle">
+        <span>最近动态：</span>
+        <span>今天</span>
+      </p>
+      <p class="main-left--subtitle">
+        <span>上线时间：</span>
+        <span>3天</span>
+      </p>
+      <p class="main-left--subtitle">
+        <span>当前版本：</span>
+        <span>v1.0.2</span>
+      </p>
+    </div>
+  </div>
+</div></div>
+      <div id="main-container" class="main-container">
+
+
+  <link rel="stylesheet" href="/css/partial/article.css" />
+
+<div class="article-container">
+  <div class="article">
+    <h1 class="article-title">emby影视</h1>
+    <div class="article-info">
+      <div class="article-info--item">
+        <div class="article-info--info">
+          
+          <div class="article-info--categories">
+            <span>分类：</span>
+            
+          </div>
+          
+          
+          <div class="article-info--tags">
+            <span>标签：</span>
+            
+          </div>
+          
+          <p class="article-info--date">日期：2025-06-08 16:13:17</p>
+        </div>
+        <img src="https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png" alt="" class="article-cover">
+      </div>
+    </div>
+    <article class="article-content markdown-body">
+      <p>💥69云机场新增Emby权益公告💥</p>
+<p>⚠️首先明确：为了更好的观影体验，建议在全局 + 69云机场的Emby节点使用emby服务！！</p>
+<p>目前，69云为用户诚挚提供三大Emby权益</p>
+<p>1️⃣<br>DPX 硬盘服-全体会员尊享<br>🔗 <a target="_blank" rel="noopener" href="http://emby.69yun69.com:18690/">http://emby.69yun69.com:18690</a></p>
+<p>2️⃣<br>50万+资源服-会员级别≥10专享<br>🔗 <a target="_blank" rel="noopener" href="https://emby3.69yun69.com/">https://emby3.69yun69.com:443</a></p>
+<p>3️⃣<br>Porn教学服-半年卡&#x2F;年卡用户独享<br>🔗 <a target="_blank" rel="noopener" href="https://emby2.69yun69.com/">https://emby2.69yun69.com:443</a></p>
+<ul>
+<li>账号信息<br>👤 Emby 账号: 您注册69云机场的邮箱 (示例: <a href="mailto:&#x71;&#x69;&#x61;&#110;&#120;&#105;&#117;&#x34;&#x38;&#x40;&#x67;&#x6d;&#97;&#105;&#x6c;&#x2e;&#x63;&#111;&#x6d;">qianxiu48@gmail.com</a>)<br>🔑 密码: 空</li>
+</ul>
+<p>使用方法：  </p>
+<ol>
+<li>网 站 （china.69yun69.com）购买套餐  </li>
+<li>下载emby的app  </li>
+<li>在app中填写对应的域名，端口和账号</li>
+</ol>
+<h3 id="🔔-特别提示"><a href="#🔔-特别提示" class="headerlink" title="🔔 特别提示"></a>🔔 特别提示</h3><p>1️⃣ 禁止网页观看  </p>
+<ul>
+<li>请务必使用 第三方 App 软件 进行观看，网页端不支持播放。</li>
+</ul>
+<p>2️⃣ 不提供技术支持  </p>
+<ul>
+<li>69云机场不提供 Emby 服务的技术支持。如有任何使用问题，请自行查阅相关资料或使用谷歌搜索。☀️</li>
+</ul>
+<p>感谢您的支持与理解，希望大家能享受这项新服务！💻🎬  </p>
+<hr>
+<p>🙏以下是收集到的一些客户端，可自行选择，不带任何技术支持，纯小白请自查，如果有侵权，请告知，即刻修正！  </p>
+<p>（暂行）播放软件推荐（转载，修正于2024年11月8日），连接协议请选择”Emby”，或”其他Emby”：  </p>
+<p><strong>IOS &amp; IPad OS</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id1136220934">Infuse</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/yybx/id1519723194">yybx</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/iemc/id1467462861">iemc</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/fileball/id1558391784">Fileball</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id6458691598">HamHub</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id6443975850">SenPlayer</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/conflux-video-player/id6450330892">Conflux</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/iplay/id6480576133">iPlay</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/us/app/forward-%E6%96%B0%E8%A7%86%E7%95%8C/id6503940939">Forward</a></li>
+</ol>
+<p><strong>Apple TV</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id1136220934">Infuse</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/yybx/id1519723194">yybx</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/fileball/id1558391784">Fileball</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id6458691598">HamHub</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id6443975850">SenPlayer</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/conflux-video-player/id6450330892">Conflux</a></li>
+<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/iplay/id6480576133">iPlay</a></li>
+</ol>
+<p>请注意：本服禁止使用Vidhub登录，禁止开启Infuse的”媒体库模式”功能，禁止通过网页端登录，禁止使用Reflix连接，禁止使用Emby for Kodi登录。登录成功后，请不要新建播放列表。  </p>
+<p><strong>Android</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/AttemptD/AfuseKt-release/releases">Afusekt</a></li>
+<li><a target="_blank" rel="noopener" href="https://t.me/yamby_release">Yamby</a></li>
+<li><a target="_blank" rel="noopener" href="https://t.me/NaoRubbish/119">Emby 小秘版 及多个相关改版</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/ourfor/iPlay/releases">iPlay</a></li>
+<li><a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=org.jellyfin.mobile&hl=en_US">Jellyfin</a></li>
+<li><a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=dev.jdtech.jellyfin&hl=en_US">Findroid</a></li>
+<li><a target="_blank" rel="noopener" href="https://t.me/SaltSoupGarage/603">Emby kirlif版</a></li>
+<li><a target="_blank" rel="noopener" href="https://t.me/hkaemby/38362">Femor</a></li>
+</ol>
+<p><strong>Android TV</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://github.com/AttemptD/AfuseKtV-release/releases">Afusekt TV版</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/jellyfin/jellyfin-androidtv/releases">Jellyfin Android TV</a></li>
+<li><a target="_blank" rel="noopener" href="https://t.me/NaoRubbish/119">Emby 小秘版 及多个相关改版</a></li>
+<li><a target="_blank" rel="noopener" href="https://t.me/SaltSoupGarage/615">Emby kirlif版</a></li>
+</ol>
+<p>请注意：Emby的诸多相关改版在不同的设备上兼容性表现也各不相同，建议多次尝试后选择您当前设备下使用体验最好的改版。</p>
+<p><strong>Windows</strong></p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://t.me/NaoRubbish/119">Emby 小秘版 及多个相关改版</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/tsukinaha/tsukimi/releases">Tsukimi</a></li>
+<li><a target="_blank" rel="noopener" href="https://t.me/hkaemby/38362">Femor</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/jellyfin/jellyfin-media-player/releases">Jellyfin Media Player</a></li>
+</ol>
+
+    </article>
+    
+    <div class="read-nums">
+      <!-- id 将作为查询条件 -->
+      <span id="2025/06/08/emby影视/" class="leancloud_visitors" data-flag-title="Your Article Title">
+        <em class="post-meta-item-text">浏览量</em>
+        <i class="leancloud-visitors-count"></i>
+      </span>
+    </div>
+    <div class="comments-intro">
+      <h2>评论区</h2>
+      <p>欢迎你留下宝贵的意见，昵称输入QQ号会显示QQ头像哦~</p>
+    </div>
+    <div id="vcomments" class="vcomments"></div>
+    
+  </div>
+  <div class="article-catelogue">
+    <div class="article-catelogue--wrapper">
+      <div class="catelogue catelogue-1">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%94-%E7%89%B9%E5%88%AB%E6%8F%90%E7%A4%BA"><span class="toc-number">1.</span> <span class="toc-text">🔔 特别提示</span></a></li></ol>
+      </div>
+      
+        <div class="catelogue catelogue-2">
+           
+          
+            <p>
+              <span>下一篇</span>
+              <a href="/2025/06/08/n8n工作流/">n8n工作流</a>
+            </p>
+          
+        </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<script>
+  // var定义，避免pjax重新进来造成的重复声明错误
+  var config = JSON.parse('{"enable":true,"appId":"Pf8zCXGEH1qsprnWfikVVujL-gzGzoHsz","appKey":"qOqoiUHhH1TGtLRUYURkLRQX","placeholder":"请留下你宝贵的意见吧~","meta":["nick"],"recordIP":true,"visitor":true,"enableQQ":true}')
+  new Valine({
+    el: '#vcomments',
+    appId: config.appId,
+    appKey: config.appKey,
+    placeholder: config.placeholder,
+    meta: config.meta,
+    recordIP: config.recordIP,
+    visitor: config.visitor,
+    enableQQ: config.enableQQ,
+    path: '2025/06/08/emby影视/'
+  })
+</script>
+
+
+<script>
+  $(document).on('pjax:complete', function() {
+    const tocs = document.querySelector('.toc')
+    const links = tocs ? tocs.querySelectorAll('a') : []
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        const href = decodeURIComponent(e.href)
+        href.search(/#(.*)/)
+        const id = RegExp.$1
+        const target = document.querySelector('#' + id)
+        const top = target.offsetTop
+        document.documentElement.scrollTo({
+          top: top - 100,
+          behavior: 'smooth'
+        })
+        e.preventDefault()
+      })
+    })
+  })
+</script> 
+
+</div>
+      <div class="main-right-wrapper"><div class="main-right">
+  <div class="main-right--board">
+    <div class="main-right--title">
+      <h5>公告栏</h5>
+      <i class="iconfont icon-gonggao"></i>
+    </div>
+    <div class="main-right--content">
+      Hello~大家好。欢迎你们来到我的博客小站。 
+    </div>
+  </div>
+
+  <!-- 音乐播放器已禁用 -->
+
+  <div class="operate-items">
+    <div class="operate-item backtop">
+      <i class="iconfont icon-huidaodingbu"></i>
+      <span>回到顶部</span>
+    </div>
+    
+    <div class="operate-item turn-comment hidden">
+      <i class="iconfont icon-pinglun"></i>
+      <span>查看评论</span>
+    </div>
+    
+  </div>
+
+  <div class="main-right--site">
+    <div class="main-right--power">
+      <p>Power By <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/docs/">Hexo</a>.</p>
+      <p>Theme：<a target="_blank" rel="noopener" href="https://github.com/Aizener/hexo-theme-cola">Cola.</a></p>
+    </div>
+    <p class="main-right--refer"><a target="_blank" rel="noopener" href="https://beian.miit.gov.cn/#/Integrated/index">蜀ICP备2022005384号-1</a> </p>
+  </div>
+</div>
+
+<script>
+  function setOperateItem () {
+    const reg = /\d{4}\/\d{2}\/\d{2}\/.+/
+    const path = location.pathname
+    const operateDom = document.querySelector('.main-right .operate-items')
+    const commentDom = document.querySelector('.turn-comment')
+    const cateloguDom = document.querySelector('.article-catelogue > .article-catelogue--wrapper');
+
+    if (commentDom) {
+      if (reg.test(path) || path.match(/\/log\/.+/)) {
+        commentDom.classList.remove('hidden')
+        const newDom = operateDom.cloneNode(true);
+        const _backtopDom = newDom.querySelector('.backtop');
+        const _commentDom = newDom.querySelector('.turn-comment');
+        _backtopDom.addEventListener('click', () => backTopEvent());
+        _commentDom.addEventListener('click', () => commentDomEvent());
+        cateloguDom.appendChild(newDom);
+      } else {
+        commentDom.classList.add('hidden')
+      }
+    }
+  }
+
+  setOperateItem()
+  // 音乐播放器已禁用
+  // const musics = JSON.parse(`[]`)
+  // const ap = new APlayer({
+  //   container: document.querySelector('#aplayer'),
+  //   audio: musics,
+  // })
+
+  $(document).on('pjax:complete', function() {
+    setOperateItem()
+  })
+
+  document.querySelector('.backtop').addEventListener('click', () => {
+    backTopEvent();
+  })
+  const dom = document.querySelector('.turn-comment')
+  dom && dom.addEventListener('click', () => {
+    commentDomEvent();
+  })
+
+  function backTopEvent() {
+    document.documentElement.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    })
+  }
+
+  function commentDomEvent() {
+    const commentDom = document.querySelector('.comments-intro')
+    if (!commentDom) return
+    const top = commentDom.offsetTop, height = commentDom.offsetHeight
+    document.documentElement.scrollTo({
+      top: top - 2 * height,
+      behavior: 'smooth'
+    })
+  }
+</script></div>
+    </section>
+  </div>
+  <div id="progress" class="progress"></div>
+  <div id="gray" class="gray"></div>
+
+  <script>
+    function initScroll () {
+      document.addEventListener('scroll', () => {
+        const doc = document.documentElement
+        const scrollTop = doc.scrollTop
+        const pageHeight = doc.offsetHeight
+        const clientHeight = doc.clientHeight
+        const ratio = scrollTop / (pageHeight - clientHeight)
+        const progress = document.querySelector('#progress')
+        const avatarImg = document.querySelector('.main-left--avatar')
+        progress.style.width = (100 * ratio) + '%'
+        avatarImg.style.transform = `rotate(${360 * ratio}deg)`
+      })
+    }
+
+    const rootPath = "/"
+
+    const checkAndSetArticlePageLayout = () => {
+      const path = location.pathname.replace(rootPath, '');
+      if (
+        /^\/?\d{4}\/\d{2}\/\d{2}\/.*/.test(path) ||
+        /^log\/.+/.test(path)
+      ) {
+        $('.main-container, .main-right, .main-right-wrapper').addClass('is-article')
+      } else {
+        $('.main-container, .main-right, .main-right-wrapper').removeClass('is-article')
+      }
+    }
+
+    const gray = "none"
+    const setGrayStyle = () => {
+      if (gray === 'none') {
+        return
+      } else if (gray === 'index') {
+        location.pathname === '/' ? $('#gray').show() : $('#gray').hide()
+      } else if (gray === 'all') {
+        $('#gray').show()
+      }
+    }
+    setGrayStyle()
+
+
+    window.onload = function () {
+      checkAndSetArticlePageLayout()
+      setTimeout(() => {
+        $('#load').slideUp()
+        $('#container').slideToggle()
+        setTimeout(() => {
+          initScroll();
+        }, 500)
+      }, 500)
+    }
+    
+    let status = 0
+    // 对所有链接跳转事件绑定pjax容器container
+    $(document).pjax('a[target!=_blank]', '#main-container', {
+      container: '#main-container',
+      fragment: '#main-container',
+      timeout: 8000
+    })
+
+    $(document).on('pjax:start', function() {
+    })
+    $(document).on('pjax:complete', function() {
+      status = 0
+      $('.main-container').addClass('to-up').on('animationend', function() {
+        $(this).removeClass('to-up')
+      })
+      setGrayStyle()
+      checkAndSetArticlePageLayout()
+    })
+    $(document).on('pjax:popstate', function() {
+      status = -1
+      checkAndSetArticlePageLayout()
+    });
+  </script>
+</body>
+</html>

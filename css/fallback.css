@@ -1,0 +1,141 @@
+/* 背景加载失败的回退样式 */
+/* 主容器背景回退 */
+.container {
+/* 如果背景图片加载失败，使用渐变背景 */
+  background-color: #f5f7fa;
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%), radial-gradient(circle at 20% 80%, rgba(120,119,198,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15) 0%, transparent 50%);
+}
+/* 背景加载失败时的特殊样式 */
+.container.bg-fallback {
+  background-image: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important, radial-gradient(circle at 20% 80%, rgba(120,119,198,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.15) 0%, transparent 50%);
+}
+/* 头部背景回退 */
+.header::after {
+  background-color: rgba(102,126,234,0.8);
+  background-image: linear-gradient(90deg, rgba(102,126,234,0.8) 0%, rgba(118,75,162,0.8) 100%);
+}
+.header.header-bg-fallback::after {
+  background-image: linear-gradient(90deg, rgba(102,126,234,0.8) 0%, rgba(118,75,162,0.8) 100%) !important;
+}
+/* 文章内容区域背景优化 */
+.markdown-body {
+  background-color: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+/* 卡片背景优化 */
+.index-article--box,
+.article,
+.main-left,
+.main-right {
+  background-color: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.2);
+}
+/* 图片加载失败时的样式 */
+.index-article--box.img-error {
+  background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+}
+.index-article--box.img-error::before {
+  content: '图片加载失败';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: #666;
+  font-size: 14px;
+  z-index: 2;
+}
+/* 字体加载失败时的回退 */
+.iconfont {
+  font-family: "iconfont", "Font Awesome 5 Free", "Font Awesome 5 Brands", Arial, sans-serif !important;
+}
+/* GitHub图标特殊处理 - 如果字体加载失败，显示文字 */
+.font-fallback .icon-github-fill:before {
+  content: "GitHub";
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+/* 其他图标的文字回退 */
+.font-fallback .icon-shouye:before {
+  content: "首页";
+}
+.font-fallback .icon-rizhi:before {
+  content: "日志";
+}
+.font-fallback .icon-youqinglianjie:before {
+  content: "链接";
+}
+.font-fallback .icon-guanyuwomen:before {
+  content: "关于";
+}
+.font-fallback .icon-gongju:before {
+  content: "工具";
+}
+.font-fallback .icon-sousuo:before {
+  content: "搜索";
+}
+/* 加载动画优化 */
+.img-loading {
+  background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0), linear-gradient(45deg, #f0f0f0 25%, transparent 25%, transparent 75%, #f0f0f0 75%, #f0f0f0);
+  background-size: 20px 20px;
+  background-position: 0 0, 10px 10px;
+  animation: loading-bg 1s linear infinite;
+}
+/* 移动端优化 */
+@media screen and (max-width: 768px) {
+  .container {
+    background-attachment: scroll; /* 移动端不使用fixed，避免性能问题 */
+  }
+}
+/* 深色模式适配 */
+@media (prefers-color-scheme: dark) {
+  .container {
+    background-color: #1a1a2e;
+    background-image: linear-gradient(135deg, #16213e 0%, #0f3460 100%), radial-gradient(circle at 20% 80%, rgba(69,90,120,0.3) 0%, transparent 50%);
+  }
+  .markdown-body {
+    background-color: rgba(26,26,46,0.95);
+    color: #e0e0e0;
+  }
+  .index-article--box,
+  .article,
+  .main-left,
+  .main-right {
+    background-color: rgba(26,26,46,0.95);
+    border-color: rgba(255,255,255,0.1);
+  }
+}
+@-moz-keyframes loading-bg {
+  0% {
+    background-position: 0 0, 10px 10px;
+  }
+  100% {
+    background-position: 20px 20px, 30px 30px;
+  }
+}
+@-webkit-keyframes loading-bg {
+  0% {
+    background-position: 0 0, 10px 10px;
+  }
+  100% {
+    background-position: 20px 20px, 30px 30px;
+  }
+}
+@-o-keyframes loading-bg {
+  0% {
+    background-position: 0 0, 10px 10px;
+  }
+  100% {
+    background-position: 20px 20px, 30px 30px;
+  }
+}
+@keyframes loading-bg {
+  0% {
+    background-position: 0 0, 10px 10px;
+  }
+  100% {
+    background-position: 20px 20px, 30px 30px;
+  }
+}
