@@ -203,7 +203,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"搭建Hexo博客","cover":"https://cdn4.winhlb.com/2025/06/08/68449247315f0.jpeg","path":"2025/06/08/HEXO使用指南/"},{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2e3187c.png","path":"2025/06/08/LobeChat/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"n8n工作流","cover":"https://cdn4.winhlb.com/2025/06/08/68448d271ac2a.png","path":"2025/06/08/n8n工作流/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448f0c64165.png","path":"2025/06/06/libretv-yingshi/"},{"title":"webhostmost教程","cover":"https://cdn4.winhlb.com/2025/06/27/685d8485b81fc.jpeg","path":"2025/06/27/webhostmost教程/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://cdn4.winhlb.com/2025/06/08/68448f4a15b4b.jpeg","path":"2025/06/05/新闻快递/"},{"title":"免费节点","cover":"https://cdn4.winhlb.com/2025/06/27/685d830497f1e.jpeg","path":"2025/06/27/免费节点/"},{"title":"订阅转换 - 在Cloudflare上高效管理节点订阅","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2e680df.png","path":"2025/06/08/订阅转换/"}]`)
+  const posts = JSON.parse(`[{"title":"搭建Hexo博客","cover":"https://cdn4.winhlb.com/2025/06/08/68449247315f0.jpeg","path":"2025/06/08/HEXO使用指南/"},{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2e3187c.png","path":"2025/06/08/LobeChat/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"n8n工作流","cover":"https://cdn4.winhlb.com/2025/06/08/68448d271ac2a.png","path":"2025/06/08/n8n工作流/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448f0c64165.png","path":"2025/06/06/libretv-yingshi/"},{"title":"webhostmost教程","cover":"https://cdn4.winhlb.com/2025/06/27/685d8485b81fc.jpeg","path":"2025/06/27/webhostmost教程/"},{"title":"免费节点","cover":"https://cdn4.winhlb.com/2025/06/27/685d830497f1e.jpeg","path":"2025/06/27/免费节点/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://cdn4.winhlb.com/2025/06/08/68448f4a15b4b.jpeg","path":"2025/06/05/新闻快递/"},{"title":"订阅转换 - 在Cloudflare上高效管理节点订阅","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2e680df.png","path":"2025/06/08/订阅转换/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -383,49 +383,18 @@
       </div>
     </div>
     <article class="article-content markdown-body">
-      <h2 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h2><ul>
-<li>CF账号</li>
-<li>域名</li>
-</ul>
-<h2 id="第一步：注册webhostmost"><a href="#第一步：注册webhostmost" class="headerlink" title="第一步：注册webhostmost"></a>第一步：注册webhostmost</h2><ol>
-<li>访问注册地址：<a target="_blank" rel="noopener" href="https://www.webhostmost.com/free-web-hosting">webhostmost免费主机</a></li>
-<li>完成注册后会收到确认邮件，点击链接完成邮箱验证</li>
-</ol>
-<h2 id="第二步：IP解析到域名"><a href="#第二步：IP解析到域名" class="headerlink" title="第二步：IP解析到域名"></a>第二步：IP解析到域名</h2><ol>
-<li>复制服务器IP地址</li>
-<li>在域名管理页面添加DNS记录：<ul>
-<li>设置子域名</li>
-<li>绑定IP</li>
-</ul>
-</li>
-<li>启用IP代理状态并保存</li>
-<li>将系统中的默认域名更改为自定义域名</li>
-<li>等待设置生效</li>
-</ol>
-<h2 id="第三步：搭建节点项目"><a href="#第三步：搭建节点项目" class="headerlink" title="第三步：搭建节点项目"></a>第三步：搭建节点项目</h2><ol>
-<li>项目地址：<a target="_blank" rel="noopener" href="https://github.com/qianxiu203/webhost-node-ws">webhost-node-ws</a></li>
-<li>终端执行以下命令：</li>
-</ol>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -Ls https://raw.githubusercontent.com/frankiejun/node-ws/refs/heads/main/setup.sh &gt; setup.sh &amp;&amp; <span class="built_in">chmod</span> +x setup.sh &amp;&amp; ./setup.sh 域名</span><br></pre></td></tr></table></figure>
-
-<h2 id="第四步：打开node路径"><a href="#第四步：打开node路径" class="headerlink" title="第四步：打开node路径"></a>第四步：打开node路径</h2><p>访问管理页面：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://服务区.webhostmost.com:2222/重点填写evo/user/plugins/nodejs_selector#/applications</span><br></pre></td></tr></table></figure>
-
-<h2 id="第五步：填写变量"><a href="#第五步：填写变量" class="headerlink" title="第五步：填写变量"></a>第五步：填写变量</h2><ol>
-<li>版本：20.18.3</li>
-<li>Application mode：默认</li>
-<li>Application root：public_html</li>
-<li>Application startup file：index.js</li>
-<li>添加环境变量</li>
-<li>UUID生成地址：<a target="_blank" rel="noopener" href="https://1024tools.com/uuid">1024tools</a></li>
-</ol>
-<h2 id="第六步：运行NPM"><a href="#第六步：运行NPM" class="headerlink" title="第六步：运行NPM"></a>第六步：运行NPM</h2><ol>
-<li>如果失败停止运行，下载文件：<a target="_blank" rel="noopener" href="https://www.123684.com/s/Gzf8Vv-gdLBA">备用下载</a></li>
-<li>文件上传路径：nodevenv-domains-域名</li>
-<li>再次运行NPM</li>
-<li>订阅地址格式：域名+uuid</li>
-</ol>
-
+      <div class="hbe hbe-container" id="hexo-blog-encrypt" data-wpm="Oh, this is an invalid password. Check and try again, please." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">
+  <script id="hbeData" type="hbeData" data-hmacdigest="3fec3bbdab81268129adf2c8c683b6d1fb374f9fc6fdabff1ed6d66af5b728e5">97b2b2fe323604bfc8fe2648fe355975dbded2c1f3ce63044122ea22c113c12ad3964570618ab5f45936ce28cb229d7a869e03b57e8b82f22fc5eef55db8ef876cfa51c45eafc6aac1d6dfe1eec8b183c8d5151c76127730b9952c580e393094b8d2b50816b6cae07438375c45a811029132d131d227a5492e659b869505b637daf01e1ec7308da65d79077d95b895436259ca0d0ca4ce8707bf93d223111109218c87a02125debd47e357211f999170fa7ed36d36a17bef156dc779f871ff350d8a68e1eb88d3942a04d326a5338a8ae5aeb05f778164a72245beceb2bcdbe9760e5ebf41273ce8978a814714fd1006f69d444331554ba2a5f38e7c7b3e71d42e78a1d2fb7d2e1da3ba788169fca38546fb1a96e67bc2ebe966ccf7a3fa37f336063100c0525814881a3cf39ad5cc0561ce57365725e743eede186364d47dc0899e39bc5a41a7a6f5503133893c7f7cf0b1b5fa6b0f4605a51a1fd705d7a0d6d0f3ef964761d1fe7b716613088931072962ac4bf3c3197e2dc574b6511d717635f5c53538988a2549bb3d3c5ebfad3612626a29c4f49123ed80156abf0addf226fd6178ca6ea82f89c90f07058a90f4ff1b04c622c1f56c154ef519f523e4caf69f27bc83286376215a45af41bd4a705302229b81656742a287c98d0abdd8d2d063fd9b68dca5c11e5e078970b1209d9b53b43fef95780cae201addda5630d1bab509dfc7de63b15e72609796133a94433809a4293251d69c4389f1bec761455e1ae618406f2a2c4c566fd1a532e005ee625afee2d1468227004ebb3564478da8820079a6d3c3ee5be524943026ab3005419f40c6abce514d3b8a9430ca7681ab2a9e071daea8979d5883b7323a57f48aad5fb56e71b6b23037b64d652c0ec5f19422a94a04cd9fd45cc183cd7c9f9291f1fec701f498d567ba3ca4743b95173dc41aa547bf211bc908a5d767d7e549c8a75598a4c677388102e237f63aaf462d2d7cd14798f5c67a0f15839a18c1c6496175d8a5a878b65f200e2cc646d26561f4fba5a0ab83c532879e409c9a7ddba2604b9e6c08bcb75eeb1187060987806ec628d2f29e6c6dbfff47961707eb1ca919786e7653dc1bd25184d54d418ffee51e3721c2f41da00cb22f7d4f2c122841005790c54dfe6d88018ef781b248136c280ee9819ed5aff270aa101d216635cd17d453446ca51a42dff7ba7cc484aafa633153736876cb42ca56d016b145831a792a3c9fdefad24fe1a50d9044b6ab186a2c18608e507e354dcece0145e484c5ba5ef8254677a08ba08f3f37c7064d7489307c117a75f8e01524c4987eeb8674009a4c99d2261e7af4ce898d2bfeb59dd342b9ff1578b3cf52f66519e1761f0cacc9ea01c4440de095e6fc24da6c58ab0a4c61db6ec6cc4c0597ef09922e8b6a353154eb2fdedd28a3a3fa7d9e6019d5579fd0bebe9cff8660fd23b2ebb5a8bb0894c12efd2275eb8f2d0478e3d975fb89524fded212e31d9167b55c0369ae9f1296ddaf50c28e77ac442d60a7150d444b4d14d2d38212486f4073b0d1d8a5cff6540c348c4895e32b53c238ca76917c45fa81d199da07195a96f3b41c9500754d74c685c99dcc66795267abaad5078c277c92b3a4c326e1c5154ea506d0f2061c350ce0b824e9ba8e6023754a795e88ee37b4f5ff613731efa2cac265c3a1bee4c2af8733a19107da5aafe23240e40eb31c90120f550137151189ceb63b3ae2f490cc95161af3d9857a1eb6359e72b21db683c25ea38eeb737e1a976e8590e9d895a54c1876473714856ec14451f3d46bebf8ff7533c474aa42af94db7c43b3d4bb700dbe5ddb930f9b771f9b9ed46a0341b322f2c7fde93d8ce31e11e9bc8a5f4dd26d7e9930ec6dab54ad6071e9bd273b94abf422506ae74180f5474abbf97385671b65dbd44c59276bb34891dd2c8f4324a11f630099ed124ed2f60a2279d230fcee57bae2b3131024a5c4d7a4cc0f32a286b3c3aebe134bf71cf698f9de9608c6bf6ee490dc849e28e7d9e189513bdd21b7d08a1e87a0afdc23f85f4c021f13a7ae0190e4665af3cb8271118de50657c5c98fa11704dcdffef67f2c3cddfc35badeea79b96c18d6e4a1ed6cdfa450e0db61c29534133ce9c12cf9c09c1a86342d7df43d2650918436993cbd309d2353383910622fbf44355fe99ccd971eae40d7538cee2af98fb75a1e34d35a4993cc2830155812a64c629f93892fa1ccce5a790ca68c9358a5c0c09e7985a55a90f21d49c1d49f12344f39089308a7ea61c35fb4dbcd84b6f265f4bcb385ef94976f290974a6b19479c2e8b3a09e57fdcbebe62e290bc7239e197beace79229c4616a9fd7fe7539cdfed62e92a0a8678561ffbe651fb5d3a49d3e1c399fbb4cfafce265237d546c0850233536baa66da6586bcecba837a2d6accc8e03af53ac2573e9d7da0a87cefb6d5eb0c41895312943d414cfe40dff829e2f3d97b1e96d5cd660ab9218d519f1769e34e6a019dc362735d330446c494b75073c923cd74ed9e6b171be87448e22b8427ae2f64b59adecaf78f4c8480743757378d3121ab0f40a7f0c665998dd56965061684811dfe7a856985998f4f6e61fac4cdfc685e0026e7d9f979f61c88a9ba0de4c9adeb07eb11a3652e19d22086d35172ecfd8867816888901e8c5e74ae15662a397b9e22a14240be873844e45e56df0b1e5540a9df43fbb2c64e61b64bad470b44730e733a101fab6d35430a641e731e24176d257f75d61ace88f7f4076d4a819bee91dac52ef8b6ce5e03440e6003f8d61d9919d60203ea5d801757ea866c9f634b63e6e8a71c4b50a16133e2b1b3cb448ea24837dff22c73cac48e4f7c3a464601f4af63314e7d1a3883d78fd4b27a312e09cd7d6b6705ce985b526f2bf47ad457e5b5d40a601086b9368344005576d162c9e3a8d5c57589cd60b5dad0394c4e7f86709cf7e4507b19fbdc896cd18d05515af7be4f0bac39704447ea6249bdd6c37da3cfac2e63fe5d6fad87ff54a0354305a24c4bd70c7980d32e94f41b1ecc766643607165c955c5113ae0dd0b14180ea111871d998c20e5a2cd95b801f36f58e3e3a3582af9c7ab84f55d195c76cc76bf111574b88173aa6d55f42977f251a25caeeb8a54f969725e310e1fd9b7433855837670cef7ff8c84cab06405e55344869dc41d605e6f8767df9317f83e1e06e78c9952e85ea080ca1c59d452201fcf8e56f447213ef5c6ac28379d97e934114f01da0bc72cc532e021361ab1d6395bf2dc96465e55ca5ce0aeea077052c214dbee7a293d99e8cdd1cecb9a585d5aa28d6dd25533b9980ac7d68be22e4c6fa674f2face8d40cf33897d41392b8d29ffd03ad23318df78f98d38a407db72066a7fa98dbb8ced89e1ee819336a063844dcde2d2ac503108b90a5302b8b241f043dcfd3e8bfe3b0d5d8a84399c1ab2321f6b8b1ba5e36a2120ecdae2fcb3f61c561540404e1d0743777f3e778b04496b8ab293616e3ff20b6d4631d495acbf1ddc94cc3203c8e9a9a961d4f6cd8d4740ac9e6185c3314f2d5a620863194db374d8e03386c617c6400bb192c5bf94ca5c4b0490eec2d87b67fc450f6aed9491e826f7505fdb0e0a8212041141f655aa811d9e26e0f6fbea6f342cff07c3c87d5f05b590242214591fea8ad5d4f1bcf38e2e16f20dd415d868c4741ba75ba358cbbc75d8931a0e3b35fce90d699ae8b156e353b68405b6a55c2efbd24ee389ec9c4db1baec6d33139d016ef05adaec846cd14570678959d544e4c0745838a51c18ffbc3e4b5bd6f430c9617f30783856ed9bdfbd3fea208f1ec4b21bf536d4bf0109a37555dc81dbfaaa09d4fabf013eca6f56fa869df43acdbdc6018aa2465c032a5d0359deae4c16027f246e8a365701ba2a707ef7ea215e96c12e48a4a7fd886f62dbb0bfd87a6dbc08e6c18e55ba2b4324dda73e2446015cf99bf1b1e14c1df1c24139b6d080d9187c42360007c2f9e19f7886ec47ec9d8045c107b53aeac537b6be79ac8733b50a1e18ec13415499d945c0962adb0577ec13af66d652e1ce559f3dc02feada2c76667c2162e87f531969b1650870e358f56d950d4f3496c15630a43687e05348967bf511587ce4d079b869fb85cda8f6840573587bb9599cf2f15e570d7ed03815c1a64262c592a433894dca494e7528bfe2a9aa60047f67ad1e7701eb5d441e956572ce0521ac88529e6b771992af5ea2b9fd426f84a67ed81f3c80046118162d622d1aa3527aa96bf5</script>
+  <div class="hbe hbe-content">
+    <div class="hbe hbe-input hbe-input-default">
+      <input class="hbe hbe-input-field hbe-input-field-default" type="password" id="hbePass">
+      <label class="hbe hbe-input-label hbe-input-label-default" for="hbePass">
+        <span class="hbe hbe-input-label-content hbe-input-label-content-default">请输入密码查看完整内容</span>
+      </label>
+    </div>
+  </div>
+</div>
+<script data-pjax src="/lib/hbe.js"></script><link href="/css/hbe.style.css" rel="stylesheet" type="text/css">
     </article>
     
     <div class="read-nums">
@@ -446,7 +415,7 @@
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E6%B3%A8%E5%86%8Cwebhostmost"><span class="toc-number">2.</span> <span class="toc-text">第一步：注册webhostmost</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9AIP%E8%A7%A3%E6%9E%90%E5%88%B0%E5%9F%9F%E5%90%8D"><span class="toc-number">3.</span> <span class="toc-text">第二步：IP解析到域名</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E6%90%AD%E5%BB%BA%E8%8A%82%E7%82%B9%E9%A1%B9%E7%9B%AE"><span class="toc-number">4.</span> <span class="toc-text">第三步：搭建节点项目</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E6%89%93%E5%BC%80node%E8%B7%AF%E5%BE%84"><span class="toc-number">5.</span> <span class="toc-text">第四步：打开node路径</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E5%A1%AB%E5%86%99%E5%8F%98%E9%87%8F"><span class="toc-number">6.</span> <span class="toc-text">第五步：填写变量</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E6%AD%A5%EF%BC%9A%E8%BF%90%E8%A1%8CNPM"><span class="toc-number">7.</span> <span class="toc-text">第六步：运行NPM</span></a></li></ol>
+        
       </div>
       
         <div class="catelogue catelogue-2">
