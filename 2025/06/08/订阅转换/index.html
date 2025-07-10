@@ -203,7 +203,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"搭建Hexo博客","cover":"https://cdn4.winhlb.com/2025/06/08/68449247315f0.jpeg","path":"2025/06/08/HEXO使用指南/"},{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2e3187c.png","path":"2025/06/08/LobeChat/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://cdn4.winhlb.com/2025/06/08/68448f0c64165.png","path":"2025/06/06/libretv-yingshi/"},{"title":"n8n工作流","cover":"https://cdn4.winhlb.com/2025/06/08/68448d271ac2a.png","path":"2025/06/08/n8n工作流/"},{"title":"免费节点","cover":"https://cdn4.winhlb.com/2025/06/27/685d830497f1e.jpeg","path":"2025/06/27/免费节点/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://cdn4.winhlb.com/2025/06/08/68448f4a15b4b.jpeg","path":"2025/06/05/新闻快递/"},{"title":"站点监控平台","cover":"https://cdn4.winhlb.com/2025/06/30/68626a92dd46e.jpeg","path":"2025/06/30/站点监控平台/"},{"title":"订阅转换 - 在Cloudflare上高效管理节点订阅","cover":"https://cdn4.winhlb.com/2025/06/08/68448d2e680df.png","path":"2025/06/08/订阅转换/"}]`)
+  const posts = JSON.parse(`[{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbdiD.png","path":"2025/06/08/LobeChat/"},{"title":"搭建Hexo博客","cover":"https://s21.ax1x.com/2025/07/10/pVQbwJe.png","path":"2025/06/08/HEXO使用指南/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbssI.png","path":"2025/06/06/libretv-yingshi/"},{"title":"免费节点","cover":"https://cdn4.winhlb.com/2025/06/27/685d830497f1e.jpeg","path":"2025/06/27/免费节点/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://s21.ax1x.com/2025/07/10/pVQbNdK.jpg","path":"2025/06/05/新闻快递/"},{"title":"站点监控平台","cover":"https://cdn4.winhlb.com/2025/06/30/68626a92dd46e.jpeg","path":"2025/06/30/站点监控平台/"},{"title":"订阅转换 - 在Cloudflare上高效管理节点订阅","cover":"https://s21.ax1x.com/2025/07/10/pVQbHe0.png","path":"2025/06/08/订阅转换/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -268,13 +268,13 @@
       <div class="main-left--statics">
         <a href="/categories">
           <div>
-            <span>7</span>
+            <span>6</span>
             <span>分类</span>
           </div>
         </a>
         <a href="/tags">
           <div>
-            <span>25</span>
+            <span>23</span>
             <span>标签</span>
           </div>
         </a>
@@ -337,7 +337,7 @@
       </h5>
       <p class="main-left--subtitle">
         <span>文章数目：</span>
-        <span>9 篇</span>
+        <span>8 篇</span>
       </p>
       <p class="main-left--subtitle">
         <span>最近动态：</span>
@@ -345,7 +345,7 @@
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
-        <span>24天</span>
+        <span>33天</span>
       </p>
       <p class="main-left--subtitle">
         <span>当前版本：</span>
@@ -379,7 +379,7 @@
           
           <p class="article-info--date">日期：2025-06-08 01:31:35</p>
         </div>
-        <img src="https://cdn4.winhlb.com/2025/06/08/68448d2e680df.png" alt="" class="article-cover">
+        <!-- <img src="https://s21.ax1x.com/2025/07/10/pVQbHe0.png" alt="" class="article-cover"> -->
       </div>
     </div>
     <article class="article-content markdown-body">
@@ -403,47 +403,6 @@
 <li>Clash Meta 配置 和 Clash 配置: 如果你使用Clash系列客户端，Edge Sub可以轻松地处理其配置。值得一提的是，Clash配置的输出会经过滤，只包含Edge Sub已支持的代理类型，以确保兼容性。</li>
 <li>Sing-Box 配置: 对于Sing-Box用户，Edge Sub也提供了支持。</li>
 </ul>
-<h2 id="如何使用Edge-Sub？"><a href="#如何使用Edge-Sub？" class="headerlink" title="如何使用Edge Sub？"></a>如何使用Edge Sub？</h2><p>Edge Sub提供了两种主要的使用方式：</p>
-<ol>
-<li><strong>UI界面</strong>: 最简单直观的方式，你只需将Edge Sub部署在Cloudflare Pages上，然后通过其Web界面进行操作，根据提示即可完成订阅转换。</li>
-<li><strong>API端点</strong>: 对于开发者或需要自动化处理的用户，Edge Sub提供了API端点。<ul>
-<li><code>/sub/clash-meta</code>: 专门用于Clash Meta订阅的转换。你可以通过URL参数指定远程订阅地址、可选的远程配置文件（INI格式）以及是否强制刷新缓存。</li>
-<li><code>/sub/debug</code>: 这是一个仅供测试的调试端点，输出格式可能随时发生变化。</li>
-</ul>
-</li>
-</ol>
-<h2 id="部署Edge-Sub：简单便捷"><a href="#部署Edge-Sub：简单便捷" class="headerlink" title="部署Edge Sub：简单便捷"></a>部署Edge Sub：简单便捷</h2><p>将Edge Sub部署到Cloudflare Pages非常简单，只需几个步骤：</p>
-<ol>
-<li>Fork Edge Sub的GitHub项目。</li>
-<li>登录你的Cloudflare账户，前往“Workers &amp; Pages”部分。</li>
-<li>选择“Pages”，然后点击“连接到Git”，选择你Fork的Edge Sub项目。</li>
-<li>在构建设置中，将“Framework preset”设置为Astro，并将“Build command”编辑为<code>pnpm build:frontend</code>。</li>
-<li>点击“Save and Deploy”，等待部署完成。</li>
-</ol>
-<h3 id="可选：为远程规则添加缓存-强烈推荐！"><a href="#可选：为远程规则添加缓存-强烈推荐！" class="headerlink" title="可选：为远程规则添加缓存 (强烈推荐！)"></a>可选：为远程规则添加缓存 (强烈推荐！)</h3><p>为了进一步提升处理速度，Edge Sub推荐为远程规则添加KV缓存。这可以显著加快订阅转换的速度，尤其是在处理大型或频繁更新的订阅时。</p>
-<ol>
-<li>在Cloudflare的“Workers &amp; Pages”部分，前往“KV”。</li>
-<li>创建一个新的KV命名空间，并为其命名。</li>
-<li>回到你的Edge Sub项目设置，在“Functions”下的“KV namespace bindings”中，添加一个新的绑定。</li>
-<li>将“Variable name”设置为<code>EdgeSubDB</code>，并选择你刚刚创建的KV命名空间。</li>
-<li>保存设置后，找到最近的部署，点击“Retry Deployment”重新部署项目即可。</li>
-</ol>
-<h2 id="使用场景示例"><a href="#使用场景示例" class="headerlink" title="使用场景示例"></a>使用场景示例</h2><ol>
-<li><strong>多设备同步</strong>：将同一订阅转换为不同客户端支持的格式，在手机、电脑等设备上使用</li>
-<li><strong>协议升级</strong>：将老旧协议节点转换为新协议，提升安全性和速度</li>
-<li><strong>订阅过滤</strong>：只保留特定地区或特定协议的节点，简化订阅内容</li>
-</ol>
-<h2 id="常见问题"><a href="#常见问题" class="headerlink" title="常见问题"></a>常见问题</h2><p><strong>Q: Edge Sub会存储我的订阅内容吗？</strong><br>A: 不会，所有转换操作都在内存中完成，不会持久化存储您的订阅数据。</p>
-<p><strong>Q: 转换后的订阅速度会变慢吗？</strong><br>A: 不会，Cloudflare的边缘计算节点会确保转换过程高效快速。</p>
-<p><strong>Q: 如何确保订阅安全性？</strong><br>A: 建议使用HTTPS访问Edge Sub，并定期更换订阅链接。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Edge Sub为管理和转换你的节点订阅提供了一个强大而灵活的解决方案。通过利用Cloudflare的全球网络，它不仅能提高你代理访问的速度和稳定性，还能大大简化不同客户端和协议之间的转换过程。如果你正在寻找一个高效、便捷的订阅管理工具，Edge Sub绝对值得一试！</p>
-<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
-<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
-<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
-<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
-<h2 id="相关资源"><a href="#相关资源" class="headerlink" title="相关资源"></a>相关资源</h2><p><strong>Edge Sub GitHub项目：</strong> <a target="_blank" rel="noopener" href="https://github.com/edgesub">https://github.com/edgesub</a></p>
-<p><strong>Cloudflare Workers文档：</strong> <a target="_blank" rel="noopener" href="https://developers.cloudflare.com/workers/">https://developers.cloudflare.com/workers/</a></p>
-<p><strong>代理协议比较指南：</strong> <a href="https://example.com/proxy-comparison">https://example.com/proxy-comparison</a></p>
 
     </article>
     
@@ -465,7 +424,7 @@
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Edge-Sub%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">Edge Sub能做什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E7%9A%84%E8%8A%82%E7%82%B9%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">支持的节点类型：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E7%9A%84%E8%AE%A2%E9%98%85%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">支持的订阅类型：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8Edge-Sub%EF%BC%9F"><span class="toc-number">2.</span> <span class="toc-text">如何使用Edge Sub？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%83%A8%E7%BD%B2Edge-Sub%EF%BC%9A%E7%AE%80%E5%8D%95%E4%BE%BF%E6%8D%B7"><span class="toc-number">3.</span> <span class="toc-text">部署Edge Sub：简单便捷</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E9%80%89%EF%BC%9A%E4%B8%BA%E8%BF%9C%E7%A8%8B%E8%A7%84%E5%88%99%E6%B7%BB%E5%8A%A0%E7%BC%93%E5%AD%98-%E5%BC%BA%E7%83%88%E6%8E%A8%E8%8D%90%EF%BC%81"><span class="toc-number">3.1.</span> <span class="toc-text">可选：为远程规则添加缓存 (强烈推荐！)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%E7%A4%BA%E4%BE%8B"><span class="toc-number">4.</span> <span class="toc-text">使用场景示例</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-number">5.</span> <span class="toc-text">常见问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-number">7.</span> <span class="toc-text">免责声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E8%B5%84%E6%BA%90"><span class="toc-number">8.</span> <span class="toc-text">相关资源</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Edge-Sub%E8%83%BD%E5%81%9A%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="toc-number">1.</span> <span class="toc-text">Edge Sub能做什么？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E7%9A%84%E8%8A%82%E7%82%B9%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="toc-number">1.1.</span> <span class="toc-text">支持的节点类型：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%94%AF%E6%8C%81%E7%9A%84%E8%AE%A2%E9%98%85%E7%B1%BB%E5%9E%8B%EF%BC%9A"><span class="toc-number">1.2.</span> <span class="toc-text">支持的订阅类型：</span></a></li></ol></li></ol>
       </div>
       
         <div class="catelogue catelogue-2">
