@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/css/iconfont.css" />
   <link rel="stylesheet" href="/css/fallback.css" />
   <link rel="stylesheet" href="/css/background-themes.css" />
+  <link rel="stylesheet" href="/css/terminal-copy.css" />
 
   <!-- 预加载关键背景图片 -->
   <link rel="preload" href="/imgs/bg-cover.jpeg" as="image" />
@@ -23,6 +24,7 @@
   <script src="/js/jquery.pjax.min.js"></script>
   <script src="/js/resource-fallback.js"></script>
   <script src="/js/theme-switcher.js"></script>
+  <script src="/js/terminal-copy.js"></script>
 
   <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <script>
@@ -203,7 +205,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbdiD.png","path":"2025/06/08/LobeChat/"},{"title":"搭建Hexo博客","cover":"https://s21.ax1x.com/2025/07/10/pVQbwJe.png","path":"2025/06/08/HEXO使用指南/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbssI.png","path":"2025/06/06/libretv-yingshi/"},{"title":"免费节点","cover":"https://cdn4.winhlb.com/2025/06/27/685d830497f1e.jpeg","path":"2025/06/27/免费节点/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"站点监控平台","cover":"https://cdn4.winhlb.com/2025/06/30/68626a92dd46e.jpeg","path":"2025/06/30/站点监控平台/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://s21.ax1x.com/2025/07/10/pVQbNdK.jpg","path":"2025/06/05/新闻快递/"},{"title":"汇聚订阅 - 在Cloudflare上高效管理节点订阅","cover":"https://s21.ax1x.com/2025/07/10/pVQbHe0.png","path":"2025/06/08/订阅转换/"}]`)
+  const posts = JSON.parse(`[{"title":"搭建Hexo博客","cover":"https://s21.ax1x.com/2025/07/10/pVQbwJe.png","path":"2025/06/08/HEXO使用指南/"},{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbdiD.png","path":"2025/06/08/LobeChat/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbssI.png","path":"2025/06/06/libretv-yingshi/"},{"title":"Perplexica - 开源AI驱动搜索引擎","cover":"https://s21.ax1x.com/2025/07/12/pVlYc2q.jpg","path":"2025/01/15/Perplexica/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"免费节点","cover":"https://cdn4.winhlb.com/2025/06/27/685d830497f1e.jpeg","path":"2025/06/27/免费节点/"},{"title":"提示词优化器 - AI对话效果提升利器","cover":"https://s21.ax1x.com/2025/07/12/pVlYwqS.jpg","path":"2025/01/15/提示词优化器/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://s21.ax1x.com/2025/07/10/pVQbNdK.jpg","path":"2025/06/05/新闻快递/"},{"title":"站点监控平台","cover":"https://cdn4.winhlb.com/2025/06/30/68626a92dd46e.jpeg","path":"2025/06/30/站点监控平台/"},{"title":"汇聚订阅 - 在Cloudflare上高效管理节点订阅","cover":"https://s21.ax1x.com/2025/07/10/pVQbHe0.png","path":"2025/06/08/订阅转换/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -274,13 +276,13 @@
         </a>
         <a href="/tags">
           <div>
-            <span>23</span>
+            <span>27</span>
             <span>标签</span>
           </div>
         </a>
         <a href="/archives">
           <div>
-            <span>1 </span>
+            <span>2 </span>
             <span>归档</span>
           </div>
         </a>
@@ -337,7 +339,7 @@
       </h5>
       <p class="main-left--subtitle">
         <span>文章数目：</span>
-        <span>8 篇</span>
+        <span>10 篇</span>
       </p>
       <p class="main-left--subtitle">
         <span>最近动态：</span>
@@ -345,7 +347,7 @@
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
-        <span>34天</span>
+        <span>35天</span>
       </p>
       <p class="main-left--subtitle">
         <span>当前版本：</span>
@@ -383,19 +385,169 @@
       </div>
     </div>
     <article class="article-content markdown-body">
-      <p>探索 LobeChat：现代化设计的开源聊天应用与开发框架</p>
-<h2 id="核心功能概览"><a href="#核心功能概览" class="headerlink" title="核心功能概览"></a>核心功能概览</h2><p>LobeChat 是一个现代化设计的开源 ChatGPT&#x2F;LLMs 聊天应用与开发框架，支持以下核心能力：</p>
-<h3 id="1-多模态交互"><a href="#1-多模态交互" class="headerlink" title="1. 多模态交互"></a>1. 多模态交互</h3><ul>
-<li>思维链可视化(CoT)</li>
-<li>分支对话管理</li>
-<li>白板内容创作(Artifacts)</li>
-<li>文件上传与知识库</li>
+      <style>
+.terminal-block {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 10px 0;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px 6px 0 0;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27ca3f; }
+
+.terminal-content {
+    padding: 12px;
+    color: #f8f8f2;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: #50fa7b;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #44475a;
+    border: 1px solid #6272a4;
+    color: #f8f8f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #6272a4;
+    border-color: #8be9fd;
+}
+
+.copy-btn.success {
+    background: #50fa7b;
+    color: #282a36;
+    border-color: #50fa7b;
+}
+
+.copy-btn.error {
+    background: #ff5555;
+    border-color: #ff5555;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ 已复制';
+        button.className = 'copy-btn success';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✗ 失败';
+        button.className = 'copy-btn error';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    });
+}
+</script>
+
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>探索 LobeChat：现代化设计的开源聊天应用与开发框架</p>
+<p>LobeChat 是一个现代化设计的开源 ChatGPT&#x2F;LLMs 聊天应用与开发框架，为用户提供强大的AI对话体验。</p>
+<h2 id="核心功能概览"><a href="#核心功能概览" class="headerlink" title="核心功能概览"></a>核心功能概览</h2><h3 id="多模态交互能力"><a href="#多模态交互能力" class="headerlink" title="多模态交互能力"></a>多模态交互能力</h3><ul>
+<li><strong>思维链可视化 (CoT)</strong> - 展示AI推理过程</li>
+<li><strong>分支对话管理</strong> - 支持多线程对话</li>
+<li><strong>白板内容创作 (Artifacts)</strong> - 可视化内容编辑</li>
+<li><strong>文件上传与知识库</strong> - 支持文档问答</li>
 </ul>
-<h3 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h3><p><strong>访问地址:</strong> <a target="_blank" rel="noopener" href="https://chat.0407123.xyz/">https://chat.0407123.xyz</a></p>
-<p><strong>登录密码:</strong> <code>admin</code></p>
-<blockquote>
-<p>关注<a target="_blank" rel="noopener" href="https://blog.lobe-chat.xyz/">官方博客</a>获取最新动态</p>
+<h3 id="技术特性"><a href="#技术特性" class="headerlink" title="技术特性"></a>技术特性</h3><ul>
+<li>🎨 <strong>现代化UI设计</strong> - 简洁美观的用户界面</li>
+<li>🔧 <strong>高度可定制</strong> - 支持主题和插件扩展</li>
+<li>🌐 <strong>多语言支持</strong> - 国际化界面</li>
+<li>📱 <strong>响应式设计</strong> - 完美适配各种设备</li>
+</ul>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="在线体验"><a href="#在线体验" class="headerlink" title="在线体验"></a>在线体验</h3><p><strong>访问地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://chat.0407123.xyz
+        <button class="copy-btn" onclick="copyTerminalContent('https://chat.0407123.xyz', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>登录密码：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">登录密码</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>admin
+        <button class="copy-btn" onclick="copyTerminalContent('admin', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="获取更新"><a href="#获取更新" class="headerlink" title="获取更新"></a>获取更新</h3><blockquote>
+<p>💡 <strong>提示：</strong> 关注 <a target="_blank" rel="noopener" href="https://blog.lobe-chat.xyz/">官方博客</a> 获取最新功能动态和使用技巧</p>
 </blockquote>
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解网络技术。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
+<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
+<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
 
     </article>
     
@@ -417,7 +569,7 @@
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E6%A6%82%E8%A7%88"><span class="toc-number">1.</span> <span class="toc-text">核心功能概览</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%A4%9A%E6%A8%A1%E6%80%81%E4%BA%A4%E4%BA%92"><span class="toc-number">1.1.</span> <span class="toc-text">1. 多模态交互</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B"><span class="toc-number">1.2.</span> <span class="toc-text">快速开始</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%8A%9F%E8%83%BD%E6%A6%82%E8%A7%88"><span class="toc-number">2.</span> <span class="toc-text">核心功能概览</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%9A%E6%A8%A1%E6%80%81%E4%BA%A4%E4%BA%92%E8%83%BD%E5%8A%9B"><span class="toc-number">2.1.</span> <span class="toc-text">多模态交互能力</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E7%89%B9%E6%80%A7"><span class="toc-number">2.2.</span> <span class="toc-text">技术特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E5%BC%80%E5%A7%8B"><span class="toc-number">3.</span> <span class="toc-text">快速开始</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9C%A8%E7%BA%BF%E4%BD%93%E9%AA%8C"><span class="toc-number">3.1.</span> <span class="toc-text">在线体验</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8E%B7%E5%8F%96%E6%9B%B4%E6%96%B0"><span class="toc-number">3.2.</span> <span class="toc-text">获取更新</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-number">4.</span> <span class="toc-text">免责声明</span></a></li></ol>
       </div>
       
         <div class="catelogue catelogue-2">

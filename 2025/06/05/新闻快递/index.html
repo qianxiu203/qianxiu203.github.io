@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/css/iconfont.css" />
   <link rel="stylesheet" href="/css/fallback.css" />
   <link rel="stylesheet" href="/css/background-themes.css" />
+  <link rel="stylesheet" href="/css/terminal-copy.css" />
 
   <!-- 预加载关键背景图片 -->
   <link rel="preload" href="/imgs/bg-cover.jpeg" as="image" />
@@ -23,6 +24,7 @@
   <script src="/js/jquery.pjax.min.js"></script>
   <script src="/js/resource-fallback.js"></script>
   <script src="/js/theme-switcher.js"></script>
+  <script src="/js/terminal-copy.js"></script>
 
   <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <script>
@@ -203,7 +205,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbdiD.png","path":"2025/06/08/LobeChat/"},{"title":"搭建Hexo博客","cover":"https://s21.ax1x.com/2025/07/10/pVQbwJe.png","path":"2025/06/08/HEXO使用指南/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbssI.png","path":"2025/06/06/libretv-yingshi/"},{"title":"免费节点","cover":"https://cdn4.winhlb.com/2025/06/27/685d830497f1e.jpeg","path":"2025/06/27/免费节点/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"站点监控平台","cover":"https://cdn4.winhlb.com/2025/06/30/68626a92dd46e.jpeg","path":"2025/06/30/站点监控平台/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://s21.ax1x.com/2025/07/10/pVQbNdK.jpg","path":"2025/06/05/新闻快递/"},{"title":"汇聚订阅 - 在Cloudflare上高效管理节点订阅","cover":"https://s21.ax1x.com/2025/07/10/pVQbHe0.png","path":"2025/06/08/订阅转换/"}]`)
+  const posts = JSON.parse(`[{"title":"搭建Hexo博客","cover":"https://s21.ax1x.com/2025/07/10/pVQbwJe.png","path":"2025/06/08/HEXO使用指南/"},{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbdiD.png","path":"2025/06/08/LobeChat/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbssI.png","path":"2025/06/06/libretv-yingshi/"},{"title":"Perplexica - 开源AI驱动搜索引擎","cover":"https://s21.ax1x.com/2025/07/12/pVlYc2q.jpg","path":"2025/01/15/Perplexica/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"免费节点","cover":"https://cdn4.winhlb.com/2025/06/27/685d830497f1e.jpeg","path":"2025/06/27/免费节点/"},{"title":"提示词优化器 - AI对话效果提升利器","cover":"https://s21.ax1x.com/2025/07/12/pVlYwqS.jpg","path":"2025/01/15/提示词优化器/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://s21.ax1x.com/2025/07/10/pVQbNdK.jpg","path":"2025/06/05/新闻快递/"},{"title":"站点监控平台","cover":"https://cdn4.winhlb.com/2025/06/30/68626a92dd46e.jpeg","path":"2025/06/30/站点监控平台/"},{"title":"汇聚订阅 - 在Cloudflare上高效管理节点订阅","cover":"https://s21.ax1x.com/2025/07/10/pVQbHe0.png","path":"2025/06/08/订阅转换/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -274,13 +276,13 @@
         </a>
         <a href="/tags">
           <div>
-            <span>23</span>
+            <span>27</span>
             <span>标签</span>
           </div>
         </a>
         <a href="/archives">
           <div>
-            <span>1 </span>
+            <span>2 </span>
             <span>归档</span>
           </div>
         </a>
@@ -337,7 +339,7 @@
       </h5>
       <p class="main-left--subtitle">
         <span>文章数目：</span>
-        <span>8 篇</span>
+        <span>10 篇</span>
       </p>
       <p class="main-left--subtitle">
         <span>最近动态：</span>
@@ -345,7 +347,7 @@
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
-        <span>34天</span>
+        <span>35天</span>
       </p>
       <p class="main-left--subtitle">
         <span>当前版本：</span>
@@ -383,36 +385,268 @@
       </div>
     </div>
     <article class="article-content markdown-body">
-      <h2 id="新闻快递-全球资讯一网打尽"><a href="#新闻快递-全球资讯一网打尽" class="headerlink" title="新闻快递 - 全球资讯一网打尽"></a>新闻快递 - 全球资讯一网打尽</h2><p>新闻快递是一个专注于提供全球最新资讯的新闻聚合平台，涵盖政治、经济、科技、文化、娱乐等多个领域。我们实时追踪各大权威媒体，为您精选最有价值的新闻内容。</p>
-<h3 id="主要新闻分类"><a href="#主要新闻分类" class="headerlink" title="主要新闻分类"></a>主要新闻分类</h3><ol>
-<li><strong>国际时事</strong>：全球政治动态、外交关系</li>
-<li><strong>经济金融</strong>：市场走势、商业资讯</li>
-<li><strong>科技创新</strong>：IT行业、人工智能、前沿科技</li>
-<li><strong>文化娱乐</strong>：影视、音乐、艺术展览</li>
-<li><strong>生活健康</strong>：医疗保健、生活方式</li>
-</ol>
-<h3 id="平台特色功能"><a href="#平台特色功能" class="headerlink" title="平台特色功能"></a>平台特色功能</h3><ul>
-<li><strong>24小时实时更新</strong>：全天候捕捉全球热点事件</li>
-<li><strong>多源聚合</strong>：整合100+权威媒体内容</li>
-<li><strong>智能推荐</strong>：根据阅读习惯个性化推送</li>
-<li><strong>无广告体验</strong>：专注内容本身，零干扰</li>
-<li><strong>多端同步</strong>：支持Web、移动端访问</li>
+      <style>
+.terminal-block {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+    border-radius: 8px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #555;
+}
+
+.terminal-title {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f57; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #28ca42; }
+
+.terminal-content {
+    padding: 15px;
+    color: #00ff00;
+    font-size: 14px;
+    position: relative;
+    background: #1e1e1e;
+}
+
+.terminal-prompt {
+    color: #00ff00;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #005a9e;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.textContent;
+        button.textContent = '已复制';
+        button.style.background = '#28a745';
+        setTimeout(function() {
+            button.textContent = originalText;
+            button.style.background = '#007acc';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+    });
+}
+</script>
+
+<h2 id="平台简介"><a href="#平台简介" class="headerlink" title="平台简介"></a>平台简介</h2><p>新闻快递是一个全球实时资讯聚合平台，致力于为用户提供最新、最全面的新闻资讯。平台汇聚了来自世界各地的新闻源，通过智能算法筛选和整理，为用户呈现高质量的新闻内容。</p>
+<h3 id="核心优势"><a href="#核心优势" class="headerlink" title="核心优势"></a>核心优势</h3><ul>
+<li>📰 <strong>全球覆盖</strong> - 汇聚世界各地优质新闻源</li>
+<li>⚡ <strong>实时更新</strong> - 24小时不间断资讯更新</li>
+<li>🤖 <strong>智能筛选</strong> - AI算法精选高质量内容</li>
+<li>🎯 <strong>个性推荐</strong> - 基于用户偏好的智能推荐</li>
 </ul>
-<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><ol>
-<li><strong>浏览新闻</strong>：直接访问<a target="_blank" rel="noopener" href="https://new.0407123.xyz/">new.0407123.xyz</a></li>
-<li><strong>订阅更新</strong>：<ul>
-<li>RSS订阅：添加我们的RSS源到阅读器</li>
-<li>邮件订阅：注册接收每日精选</li>
+<h2 id="新闻分类"><a href="#新闻分类" class="headerlink" title="新闻分类"></a>新闻分类</h2><h3 id="📊-主要频道"><a href="#📊-主要频道" class="headerlink" title="📊 主要频道"></a>📊 主要频道</h3><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>内容范围</th>
+<th>更新频率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🌍 <strong>国际新闻</strong></td>
+<td>全球重大事件、国际政治、外交动态</td>
+<td>实时</td>
+</tr>
+<tr>
+<td>💻 <strong>科技资讯</strong></td>
+<td>最新科技发展、产品发布、行业趋势</td>
+<td>每小时</td>
+</tr>
+<tr>
+<td>💰 <strong>财经新闻</strong></td>
+<td>股市动态、经济政策、商业资讯</td>
+<td>实时</td>
+</tr>
+<tr>
+<td>⚽ <strong>体育新闻</strong></td>
+<td>体育赛事、运动员动态、体育产业</td>
+<td>实时</td>
+</tr>
+<tr>
+<td>🎬 <strong>娱乐资讯</strong></td>
+<td>明星动态、影视资讯、娱乐八卦</td>
+<td>每日</td>
+</tr>
+<tr>
+<td>🏠 <strong>生活资讯</strong></td>
+<td>健康养生、美食旅游、生活技巧</td>
+<td>每日</td>
+</tr>
+</tbody></table>
+<h2 id="平台特色功能"><a href="#平台特色功能" class="headerlink" title="平台特色功能"></a>平台特色功能</h2><h3 id="🔄-实时更新系统"><a href="#🔄-实时更新系统" class="headerlink" title="🔄 实时更新系统"></a>🔄 实时更新系统</h3><ul>
+<li>新闻内容24小时实时更新</li>
+<li>突发新闻即时推送</li>
+<li>热点事件持续跟踪</li>
 </ul>
-</li>
-<li><strong>搜索功能</strong>：通过关键词查找历史新闻</li>
+<h3 id="🌐-多源聚合技术"><a href="#🌐-多源聚合技术" class="headerlink" title="🌐 多源聚合技术"></a>🌐 多源聚合技术</h3><ul>
+<li>整合全球优质新闻源</li>
+<li>提供多角度新闻视角</li>
+<li>去重算法避免重复内容</li>
+</ul>
+<h3 id="🎯-智能推荐引擎"><a href="#🎯-智能推荐引擎" class="headerlink" title="🎯 智能推荐引擎"></a>🎯 智能推荐引擎</h3><ul>
+<li>基于用户阅读习惯分析</li>
+<li>个性化内容推荐</li>
+<li>相关新闻智能关联</li>
+</ul>
+<h3 id="📱-用户体验优化"><a href="#📱-用户体验优化" class="headerlink" title="📱 用户体验优化"></a>📱 用户体验优化</h3><ul>
+<li>清爽简洁的阅读界面</li>
+<li>响应式设计适配多端</li>
+<li>快速搜索和筛选功能</li>
+</ul>
+<h2 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h2><h3 id="📖-基本操作"><a href="#📖-基本操作" class="headerlink" title="📖 基本操作"></a>📖 基本操作</h3><ol>
+<li><strong>访问平台</strong> - 打开新闻快递官网</li>
+<li><strong>选择分类</strong> - 点击感兴趣的新闻频道</li>
+<li><strong>阅读新闻</strong> - 点击标题查看详细内容</li>
+<li><strong>搜索功能</strong> - 使用关键词查找特定新闻</li>
+<li><strong>互动功能</strong> - 支持分享、收藏和评论</li>
 </ol>
-<h3 id="示例新闻"><a href="#示例新闻" class="headerlink" title="示例新闻"></a>示例新闻</h3><ol>
-<li><a target="_blank" rel="noopener" href="https://new.0407123.xyz/ai-summit">全球AI峰会最新成果发布</a></li>
-<li><a target="_blank" rel="noopener" href="https://new.0407123.xyz/q2-economy">2025年第二季度经济展望</a></li>
-<li><a target="_blank" rel="noopener" href="https://new.0407123.xyz/film-festival">国际电影节获奖名单公布</a></li>
-</ol>
-<p>立即体验：<a target="_blank" rel="noopener" href="https://new.0407123.xyz/">new.0407123.xyz</a> | <a target="_blank" rel="noopener" href="https://new.0407123.xyz/app">下载APP</a></p>
+<h3 id="🔧-高级功能"><a href="#🔧-高级功能" class="headerlink" title="🔧 高级功能"></a>🔧 高级功能</h3><ul>
+<li><strong>订阅推送</strong> - 关注特定话题或关键词</li>
+<li><strong>离线阅读</strong> - 下载新闻内容离线查看</li>
+<li><strong>多语言支持</strong> - 支持多种语言界面</li>
+<li><strong>夜间模式</strong> - 护眼的深色主题</li>
+</ul>
+<h2 id="热门资讯示例"><a href="#热门资讯示例" class="headerlink" title="热门资讯示例"></a>热门资讯示例</h2><h3 id="💻-科技前沿"><a href="#💻-科技前沿" class="headerlink" title="💻 科技前沿"></a>💻 科技前沿</h3><p><strong>🔥 人工智能技术在医疗领域的最新突破</strong></p>
+<blockquote>
+<p>最新研究显示，AI技术在疾病诊断准确率方面取得重大进展，为精准医疗开辟新路径…</p>
+</blockquote>
+<h3 id="🌍-国际动态"><a href="#🌍-国际动态" class="headerlink" title="🌍 国际动态"></a>🌍 国际动态</h3><p><strong>🌱 全球气候变化应对措施新进展</strong></p>
+<blockquote>
+<p>多国领导人就气候变化问题达成新的合作协议，共同推进绿色发展目标…</p>
+</blockquote>
+<h3 id="💰-财经资讯"><a href="#💰-财经资讯" class="headerlink" title="💰 财经资讯"></a>💰 财经资讯</h3><p><strong>📈 数字货币市场最新动向分析</strong></p>
+<blockquote>
+<p>比特币价格波动引发市场关注，专家深度分析未来走势和投资机会…</p>
+</blockquote>
+<h3 id="🔗-快速访问"><a href="#🔗-快速访问" class="headerlink" title="🔗 快速访问"></a>🔗 快速访问</h3><p><strong>全球AI峰会最新成果发布：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">AI峰会链接</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://new.0407123.xyz/ai-summit
+        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/ai-summit', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>2025年第二季度经济展望：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">经济展望链接</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://new.0407123.xyz/q2-economy
+        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/q2-economy', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>国际电影节获奖名单：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">电影节链接</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://new.0407123.xyz/film-festival
+        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/film-festival', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>立即体验：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">官网地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://new.0407123.xyz
+        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>下载APP：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">APP下载</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://new.0407123.xyz/app
+        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/app', this)">复制</button>
+    </div>
+</div>
+
 <h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
 <p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
 <p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
@@ -438,7 +672,7 @@
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E9%97%BB%E5%BF%AB%E9%80%92-%E5%85%A8%E7%90%83%E8%B5%84%E8%AE%AF%E4%B8%80%E7%BD%91%E6%89%93%E5%B0%BD"><span class="toc-number">1.</span> <span class="toc-text">新闻快递 - 全球资讯一网打尽</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E6%96%B0%E9%97%BB%E5%88%86%E7%B1%BB"><span class="toc-number">1.1.</span> <span class="toc-text">主要新闻分类</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E5%8F%B0%E7%89%B9%E8%89%B2%E5%8A%9F%E8%83%BD"><span class="toc-number">1.2.</span> <span class="toc-text">平台特色功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8"><span class="toc-number">1.3.</span> <span class="toc-text">如何使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E6%96%B0%E9%97%BB"><span class="toc-number">1.4.</span> <span class="toc-text">示例新闻</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-number">2.</span> <span class="toc-text">免责声明</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E5%8F%B0%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">平台简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E4%BC%98%E5%8A%BF"><span class="toc-number">1.1.</span> <span class="toc-text">核心优势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%96%B0%E9%97%BB%E5%88%86%E7%B1%BB"><span class="toc-number">2.</span> <span class="toc-text">新闻分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%8A-%E4%B8%BB%E8%A6%81%E9%A2%91%E9%81%93"><span class="toc-number">2.1.</span> <span class="toc-text">📊 主要频道</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E5%8F%B0%E7%89%B9%E8%89%B2%E5%8A%9F%E8%83%BD"><span class="toc-number">3.</span> <span class="toc-text">平台特色功能</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%84-%E5%AE%9E%E6%97%B6%E6%9B%B4%E6%96%B0%E7%B3%BB%E7%BB%9F"><span class="toc-number">3.1.</span> <span class="toc-text">🔄 实时更新系统</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8C%90-%E5%A4%9A%E6%BA%90%E8%81%9A%E5%90%88%E6%8A%80%E6%9C%AF"><span class="toc-number">3.2.</span> <span class="toc-text">🌐 多源聚合技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8E%AF-%E6%99%BA%E8%83%BD%E6%8E%A8%E8%8D%90%E5%BC%95%E6%93%8E"><span class="toc-number">3.3.</span> <span class="toc-text">🎯 智能推荐引擎</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%B1-%E7%94%A8%E6%88%B7%E4%BD%93%E9%AA%8C%E4%BC%98%E5%8C%96"><span class="toc-number">3.4.</span> <span class="toc-text">📱 用户体验优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97"><span class="toc-number">4.</span> <span class="toc-text">使用指南</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%96-%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">4.1.</span> <span class="toc-text">📖 基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%A7-%E9%AB%98%E7%BA%A7%E5%8A%9F%E8%83%BD"><span class="toc-number">4.2.</span> <span class="toc-text">🔧 高级功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%83%AD%E9%97%A8%E8%B5%84%E8%AE%AF%E7%A4%BA%E4%BE%8B"><span class="toc-number">5.</span> <span class="toc-text">热门资讯示例</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%92%BB-%E7%A7%91%E6%8A%80%E5%89%8D%E6%B2%BF"><span class="toc-number">5.1.</span> <span class="toc-text">💻 科技前沿</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8C%8D-%E5%9B%BD%E9%99%85%E5%8A%A8%E6%80%81"><span class="toc-number">5.2.</span> <span class="toc-text">🌍 国际动态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%92%B0-%E8%B4%A2%E7%BB%8F%E8%B5%84%E8%AE%AF"><span class="toc-number">5.3.</span> <span class="toc-text">💰 财经资讯</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%97-%E5%BF%AB%E9%80%9F%E8%AE%BF%E9%97%AE"><span class="toc-number">5.4.</span> <span class="toc-text">🔗 快速访问</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-number">6.</span> <span class="toc-text">免责声明</span></a></li></ol>
       </div>
       
         <div class="catelogue catelogue-2">
@@ -448,6 +682,11 @@
               <a href="/2025/06/06/libretv-yingshi/">LibreTV影视 - 优质在线影视平台使用指南</a>
             </p>
            
+          
+            <p>
+              <span>下一篇</span>
+              <a href="/2025/01/15/Perplexica/">Perplexica - 开源AI驱动搜索引擎</a>
+            </p>
           
         </div>
       

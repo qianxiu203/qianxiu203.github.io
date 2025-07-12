@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/css/iconfont.css" />
   <link rel="stylesheet" href="/css/fallback.css" />
   <link rel="stylesheet" href="/css/background-themes.css" />
+  <link rel="stylesheet" href="/css/terminal-copy.css" />
 
   <!-- 预加载关键背景图片 -->
   <link rel="preload" href="/imgs/bg-cover.jpeg" as="image" />
@@ -23,6 +24,7 @@
   <script src="/js/jquery.pjax.min.js"></script>
   <script src="/js/resource-fallback.js"></script>
   <script src="/js/theme-switcher.js"></script>
+  <script src="/js/terminal-copy.js"></script>
 
   <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <script>
@@ -203,7 +205,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbdiD.png","path":"2025/06/08/LobeChat/"},{"title":"搭建Hexo博客","cover":"https://s21.ax1x.com/2025/07/10/pVQbwJe.png","path":"2025/06/08/HEXO使用指南/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbssI.png","path":"2025/06/06/libretv-yingshi/"},{"title":"免费节点","cover":"https://cdn4.winhlb.com/2025/06/27/685d830497f1e.jpeg","path":"2025/06/27/免费节点/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"站点监控平台","cover":"https://cdn4.winhlb.com/2025/06/30/68626a92dd46e.jpeg","path":"2025/06/30/站点监控平台/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://s21.ax1x.com/2025/07/10/pVQbNdK.jpg","path":"2025/06/05/新闻快递/"},{"title":"汇聚订阅 - 在Cloudflare上高效管理节点订阅","cover":"https://s21.ax1x.com/2025/07/10/pVQbHe0.png","path":"2025/06/08/订阅转换/"}]`)
+  const posts = JSON.parse(`[{"title":"搭建Hexo博客","cover":"https://s21.ax1x.com/2025/07/10/pVQbwJe.png","path":"2025/06/08/HEXO使用指南/"},{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbdiD.png","path":"2025/06/08/LobeChat/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbssI.png","path":"2025/06/06/libretv-yingshi/"},{"title":"Perplexica - 开源AI驱动搜索引擎","cover":"https://s21.ax1x.com/2025/07/12/pVlYc2q.jpg","path":"2025/01/15/Perplexica/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"免费节点","cover":"https://cdn4.winhlb.com/2025/06/27/685d830497f1e.jpeg","path":"2025/06/27/免费节点/"},{"title":"提示词优化器 - AI对话效果提升利器","cover":"https://s21.ax1x.com/2025/07/12/pVlYwqS.jpg","path":"2025/01/15/提示词优化器/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://s21.ax1x.com/2025/07/10/pVQbNdK.jpg","path":"2025/06/05/新闻快递/"},{"title":"站点监控平台","cover":"https://cdn4.winhlb.com/2025/06/30/68626a92dd46e.jpeg","path":"2025/06/30/站点监控平台/"},{"title":"汇聚订阅 - 在Cloudflare上高效管理节点订阅","cover":"https://s21.ax1x.com/2025/07/10/pVQbHe0.png","path":"2025/06/08/订阅转换/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -274,13 +276,13 @@
         </a>
         <a href="/tags">
           <div>
-            <span>23</span>
+            <span>27</span>
             <span>标签</span>
           </div>
         </a>
         <a href="/archives">
           <div>
-            <span>1 </span>
+            <span>2 </span>
             <span>归档</span>
           </div>
         </a>
@@ -337,7 +339,7 @@
       </h5>
       <p class="main-left--subtitle">
         <span>文章数目：</span>
-        <span>8 篇</span>
+        <span>10 篇</span>
       </p>
       <p class="main-left--subtitle">
         <span>最近动态：</span>
@@ -345,7 +347,7 @@
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
-        <span>34天</span>
+        <span>35天</span>
       </p>
       <p class="main-left--subtitle">
         <span>当前版本：</span>
@@ -383,42 +385,467 @@
       </div>
     </div>
     <article class="article-content markdown-body">
-      <h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解网络技术。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+      <style>
+.terminal-block {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 10px 0;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px 6px 0 0;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27ca3f; }
+
+.terminal-content {
+    padding: 12px;
+    color: #f8f8f2;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: #50fa7b;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #44475a;
+    border: 1px solid #6272a4;
+    color: #f8f8f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #6272a4;
+    border-color: #8be9fd;
+}
+
+.copy-btn.success {
+    background: #50fa7b;
+    color: #282a36;
+    border-color: #50fa7b;
+}
+
+.copy-btn.error {
+    background: #ff5555;
+    border-color: #ff5555;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ 已复制';
+        button.className = 'copy-btn success';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✗ 失败';
+        button.className = 'copy-btn error';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    });
+}
+</script>
+
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解网络技术。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
 <p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
 <p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
 <p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
-<h2 id="节点列表"><a href="#节点列表" class="headerlink" title="节点列表"></a>节点列表</h2><h3 id="1-AWS-3XUI面板"><a href="#1-AWS-3XUI面板" class="headerlink" title="1. AWS 3XUI面板"></a>1. AWS 3XUI面板</h3><p><strong>访问地址：</strong> <code>https://aws.0407123.xyz:56789/qianxiu</code><br><strong>用户名：</strong> admin<br><strong>密码：</strong> ch123456789…,,<br><strong>配置：</strong> </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vless://144cb658-5ff0-4e86-be5a-87937198585a@aws.0407123.xyz:21556?type=ws&amp;path=%2F&amp;host=&amp;security=tls&amp;fp=chrome&amp;alpn=#aws-gi9uftwd</span><br></pre></td></tr></table></figure>
+<h2 id="节点列表"><a href="#节点列表" class="headerlink" title="节点列表"></a>节点列表</h2><h3 id="1-AWS-3XUI-面板"><a href="#1-AWS-3XUI-面板" class="headerlink" title="1. AWS 3XUI 面板"></a>1. AWS 3XUI 面板</h3><p><strong>访问地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://aws.0407123.xyz:56789/qianxiu
+        <button class="copy-btn" onclick="copyTerminalContent('https://aws.0407123.xyz:56789/qianxiu', this)">复制</button>
+    </div>
+</div>
 
-<h3 id="2-atfreecloudltd-节点"><a href="#2-atfreecloudltd-节点" class="headerlink" title="2. atfreecloudltd 节点"></a>2. atfreecloudltd 节点</h3><p><strong>国家：</strong> 意大利<br><strong>类型：</strong> V2Ray 节点  </p>
-<h4 id="安装脚本"><a href="#安装脚本" class="headerlink" title="安装脚本"></a>安装脚本</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmpt=<span class="string">&quot;&quot;</span> argo=<span class="string">&quot;y&quot;</span> agn=<span class="string">&quot;&quot;</span> agk=<span class="string">&quot;&quot;</span> bash &lt;(curl -Ls https://raw.githubusercontent.com/zzzhhh1/argosb/main/argosb.sh)</span><br></pre></td></tr></table></figure>
+<p><strong>用户名：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">用户名</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>admin
+        <button class="copy-btn" onclick="copyTerminalContent('admin', this)">复制</button>
+    </div>
+</div>
 
-<h4 id="示例配置"><a href="#示例配置" class="headerlink" title="示例配置"></a>示例配置</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmpt=<span class="string">&quot;11005&quot;</span> argo=<span class="string">&quot;y&quot;</span> agn=<span class="string">&quot;sealos.0407123.xyz&quot;</span> agk=<span class="string">&quot;eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiNTM4YmEwYTMtM2JhZi00Y2FlLTk0Y2YtOGJiM2ZiMGFjMTY0IiwicyI6Ik5EaG1NV0poWTJNdFpHVTVOQzAwTURWa0xUazBaRFV0TUdKa05qUXhZalUyTURWaiJ9&quot;</span> bash &lt;(curl -Ls https://raw.githubusercontent.com/zzzhhh1/argosb/main/argosb.sh)</span><br></pre></td></tr></table></figure>
+<p><strong>密码：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">密码</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>ch123456789…,,
+        <button class="copy-btn" onclick="copyTerminalContent('ch123456789…,,', this)">复制</button>
+    </div>
+</div>
 
-<h4 id="节点配置"><a href="#节点配置" class="headerlink" title="节点配置"></a>节点配置</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmess://eyAidiI6ICIyIiwgInBzIjogInZtLXdzLXNlcjEzMDA3MTM3MzA3NSIsICJhZGQiOiAiMTUyLjg5LjE3MC4xODciLCAicG9ydCI6ICIxMTAwNSIsICJpZCI6ICI0ZDg4NTIwYi05OWY3LTRiNjEtYTJlZi00NzJmYmFjMGUxOWMiLCAiYWlkIjogIjAiLCAic2N5IjogImF1dG8iLCAibmV0IjogIndzIiwgInR5cGUiOiAibm9uZSIsICJob3N0IjogInd3dy5iaW5nLmNvbSIsICJwYXRoIjogIi80ZDg4NTIwYi05OWY3LTRiNjEtYTJlZi00NzJmYmFjMGUxOWMtdm0/ZWQ9MjA0OCIsICJ0bHMiOiAiIn0K</span><br></pre></td></tr></table></figure>
+<p><strong>节点配置：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">节点配置</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>vless://144cb658-5ff0-4e86-be5a-87937198585a@aws.0407123.xyz:21556?type=ws&path=%2F&host=&security=tls&fp=chrome&alpn=#aws-gi9uftwd
+        <button class="copy-btn" onclick="copyTerminalContent('vless://144cb658-5ff0-4e86-be5a-87937198585a@aws.0407123.xyz:21556?type=ws&path=%2F&host=&security=tls&fp=chrome&alpn=#aws-gi9uftwd', this)">复制</button>
+    </div>
+</div>
 
-<h3 id="3-webhostmost-代理节点（三网优化）"><a href="#3-webhostmost-代理节点（三网优化）" class="headerlink" title="3. webhostmost 代理节点（三网优化）"></a>3. webhostmost 代理节点（三网优化）</h3><h4 id="主要节点"><a href="#主要节点" class="headerlink" title="主要节点"></a>主要节点</h4><p><strong>美国节点：</strong> <code>https://usa1.0407123.xyz/5a804300-404e-4bbd-b5f0-9e99c417cd69</code><br><strong>印度节点：</strong> <code>https://in1.0407123.xyz/0e16c475-f72e-4f9e-97a1-6cfce52f34f8</code><br><strong>荷兰备用：</strong> <code>https://hl.0407123.xyz/67d1d86b-0f2d-4db9-8b8c-d886ff2f43ee</code>  </p>
-<h4 id="备用节点"><a href="#备用节点" class="headerlink" title="备用节点"></a>备用节点</h4><p>当上述节点失效时使用<br><strong>管理面板：</strong> <code>https://dl.qianxiu.ddns-ip.net/panel</code><br><strong>登录密码：</strong> Ch123456789…,,</p>
-<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="查看Argo信息"><a href="#查看Argo信息" class="headerlink" title="查看Argo信息"></a>查看Argo信息</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">agsb list</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">bash &lt;(curl -Ls https://raw.githubusercontent.com/zzzhhh1/argosb/main/argosb.sh) list</span><br></pre></td></tr></table></figure>
+<h3 id="2-atfreecloudltd-节点"><a href="#2-atfreecloudltd-节点" class="headerlink" title="2. atfreecloudltd 节点"></a>2. atfreecloudltd 节点</h3><ul>
+<li><strong>国家：</strong> 意大利</li>
+<li><strong>类型：</strong> V2Ray 节点</li>
+</ul>
+<p><strong>部署配置：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">部署配置</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>vmpt="11005" argo="y" agn="sealos.0407123.xyz" agk="eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiNTM4YmEwYTMtM2JhZi00Y2FlLTk0Y2YtOGJiM2ZiMGFjMTY0IiwicyI6Ik5EaG1NV0poWTJNdFpHVTVOQzAwTURWa0xUazBaRFV0TUdKa05qUXhZalUyTURWaiJ9" bash <(curl -Ls https://raw.githubusercontent.com/zzzhhh1/argosb/main/argosb.sh)
+        <button class="copy-btn" onclick="copyTerminalContent('vmpt=\"11005\" argo=\"y\" agn=\"sealos.0407123.xyz\" agk=\"eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiNTM4YmEwYTMtM2JhZi00Y2FlLTk0Y2YtOGJiM2ZiMGFjMTY0IiwicyI6Ik5EaG1NV0poWTJNdFpHVTVOQzAwTURWa0xUazBaRFV0TUdKa05qUXhZalUyTURWaiJ9\" bash <(curl -Ls https://raw.githubusercontent.com/zzzhhh1/argosb/main/argosb.sh)', this)">复制</button>
+    </div>
+</div>
 
-<h3 id="切换IP协议"><a href="#切换IP协议" class="headerlink" title="切换IP协议"></a>切换IP协议</h3><p><strong>显示IPv4配置：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip=4 agsb list</span><br></pre></td></tr></table></figure>
+<p><strong>节点配置：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">节点配置</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>vmess://eyAidiI6ICIyIiwgInBzIjogInZtLXdzLXNlcjEzMDA3MTM3MzA3NSIsICJhZGQiOiAiMTUyLjg5LjE3MC4xODciLCAicG9ydCI6ICIxMTAwNSIsICJpZCI6ICI0ZDg4NTIwYi05OWY3LTRiNjEtYTJlZi00NzJmYmFjMGUxOWMiLCAiYWlkIjogIjAiLCAic2N5IjogImF1dG8iLCAibmV0IjogIndzIiwgInR5cGUiOiAibm9uZSIsICJob3N0IjogInd3dy5iaW5nLmNvbSIsICJwYXRoIjogIi80ZDg4NTIwYi05OWY3LTRiNjEtYTJlZi00NzJmYmFjMGUxOWMtdm0/ZWQ9MjA0OCIsICJ0bHMiOiAiIn0K
+        <button class="copy-btn" onclick="copyTerminalContent('vmess://eyAidiI6ICIyIiwgInBzIjogInZtLXdzLXNlcjEzMDA3MTM3MzA3NSIsICJhZGQiOiAiMTUyLjg5LjE3MC4xODciLCAicG9ydCI6ICIxMTAwNSIsICJpZCI6ICI0ZDg4NTIwYi05OWY3LTRiNjEtYTJlZi00NzJmYmFjMGUxOWMiLCAiYWlkIjogIjAiLCAic2N5IjogImF1dG8iLCAibmV0IjogIndzIiwgInR5cGUiOiAibm9uZSIsICJob3N0IjogInd3dy5iaW5nLmNvbSIsICJwYXRoIjogIi80ZDg4NTIwYi05OWY3LTRiNjEtYTJlZi00NzJmYmFjMGUxOWMtdm0/ZWQ9MjA0OCIsICJ0bHMiOiAiIn0K', this)">复制</button>
+    </div>
+</div>
 
-<p><strong>显示IPv6配置：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ip=6 agsb list</span><br></pre></td></tr></table></figure>
+<h3 id="3-webhostmost-代理节点（三网优化）"><a href="#3-webhostmost-代理节点（三网优化）" class="headerlink" title="3. webhostmost 代理节点（三网优化）"></a>3. webhostmost 代理节点（三网优化）</h3><p><strong>主要节点：</strong></p>
+<p><strong>美国节点：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">美国节点</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://usa1.0407123.xyz/5a804300-404e-4bbd-b5f0-9e99c417cd69
+        <button class="copy-btn" onclick="copyTerminalContent('https://usa1.0407123.xyz/5a804300-404e-4bbd-b5f0-9e99c417cd69', this)">复制</button>
+    </div>
+</div>
 
-<h3 id="卸载脚本"><a href="#卸载脚本" class="headerlink" title="卸载脚本"></a>卸载脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">agsb del</span><br><span class="line"><span class="comment"># 或</span></span><br><span class="line">bash &lt;(curl -Ls https://raw.githubusercontent.com/zzzhhh1/argosb/main/argosb.sh) del</span><br></pre></td></tr></table></figure>
+<p><strong>印度节点：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">印度节点</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://in1.0407123.xyz/0e16c475-f72e-4f9e-97a1-6cfce52f34f8
+        <button class="copy-btn" onclick="copyTerminalContent('https://in1.0407123.xyz/0e16c475-f72e-4f9e-97a1-6cfce52f34f8', this)">复制</button>
+    </div>
+</div>
 
-<h2 id="详细操作说明"><a href="#详细操作说明" class="headerlink" title="详细操作说明"></a>详细操作说明</h2><h3 id="1-查看Argo信息"><a href="#1-查看Argo信息" class="headerlink" title="1. 查看Argo信息"></a>1. 查看Argo信息</h3><p>查看Argo的固定域名、固定隧道的代币、临时域名、当前已安装的节点信息：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">agsb list</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">bash &lt;(curl -Ls https://raw.githubusercontent.com/zzzhhh1/argosb/main/argosb.sh) list</span><br></pre></td></tr></table></figure>
+<p><strong>荷兰备用：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">荷兰备用</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://hl.0407123.xyz/67d1d86b-0f2d-4db9-8b8c-d886ff2f43ee
+        <button class="copy-btn" onclick="copyTerminalContent('https://hl.0407123.xyz/67d1d86b-0f2d-4db9-8b8c-d886ff2f43ee', this)">复制</button>
+    </div>
+</div>
 
-<h3 id="2-在线切换IPV4-IPV6节点配置（双栈VPS专享）"><a href="#2-在线切换IPV4-IPV6节点配置（双栈VPS专享）" class="headerlink" title="2. 在线切换IPV4&#x2F;IPV6节点配置（双栈VPS专享）"></a>2. 在线切换IPV4&#x2F;IPV6节点配置（双栈VPS专享）</h3><p><strong>显示IPV4节点配置：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip=4 agsb list</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">ip=4 bash &lt;(curl -Ls https://raw.githubusercontent.com/zzzhhh1/argosb/main/argosb.sh) list</span><br></pre></td></tr></table></figure>
+<p><strong>备用节点：</strong></p>
+<blockquote>
+<p>当上述节点失效时使用</p>
+</blockquote>
+<p><strong>管理面板：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">管理面板</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://dl.qianxiu.ddns-ip.net/panel
+        <button class="copy-btn" onclick="copyTerminalContent('https://dl.qianxiu.ddns-ip.net/panel', this)">复制</button>
+    </div>
+</div>
 
-<p><strong>显示IPV6节点配置：</strong></p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip=6 agsb list</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">ip=6 bash &lt;(curl -Ls https://raw.githubusercontent.com/zzzhhh1/argosb/main/argosb.sh) list</span><br></pre></td></tr></table></figure>
+<p><strong>登录密码：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">登录密码</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>Ch123456789...,,
+        <button class="copy-btn" onclick="copyTerminalContent('Ch123456789...,,', this)">复制</button>
+    </div>
+</div>
 
-<h3 id="3-卸载脚本"><a href="#3-卸载脚本" class="headerlink" title="3. 卸载脚本"></a>3. 卸载脚本</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">agsb del</span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line">bash &lt;(curl -Ls https://raw.githubusercontent.com/zzzhhh1/argosb/main/argosb.sh) del</span><br></pre></td></tr></table></figure>
+<h3 id="4-EdgeTunnel-节点"><a href="#4-EdgeTunnel-节点" class="headerlink" title="4. EdgeTunnel 节点"></a>4. EdgeTunnel 节点</h3><p><strong>自建地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">自建地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://sub.qianxiu.ddns-ip.net/9b89ed4a-6731-4d31-a143-27fe3817b981?sub
+        <button class="copy-btn" onclick="copyTerminalContent('https://sub.qianxiu.ddns-ip.net/9b89ed4a-6731-4d31-a143-27fe3817b981?sub', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>使用方法：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">使用方法模板</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://sub.qianxiu.ddns-ip.net/9b89ed4a-6731-4d31-a143-27fe3817b981?sub=订阅器地址
+        <button class="copy-btn" onclick="copyTerminalContent('https://sub.qianxiu.ddns-ip.net/9b89ed4a-6731-4d31-a143-27fe3817b981?sub=订阅器地址', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>示例：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">使用示例</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://sub.qianxiu.ddns-ip.net/9b89ed4a-6731-4d31-a143-27fe3817b981?sub=sub.cmliussss.net
+        <button class="copy-btn" onclick="copyTerminalContent('https://sub.qianxiu.ddns-ip.net/9b89ed4a-6731-4d31-a143-27fe3817b981?sub=sub.cmliussss.net', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="订阅器地址"><a href="#订阅器地址" class="headerlink" title="订阅器地址"></a>订阅器地址</h2><h3 id="可用订阅器列表"><a href="#可用订阅器列表" class="headerlink" title="可用订阅器列表"></a>可用订阅器列表</h3><h4 id="CM-订阅器"><a href="#CM-订阅器" class="headerlink" title="CM 订阅器"></a>CM 订阅器</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">CM 订阅器</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>sub.cmliussss.net
+        <button class="copy-btn" onclick="copyTerminalContent('sub.cmliussss.net', this)">复制</button>
+    </div>
+</div>
+来源：[Telegram](https://t.me/CMLiussss_channel)
+
+<h4 id="Moist-R-订阅器"><a href="#Moist-R-订阅器" class="headerlink" title="Moist_R 订阅器"></a>Moist_R 订阅器</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Moist_R 订阅器</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>owo.o00o.ooo
+        <button class="copy-btn" onclick="copyTerminalContent('owo.o00o.ooo', this)">复制</button>
+    </div>
+</div>
+
+<p>解锁GPT:</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">解锁GPT</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>sjc.o00o.ooo
+        <button class="copy-btn" onclick="copyTerminalContent('sjc.o00o.ooo', this)">复制</button>
+    </div>
+</div>
+来源：[Telegram](@mianfeicf)
+
+<h4 id="周润发-订阅器"><a href="#周润发-订阅器" class="headerlink" title="周润发 订阅器"></a>周润发 订阅器</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">周润发 订阅器</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>zrf.zrf.me
+        <button class="copy-btn" onclick="copyTerminalContent('zrf.zrf.me', this)">复制</button>
+    </div>
+</div>
+来源：[Telegram](https://t.me/lsmkc/479)
+
+<h4 id="文烨-订阅器"><a href="#文烨-订阅器" class="headerlink" title="文烨 订阅器"></a>文烨 订阅器</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">文烨 订阅器</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>sub.keaeye.icu
+        <button class="copy-btn" onclick="copyTerminalContent('sub.keaeye.icu', this)">复制</button>
+    </div>
+</div>
+来源：[Telegram](https://t.me/keaeyequn/175)
+
+<h4 id="Kristi-订阅器"><a href="#Kristi-订阅器" class="headerlink" title="Kristi 订阅器"></a>Kristi 订阅器</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Kristi 订阅器</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>sub.mot.cloudns.biz
+        <button class="copy-btn" onclick="copyTerminalContent('sub.mot.cloudns.biz', this)">复制</button>
+    </div>
+</div>
+来源：[Telegram](https://t.me/Marisa_kristi/30)
+
+<h4 id="青云志-订阅器"><a href="#青云志-订阅器" class="headerlink" title="青云志 订阅器"></a>青云志 订阅器</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">青云志 订阅器</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>dy.yomoh.ggff.net
+        <button class="copy-btn" onclick="copyTerminalContent('dy.yomoh.ggff.net', this)">复制</button>
+    </div>
+</div>
+来源：[官网](https://dy.yomoh.ggff.net/)
+
+<h3 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h3><p>将上述订阅地址替换到 EdgeTunnel 节点的 <code>sub</code> 参数中即可使用。</p>
+
     </article>
     
     <div class="read-nums">
@@ -439,7 +866,7 @@
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text">免责声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8A%82%E7%82%B9%E5%88%97%E8%A1%A8"><span class="toc-number">2.</span> <span class="toc-text">节点列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-AWS-3XUI%E9%9D%A2%E6%9D%BF"><span class="toc-number">2.1.</span> <span class="toc-text">1. AWS 3XUI面板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-atfreecloudltd-%E8%8A%82%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text">2. atfreecloudltd 节点</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC"><span class="toc-number">2.2.1.</span> <span class="toc-text">安装脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%E9%85%8D%E7%BD%AE"><span class="toc-number">2.2.2.</span> <span class="toc-text">示例配置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE"><span class="toc-number">2.2.3.</span> <span class="toc-text">节点配置</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-webhostmost-%E4%BB%A3%E7%90%86%E8%8A%82%E7%82%B9%EF%BC%88%E4%B8%89%E7%BD%91%E4%BC%98%E5%8C%96%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">3. webhostmost 代理节点（三网优化）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E8%A6%81%E8%8A%82%E7%82%B9"><span class="toc-number">2.3.1.</span> <span class="toc-text">主要节点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A4%87%E7%94%A8%E8%8A%82%E7%82%B9"><span class="toc-number">2.3.2.</span> <span class="toc-text">备用节点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">3.</span> <span class="toc-text">常用命令</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8BArgo%E4%BF%A1%E6%81%AF"><span class="toc-number">3.1.</span> <span class="toc-text">查看Argo信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%87%E6%8D%A2IP%E5%8D%8F%E8%AE%AE"><span class="toc-number">3.2.</span> <span class="toc-text">切换IP协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%B8%E8%BD%BD%E8%84%9A%E6%9C%AC"><span class="toc-number">3.3.</span> <span class="toc-text">卸载脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AF%A6%E7%BB%86%E6%93%8D%E4%BD%9C%E8%AF%B4%E6%98%8E"><span class="toc-number">4.</span> <span class="toc-text">详细操作说明</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%9F%A5%E7%9C%8BArgo%E4%BF%A1%E6%81%AF"><span class="toc-number">4.1.</span> <span class="toc-text">1. 查看Argo信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9C%A8%E7%BA%BF%E5%88%87%E6%8D%A2IPV4-IPV6%E8%8A%82%E7%82%B9%E9%85%8D%E7%BD%AE%EF%BC%88%E5%8F%8C%E6%A0%88VPS%E4%B8%93%E4%BA%AB%EF%BC%89"><span class="toc-number">4.2.</span> <span class="toc-text">2. 在线切换IPV4&#x2F;IPV6节点配置（双栈VPS专享）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%8D%B8%E8%BD%BD%E8%84%9A%E6%9C%AC"><span class="toc-number">4.3.</span> <span class="toc-text">3. 卸载脚本</span></a></li></ol></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-number">1.</span> <span class="toc-text">免责声明</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8A%82%E7%82%B9%E5%88%97%E8%A1%A8"><span class="toc-number">2.</span> <span class="toc-text">节点列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-AWS-3XUI-%E9%9D%A2%E6%9D%BF"><span class="toc-number">2.1.</span> <span class="toc-text">1. AWS 3XUI 面板</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-atfreecloudltd-%E8%8A%82%E7%82%B9"><span class="toc-number">2.2.</span> <span class="toc-text">2. atfreecloudltd 节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-webhostmost-%E4%BB%A3%E7%90%86%E8%8A%82%E7%82%B9%EF%BC%88%E4%B8%89%E7%BD%91%E4%BC%98%E5%8C%96%EF%BC%89"><span class="toc-number">2.3.</span> <span class="toc-text">3. webhostmost 代理节点（三网优化）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-EdgeTunnel-%E8%8A%82%E7%82%B9"><span class="toc-number">2.4.</span> <span class="toc-text">4. EdgeTunnel 节点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%A2%E9%98%85%E5%99%A8%E5%9C%B0%E5%9D%80"><span class="toc-number">3.</span> <span class="toc-text">订阅器地址</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%AF%E7%94%A8%E8%AE%A2%E9%98%85%E5%99%A8%E5%88%97%E8%A1%A8"><span class="toc-number">3.1.</span> <span class="toc-text">可用订阅器列表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#CM-%E8%AE%A2%E9%98%85%E5%99%A8"><span class="toc-number">3.1.1.</span> <span class="toc-text">CM 订阅器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Moist-R-%E8%AE%A2%E9%98%85%E5%99%A8"><span class="toc-number">3.1.2.</span> <span class="toc-text">Moist_R 订阅器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%A8%E6%B6%A6%E5%8F%91-%E8%AE%A2%E9%98%85%E5%99%A8"><span class="toc-number">3.1.3.</span> <span class="toc-text">周润发 订阅器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E7%83%A8-%E8%AE%A2%E9%98%85%E5%99%A8"><span class="toc-number">3.1.4.</span> <span class="toc-text">文烨 订阅器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Kristi-%E8%AE%A2%E9%98%85%E5%99%A8"><span class="toc-number">3.1.5.</span> <span class="toc-text">Kristi 订阅器</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%92%E4%BA%91%E5%BF%97-%E8%AE%A2%E9%98%85%E5%99%A8"><span class="toc-number">3.1.6.</span> <span class="toc-text">青云志 订阅器</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E"><span class="toc-number">3.2.</span> <span class="toc-text">使用说明</span></a></li></ol></li></ol>
       </div>
       
         <div class="catelogue catelogue-2">

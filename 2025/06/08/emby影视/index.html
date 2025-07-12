@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/css/iconfont.css" />
   <link rel="stylesheet" href="/css/fallback.css" />
   <link rel="stylesheet" href="/css/background-themes.css" />
+  <link rel="stylesheet" href="/css/terminal-copy.css" />
 
   <!-- 预加载关键背景图片 -->
   <link rel="preload" href="/imgs/bg-cover.jpeg" as="image" />
@@ -23,6 +24,7 @@
   <script src="/js/jquery.pjax.min.js"></script>
   <script src="/js/resource-fallback.js"></script>
   <script src="/js/theme-switcher.js"></script>
+  <script src="/js/terminal-copy.js"></script>
 
   <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <script>
@@ -203,7 +205,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbdiD.png","path":"2025/06/08/LobeChat/"},{"title":"搭建Hexo博客","cover":"https://s21.ax1x.com/2025/07/10/pVQbwJe.png","path":"2025/06/08/HEXO使用指南/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbssI.png","path":"2025/06/06/libretv-yingshi/"},{"title":"免费节点","cover":"https://cdn4.winhlb.com/2025/06/27/685d830497f1e.jpeg","path":"2025/06/27/免费节点/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"站点监控平台","cover":"https://cdn4.winhlb.com/2025/06/30/68626a92dd46e.jpeg","path":"2025/06/30/站点监控平台/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://s21.ax1x.com/2025/07/10/pVQbNdK.jpg","path":"2025/06/05/新闻快递/"},{"title":"汇聚订阅 - 在Cloudflare上高效管理节点订阅","cover":"https://s21.ax1x.com/2025/07/10/pVQbHe0.png","path":"2025/06/08/订阅转换/"}]`)
+  const posts = JSON.parse(`[{"title":"搭建Hexo博客","cover":"https://s21.ax1x.com/2025/07/10/pVQbwJe.png","path":"2025/06/08/HEXO使用指南/"},{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbdiD.png","path":"2025/06/08/LobeChat/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbssI.png","path":"2025/06/06/libretv-yingshi/"},{"title":"Perplexica - 开源AI驱动搜索引擎","cover":"https://s21.ax1x.com/2025/07/12/pVlYc2q.jpg","path":"2025/01/15/Perplexica/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"免费节点","cover":"https://cdn4.winhlb.com/2025/06/27/685d830497f1e.jpeg","path":"2025/06/27/免费节点/"},{"title":"提示词优化器 - AI对话效果提升利器","cover":"https://s21.ax1x.com/2025/07/12/pVlYwqS.jpg","path":"2025/01/15/提示词优化器/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://s21.ax1x.com/2025/07/10/pVQbNdK.jpg","path":"2025/06/05/新闻快递/"},{"title":"站点监控平台","cover":"https://cdn4.winhlb.com/2025/06/30/68626a92dd46e.jpeg","path":"2025/06/30/站点监控平台/"},{"title":"汇聚订阅 - 在Cloudflare上高效管理节点订阅","cover":"https://s21.ax1x.com/2025/07/10/pVQbHe0.png","path":"2025/06/08/订阅转换/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -274,13 +276,13 @@
         </a>
         <a href="/tags">
           <div>
-            <span>23</span>
+            <span>27</span>
             <span>标签</span>
           </div>
         </a>
         <a href="/archives">
           <div>
-            <span>1 </span>
+            <span>2 </span>
             <span>归档</span>
           </div>
         </a>
@@ -337,7 +339,7 @@
       </h5>
       <p class="main-left--subtitle">
         <span>文章数目：</span>
-        <span>8 篇</span>
+        <span>10 篇</span>
       </p>
       <p class="main-left--subtitle">
         <span>最近动态：</span>
@@ -345,7 +347,7 @@
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
-        <span>34天</span>
+        <span>35天</span>
       </p>
       <p class="main-left--subtitle">
         <span>当前版本：</span>
@@ -383,84 +385,426 @@
       </div>
     </div>
     <article class="article-content markdown-body">
-      <blockquote>
-<p>💥69云机场新增Emby权益公告💥</p>
-<p>⚠️首先明确：为了更好的观影体验，建议在全局 + 69云机场的Emby节点使用emby服务！！</p>
+      <style>
+.terminal-block {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 10px 0;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px 6px 0 0;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27ca3f; }
+
+.terminal-content {
+    padding: 12px;
+    color: #f8f8f2;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: #50fa7b;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #44475a;
+    border: 1px solid #6272a4;
+    color: #f8f8f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #6272a4;
+    border-color: #8be9fd;
+}
+
+.copy-btn.success {
+    background: #50fa7b;
+    color: #282a36;
+    border-color: #50fa7b;
+}
+
+.copy-btn.error {
+    background: #ff5555;
+    border-color: #ff5555;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ 已复制';
+        button.className = 'copy-btn success';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✗ 失败';
+        button.className = 'copy-btn error';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    });
+}
+</script>
+<h2 id="服务简介"><a href="#服务简介" class="headerlink" title="服务简介"></a>服务简介</h2><blockquote>
+<p>💥 <strong>69云机场新增Emby权益公告</strong> 💥</p>
+<p>⚠️ <strong>重要提示：</strong> 为了更好的观影体验，建议在全局 + 69云机场的Emby节点使用emby服务！</p>
 </blockquote>
-<p>目前，69云为用户诚挚提供三大Emby权益</p>
-<p>1️⃣<br>DPX 硬盘服-全体会员尊享<br>🔗 <a target="_blank" rel="noopener" href="http://emby.69yun69.com:18690/">http://emby.69yun69.com:18690</a><br>🔗 <a target="_blank" rel="noopener" href="http://emby.69yun69.com:443/">http://emby.69yun69.com:443</a></p>
-<p>2️⃣<br>50万+资源服-会员级别≥10专享<br>🔗 <a target="_blank" rel="noopener" href="https://emby3.69yun69.com/">https://emby3.69yun69.com:443</a></p>
-<p>3️⃣<br>Porn教学服-半年卡&#x2F;年卡用户独享<br>🔗 <a target="_blank" rel="noopener" href="https://emby2.69yun69.com/">https://emby2.69yun69.com:443</a></p>
-<ul>
-<li>账号信息<br>👤 Emby 账号: 您注册69云机场的邮箱 (示例: <a href="mailto:&#113;&#x69;&#x61;&#110;&#x78;&#x69;&#117;&#52;&#56;&#64;&#103;&#x6d;&#x61;&#x69;&#108;&#x2e;&#99;&#x6f;&#109;">qianxiu48@gmail.com</a>)<br>🔑 密码: 空</li>
-</ul>
-<p>使用方法：  </p>
+<h2 id="服务列表"><a href="#服务列表" class="headerlink" title="服务列表"></a>服务列表</h2><p>目前，69云为用户提供三大Emby权益：</p>
+<h3 id="1️⃣-DPX-硬盘服"><a href="#1️⃣-DPX-硬盘服" class="headerlink" title="1️⃣ DPX 硬盘服"></a>1️⃣ DPX 硬盘服</h3><p><strong>权限：</strong> 全体会员尊享</p>
+<p><strong>访问地址1：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问地址1</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>http://emby.69yun69.com:18690
+        <button class="copy-btn" onclick="copyTerminalContent('http://emby.69yun69.com:18690', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>访问地址2：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问地址2</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>http://emby.69yun69.com:443
+        <button class="copy-btn" onclick="copyTerminalContent('http://emby.69yun69.com:443', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="2️⃣-50万-资源服"><a href="#2️⃣-50万-资源服" class="headerlink" title="2️⃣ 50万+资源服"></a>2️⃣ 50万+资源服</h3><p><strong>权限：</strong> 会员级别≥10专享</p>
+<p><strong>访问地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://emby3.69yun69.com:443
+        <button class="copy-btn" onclick="copyTerminalContent('https://emby3.69yun69.com:443', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="3️⃣-Porn教学服"><a href="#3️⃣-Porn教学服" class="headerlink" title="3️⃣ Porn教学服"></a>3️⃣ Porn教学服</h3><p><strong>权限：</strong> 半年卡&#x2F;年卡用户独享</p>
+<p><strong>访问地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://emby2.69yun69.com:443
+        <button class="copy-btn" onclick="copyTerminalContent('https://emby2.69yun69.com:443', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="账号信息"><a href="#账号信息" class="headerlink" title="账号信息"></a>账号信息</h2><p><strong>👤 Emby 账号：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Emby 账号</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>您注册69云机场的邮箱（示例：qianxiu48@gmail.com）
+        <button class="copy-btn" onclick="copyTerminalContent('您注册69云机场的邮箱（示例：qianxiu48@gmail.com）', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>🔑 密码：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">密码</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>空（无需密码）
+        <button class="copy-btn" onclick="copyTerminalContent('', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p><strong>购买套餐：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">购买套餐</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://china.69yun69.com
+        <button class="copy-btn" onclick="copyTerminalContent('https://china.69yun69.com', this)">复制</button>
+    </div>
+</div>
+
 <ol>
-<li>网 站 （china.69yun69.com）购买套餐  </li>
-<li>下载emby的app  </li>
-<li>在app中填写对应的域名，端口和账号</li>
+<li>访问上述地址购买套餐</li>
+<li><strong>下载应用：</strong> 下载对应平台的Emby客户端</li>
+<li><strong>配置连接：</strong> 在应用中填写服务器地址、端口和账号信息</li>
 </ol>
-<h3 id="🔔-特别提示"><a href="#🔔-特别提示" class="headerlink" title="🔔 特别提示"></a>🔔 特别提示</h3><p>1️⃣ 禁止网页观看  </p>
-<ul>
-<li>请务必使用 第三方 App 软件 进行观看，网页端不支持播放。</li>
+<h2 id="🔔-重要提示"><a href="#🔔-重要提示" class="headerlink" title="🔔 重要提示"></a>🔔 重要提示</h2><h3 id="❌-使用限制"><a href="#❌-使用限制" class="headerlink" title="❌ 使用限制"></a>❌ 使用限制</h3><ul>
+<li><strong>禁止网页观看</strong> - 请务必使用第三方App软件进行观看，网页端不支持播放</li>
+<li><strong>无技术支持</strong> - 69云机场不提供Emby服务的技术支持，如有问题请自行查阅资料</li>
 </ul>
-<p>2️⃣ 不提供技术支持  </p>
-<ul>
-<li>69云机场不提供 Emby 服务的技术支持。如有任何使用问题，请自行查阅相关资料或使用谷歌搜索。☀️</li>
+<h3 id="✅-使用建议"><a href="#✅-使用建议" class="headerlink" title="✅ 使用建议"></a>✅ 使用建议</h3><ul>
+<li>连接协议请选择 “Emby” 或 “其他Emby”</li>
+<li>建议使用推荐的客户端应用以获得最佳体验</li>
 </ul>
-<p>感谢您的支持与理解，希望大家能享受这项新服务！💻🎬  </p>
 <hr>
-<p>🙏以下是收集到的一些客户端，可自行选择，不带任何技术支持，纯小白请自查，如果有侵权，请告知，即刻修正！  </p>
-<p>（暂行）播放软件推荐（转载，修正于2024年11月8日），连接协议请选择”Emby”，或”其他Emby”：  </p>
-<p><strong>IOS &amp; IPad OS</strong></p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id1136220934">Infuse</a></li>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/yybx/id1519723194">yybx</a></li>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/iemc/id1467462861">iemc</a></li>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/fileball/id1558391784">Fileball</a></li>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id6458691598">HamHub</a></li>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id6443975850">SenPlayer</a></li>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/conflux-video-player/id6450330892">Conflux</a></li>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/iplay/id6480576133">iPlay</a></li>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/us/app/forward-%E6%96%B0%E8%A7%86%E7%95%8C/id6503940939">Forward</a></li>
-</ol>
-<p><strong>Apple TV</strong></p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id1136220934">Infuse</a></li>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/yybx/id1519723194">yybx</a></li>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/fileball/id1558391784">Fileball</a></li>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id6458691598">HamHub</a></li>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id6443975850">SenPlayer</a></li>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/conflux-video-player/id6450330892">Conflux</a></li>
-<li><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/iplay/id6480576133">iPlay</a></li>
-</ol>
-<p>请注意：本服禁止使用Vidhub登录，禁止开启Infuse的”媒体库模式”功能，禁止通过网页端登录，禁止使用Reflix连接，禁止使用Emby for Kodi登录。登录成功后，请不要新建播放列表。  </p>
-<p><strong>Android</strong></p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://github.com/AttemptD/AfuseKt-release/releases">Afusekt</a></li>
-<li><a target="_blank" rel="noopener" href="https://t.me/yamby_release">Yamby</a></li>
-<li><a target="_blank" rel="noopener" href="https://t.me/NaoRubbish/119">Emby 小秘版 及多个相关改版</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/ourfor/iPlay/releases">iPlay</a></li>
-<li><a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=org.jellyfin.mobile&hl=en_US">Jellyfin</a></li>
-<li><a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=dev.jdtech.jellyfin&hl=en_US">Findroid</a></li>
-<li><a target="_blank" rel="noopener" href="https://t.me/SaltSoupGarage/603">Emby kirlif版</a></li>
-<li><a target="_blank" rel="noopener" href="https://t.me/hkaemby/38362">Femor</a></li>
-</ol>
-<p><strong>Android TV</strong></p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://github.com/AttemptD/AfuseKtV-release/releases">Afusekt TV版</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/jellyfin/jellyfin-androidtv/releases">Jellyfin Android TV</a></li>
-<li><a target="_blank" rel="noopener" href="https://t.me/NaoRubbish/119">Emby 小秘版 及多个相关改版</a></li>
-<li><a target="_blank" rel="noopener" href="https://t.me/SaltSoupGarage/615">Emby kirlif版</a></li>
-</ol>
-<p>请注意：Emby的诸多相关改版在不同的设备上兼容性表现也各不相同，建议多次尝试后选择您当前设备下使用体验最好的改版。</p>
-<p><strong>Windows</strong></p>
-<ol>
-<li><a target="_blank" rel="noopener" href="https://t.me/NaoRubbish/119">Emby 小秘版 及多个相关改版</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/tsukinaha/tsukimi/releases">Tsukimi</a></li>
-<li><a target="_blank" rel="noopener" href="https://t.me/hkaemby/38362">Femor</a></li>
-<li><a target="_blank" rel="noopener" href="https://github.com/jellyfin/jellyfin-media-player/releases">Jellyfin Media Player</a></li>
-</ol>
+<h2 id="📱-推荐客户端"><a href="#📱-推荐客户端" class="headerlink" title="📱 推荐客户端"></a>📱 推荐客户端</h2><blockquote>
+<p>💡 <strong>说明：</strong> 以下客户端列表仅供参考，不提供技术支持。连接协议请选择 “Emby” 或 “其他Emby”  </p>
+</blockquote>
+<h3 id="🍎-iOS-iPadOS"><a href="#🍎-iOS-iPadOS" class="headerlink" title="🍎 iOS &amp; iPadOS"></a>🍎 iOS &amp; iPadOS</h3><table>
+<thead>
+<tr>
+<th>应用名称</th>
+<th>下载链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Infuse</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id1136220934">App Store</a></td>
+</tr>
+<tr>
+<td>yybx</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/yybx/id1519723194">App Store</a></td>
+</tr>
+<tr>
+<td>iemc</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/iemc/id1467462861">App Store</a></td>
+</tr>
+<tr>
+<td>Fileball</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/fileball/id1558391784">App Store</a></td>
+</tr>
+<tr>
+<td>HamHub</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id6458691598">App Store</a></td>
+</tr>
+<tr>
+<td>SenPlayer</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id6443975850">App Store</a></td>
+</tr>
+<tr>
+<td>Conflux</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/conflux-video-player/id6450330892">App Store</a></td>
+</tr>
+<tr>
+<td>iPlay</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/iplay/id6480576133">App Store</a></td>
+</tr>
+<tr>
+<td>Forward</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/us/app/forward-%E6%96%B0%E8%A7%86%E7%95%8C/id6503940939">App Store</a></td>
+</tr>
+</tbody></table>
+<h3 id="📺-Apple-TV"><a href="#📺-Apple-TV" class="headerlink" title="📺 Apple TV"></a>📺 Apple TV</h3><table>
+<thead>
+<tr>
+<th>应用名称</th>
+<th>下载链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Infuse</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id1136220934">App Store</a></td>
+</tr>
+<tr>
+<td>yybx</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/yybx/id1519723194">App Store</a></td>
+</tr>
+<tr>
+<td>Fileball</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/fileball/id1558391784">App Store</a></td>
+</tr>
+<tr>
+<td>HamHub</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id6458691598">App Store</a></td>
+</tr>
+<tr>
+<td>SenPlayer</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/id6443975850">App Store</a></td>
+</tr>
+<tr>
+<td>Conflux</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/conflux-video-player/id6450330892">App Store</a></td>
+</tr>
+<tr>
+<td>iPlay</td>
+<td><a target="_blank" rel="noopener" href="https://apps.apple.com/cn/app/iplay/id6480576133">App Store</a></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚠️ <strong>使用限制：</strong> 禁止使用Vidhub登录，禁止开启Infuse的”媒体库模式”功能，禁止通过网页端登录，禁止使用Reflix连接，禁止使用Emby for Kodi登录。登录成功后，请不要新建播放列表。  </p>
+</blockquote>
+<h3 id="🤖-Android"><a href="#🤖-Android" class="headerlink" title="🤖 Android"></a>🤖 Android</h3><table>
+<thead>
+<tr>
+<th>应用名称</th>
+<th>下载链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Afusekt</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/AttemptD/AfuseKt-release/releases">GitHub</a></td>
+</tr>
+<tr>
+<td>Yamby</td>
+<td><a target="_blank" rel="noopener" href="https://t.me/yamby_release">Telegram</a></td>
+</tr>
+<tr>
+<td>Emby 小秘版</td>
+<td><a target="_blank" rel="noopener" href="https://t.me/NaoRubbish/119">Telegram</a></td>
+</tr>
+<tr>
+<td>iPlay</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/ourfor/iPlay/releases">GitHub</a></td>
+</tr>
+<tr>
+<td>Jellyfin</td>
+<td><a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=org.jellyfin.mobile&hl=en_US">Google Play</a></td>
+</tr>
+<tr>
+<td>Findroid</td>
+<td><a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=dev.jdtech.jellyfin&hl=en_US">Google Play</a></td>
+</tr>
+<tr>
+<td>Emby kirlif版</td>
+<td><a target="_blank" rel="noopener" href="https://t.me/SaltSoupGarage/603">Telegram</a></td>
+</tr>
+<tr>
+<td>Femor</td>
+<td><a target="_blank" rel="noopener" href="https://t.me/hkaemby/38362">Telegram</a></td>
+</tr>
+</tbody></table>
+<h3 id="📺-Android-TV"><a href="#📺-Android-TV" class="headerlink" title="📺 Android TV"></a>📺 Android TV</h3><table>
+<thead>
+<tr>
+<th>应用名称</th>
+<th>下载链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Afusekt TV版</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/AttemptD/AfuseKtV-release/releases">GitHub</a></td>
+</tr>
+<tr>
+<td>Jellyfin Android TV</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/jellyfin/jellyfin-androidtv/releases">GitHub</a></td>
+</tr>
+<tr>
+<td>Emby 小秘版</td>
+<td><a target="_blank" rel="noopener" href="https://t.me/NaoRubbish/119">Telegram</a></td>
+</tr>
+<tr>
+<td>Emby kirlif版</td>
+<td><a target="_blank" rel="noopener" href="https://t.me/SaltSoupGarage/615">Telegram</a></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>💡 <strong>提示：</strong> Emby的各种改版在不同设备上兼容性表现不同，建议多次尝试后选择体验最好的版本。</p>
+</blockquote>
+<h3 id="💻-Windows"><a href="#💻-Windows" class="headerlink" title="💻 Windows"></a>💻 Windows</h3><table>
+<thead>
+<tr>
+<th>应用名称</th>
+<th>下载链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Emby 小秘版</td>
+<td><a target="_blank" rel="noopener" href="https://t.me/NaoRubbish/119">Telegram</a></td>
+</tr>
+<tr>
+<td>Tsukimi</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/tsukinaha/tsukimi/releases">GitHub</a></td>
+</tr>
+<tr>
+<td>Femor</td>
+<td><a target="_blank" rel="noopener" href="https://t.me/hkaemby/38362">Telegram</a></td>
+</tr>
+<tr>
+<td>Jellyfin Media Player</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/jellyfin/jellyfin-media-player/releases">GitHub</a></td>
+</tr>
+</tbody></table>
 <h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
 <p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
 <p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
@@ -486,7 +830,7 @@
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%94-%E7%89%B9%E5%88%AB%E6%8F%90%E7%A4%BA"><span class="toc-number">1.</span> <span class="toc-text">🔔 特别提示</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-number"></span> <span class="toc-text">免责声明</span></a>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">服务简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%9C%8D%E5%8A%A1%E5%88%97%E8%A1%A8"><span class="toc-number">2.</span> <span class="toc-text">服务列表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%EF%B8%8F%E2%83%A3-DPX-%E7%A1%AC%E7%9B%98%E6%9C%8D"><span class="toc-number">2.1.</span> <span class="toc-text">1️⃣ DPX 硬盘服</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%EF%B8%8F%E2%83%A3-50%E4%B8%87-%E8%B5%84%E6%BA%90%E6%9C%8D"><span class="toc-number">2.2.</span> <span class="toc-text">2️⃣ 50万+资源服</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%EF%B8%8F%E2%83%A3-Porn%E6%95%99%E5%AD%A6%E6%9C%8D"><span class="toc-number">2.3.</span> <span class="toc-text">3️⃣ Porn教学服</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B4%A6%E5%8F%B7%E4%BF%A1%E6%81%AF"><span class="toc-number">3.</span> <span class="toc-text">账号信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%96%B9%E6%B3%95"><span class="toc-number">4.</span> <span class="toc-text">使用方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%94%94-%E9%87%8D%E8%A6%81%E6%8F%90%E7%A4%BA"><span class="toc-number">5.</span> <span class="toc-text">🔔 重要提示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9D%8C-%E4%BD%BF%E7%94%A8%E9%99%90%E5%88%B6"><span class="toc-number">5.1.</span> <span class="toc-text">❌ 使用限制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E2%9C%85-%E4%BD%BF%E7%94%A8%E5%BB%BA%E8%AE%AE"><span class="toc-number">5.2.</span> <span class="toc-text">✅ 使用建议</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%F0%9F%93%B1-%E6%8E%A8%E8%8D%90%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="toc-number">6.</span> <span class="toc-text">📱 推荐客户端</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8D%8E-iOS-iPadOS"><span class="toc-number">6.1.</span> <span class="toc-text">🍎 iOS &amp; iPadOS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%BA-Apple-TV"><span class="toc-number">6.2.</span> <span class="toc-text">📺 Apple TV</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%A4%96-Android"><span class="toc-number">6.3.</span> <span class="toc-text">🤖 Android</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%93%BA-Android-TV"><span class="toc-number">6.4.</span> <span class="toc-text">📺 Android TV</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%92%BB-Windows"><span class="toc-number">6.5.</span> <span class="toc-text">💻 Windows</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-number">7.</span> <span class="toc-text">免责声明</span></a></li></ol>
       </div>
       
         <div class="catelogue catelogue-2">

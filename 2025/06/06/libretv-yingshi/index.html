@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="/css/iconfont.css" />
   <link rel="stylesheet" href="/css/fallback.css" />
   <link rel="stylesheet" href="/css/background-themes.css" />
+  <link rel="stylesheet" href="/css/terminal-copy.css" />
 
   <!-- 预加载关键背景图片 -->
   <link rel="preload" href="/imgs/bg-cover.jpeg" as="image" />
@@ -23,6 +24,7 @@
   <script src="/js/jquery.pjax.min.js"></script>
   <script src="/js/resource-fallback.js"></script>
   <script src="/js/theme-switcher.js"></script>
+  <script src="/js/terminal-copy.js"></script>
 
   <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <script>
@@ -203,7 +205,7 @@
   const ipt = document.querySelector('#search-input')
   const btn = document.querySelector('#search-btn')
   const layer = document.querySelector('#search-layer')
-  const posts = JSON.parse(`[{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbdiD.png","path":"2025/06/08/LobeChat/"},{"title":"搭建Hexo博客","cover":"https://s21.ax1x.com/2025/07/10/pVQbwJe.png","path":"2025/06/08/HEXO使用指南/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbssI.png","path":"2025/06/06/libretv-yingshi/"},{"title":"免费节点","cover":"https://cdn4.winhlb.com/2025/06/27/685d830497f1e.jpeg","path":"2025/06/27/免费节点/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"站点监控平台","cover":"https://cdn4.winhlb.com/2025/06/30/68626a92dd46e.jpeg","path":"2025/06/30/站点监控平台/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://s21.ax1x.com/2025/07/10/pVQbNdK.jpg","path":"2025/06/05/新闻快递/"},{"title":"汇聚订阅 - 在Cloudflare上高效管理节点订阅","cover":"https://s21.ax1x.com/2025/07/10/pVQbHe0.png","path":"2025/06/08/订阅转换/"}]`)
+  const posts = JSON.parse(`[{"title":"搭建Hexo博客","cover":"https://s21.ax1x.com/2025/07/10/pVQbwJe.png","path":"2025/06/08/HEXO使用指南/"},{"title":"LobeChat - 开源AI聊天应用与开发框架完全指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbdiD.png","path":"2025/06/08/LobeChat/"},{"title":"LibreTV影视 - 优质在线影视平台使用指南","cover":"https://s21.ax1x.com/2025/07/10/pVQbssI.png","path":"2025/06/06/libretv-yingshi/"},{"title":"Perplexica - 开源AI驱动搜索引擎","cover":"https://s21.ax1x.com/2025/07/12/pVlYc2q.jpg","path":"2025/01/15/Perplexica/"},{"title":"emby影视","cover":"https://cdn4.winhlb.com/2025/06/08/684545d0c695c.png","path":"2025/06/08/emby影视/"},{"title":"免费节点","cover":"https://cdn4.winhlb.com/2025/06/27/685d830497f1e.jpeg","path":"2025/06/27/免费节点/"},{"title":"提示词优化器 - AI对话效果提升利器","cover":"https://s21.ax1x.com/2025/07/12/pVlYwqS.jpg","path":"2025/01/15/提示词优化器/"},{"title":"新闻快递 - 全球实时资讯聚合平台","cover":"https://s21.ax1x.com/2025/07/10/pVQbNdK.jpg","path":"2025/06/05/新闻快递/"},{"title":"站点监控平台","cover":"https://cdn4.winhlb.com/2025/06/30/68626a92dd46e.jpeg","path":"2025/06/30/站点监控平台/"},{"title":"汇聚订阅 - 在Cloudflare上高效管理节点订阅","cover":"https://s21.ax1x.com/2025/07/10/pVQbHe0.png","path":"2025/06/08/订阅转换/"}]`)
   ipt.addEventListener('keyup', e => {
     if (e.key === 'Enter') {
       handleSearch()
@@ -274,13 +276,13 @@
         </a>
         <a href="/tags">
           <div>
-            <span>23</span>
+            <span>27</span>
             <span>标签</span>
           </div>
         </a>
         <a href="/archives">
           <div>
-            <span>1 </span>
+            <span>2 </span>
             <span>归档</span>
           </div>
         </a>
@@ -337,7 +339,7 @@
       </h5>
       <p class="main-left--subtitle">
         <span>文章数目：</span>
-        <span>8 篇</span>
+        <span>10 篇</span>
       </p>
       <p class="main-left--subtitle">
         <span>最近动态：</span>
@@ -345,7 +347,7 @@
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
-        <span>34天</span>
+        <span>35天</span>
       </p>
       <p class="main-left--subtitle">
         <span>当前版本：</span>
@@ -383,15 +385,159 @@
       </div>
     </div>
     <article class="article-content markdown-body">
-      <blockquote>
-<h2 id="平台简介"><a href="#平台简介" class="headerlink" title="平台简介"></a>平台简介</h2></blockquote>
-<p>LibreTV影视是一个优质的在线影视观看平台，为用户提供丰富的影视资源和流畅的观看体验。平台界面简洁美观，操作便捷，是影视爱好者的不错选择。该平台采用现代化设计理念，致力于为用户打造最佳的在线观影体验。</p>
-<h2 id="访问信息"><a href="#访问信息" class="headerlink" title="访问信息"></a>访问信息</h2><p><strong>官方网址：</strong> <a target="_blank" rel="noopener" href="http://ys.0407123.xyz/">http://ys.0407123.xyz/</a></p>
-<p><strong>访问密码：</strong> <code>admin123</code></p>
-<h2 id="界面预览"><a href="#界面预览" class="headerlink" title="界面预览"></a>界面预览</h2><p><img src="https://s21.ax1x.com/2025/07/10/pVQbrQA.jpg" alt="LibreTV影视界面截图"></p>
-<h2 id="数据源选择"><a href="#数据源选择" class="headerlink" title="数据源选择"></a>数据源选择</h2><p><img src="https://s21.ax1x.com/2025/07/10/pVQbWFS.png" alt="LibreTV数据源截图"></p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>LibreTV影视作为一个在线影视平台，在资源丰富度、用户体验和技术稳定性方面都表现不错。平台界面设计现代化，功能完善，操作简便，为用户提供了良好的影视观看体验。对于喜欢在线观看影视内容的用户来说，是一个值得尝试的平台。</p>
-<p>无论是追剧党、电影爱好者，还是综艺粉丝，都能在LibreTV影视找到适合自己的内容。平台的持续更新和优化，也确保了用户能够及时观看到最新的影视作品。</p>
+      <style>
+.terminal-block {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+    border-radius: 8px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #555;
+}
+
+.terminal-title {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f57; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #28ca42; }
+
+.terminal-content {
+    padding: 15px;
+    color: #00ff00;
+    font-size: 14px;
+    position: relative;
+    background: #1e1e1e;
+}
+
+.terminal-prompt {
+    color: #00ff00;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #005a9e;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.textContent;
+        button.textContent = '已复制';
+        button.style.background = '#28a745';
+        setTimeout(function() {
+            button.textContent = originalText;
+            button.style.background = '#007acc';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+    });
+}
+</script>
+<h2 id="平台简介"><a href="#平台简介" class="headerlink" title="平台简介"></a>平台简介</h2><p>LibreTV影视是一个优质的在线影视观看平台，为用户提供丰富的影视资源和流畅的观看体验。平台界面简洁美观，操作便捷，是影视爱好者的不错选择。</p>
+<h3 id="平台特色"><a href="#平台特色" class="headerlink" title="平台特色"></a>平台特色</h3><ul>
+<li>🎬 <strong>丰富资源库</strong> - 涵盖电影、电视剧、综艺、动漫等多种类型</li>
+<li>🎨 <strong>现代化设计</strong> - 简洁美观的用户界面</li>
+<li>📱 <strong>多端适配</strong> - 支持PC、手机、平板等设备</li>
+<li>⚡ <strong>流畅播放</strong> - 优化的播放体验</li>
+</ul>
+<h2 id="访问信息"><a href="#访问信息" class="headerlink" title="访问信息"></a>访问信息</h2><p><strong>🌐 官方网址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">官方网址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>http://ys.0407123.xyz/
+        <button class="copy-btn" onclick="copyTerminalContent('http://ys.0407123.xyz/', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>🔑 访问密码：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问密码</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>admin123
+        <button class="copy-btn" onclick="copyTerminalContent('admin123', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="界面展示"><a href="#界面展示" class="headerlink" title="界面展示"></a>界面展示</h2><h3 id="主界面预览"><a href="#主界面预览" class="headerlink" title="主界面预览"></a>主界面预览</h3><p><img src="https://s21.ax1x.com/2025/07/10/pVQbrQA.jpg" alt="LibreTV影视界面截图"></p>
+<h3 id="数据源配置"><a href="#数据源配置" class="headerlink" title="数据源配置"></a>数据源配置</h3><p><img src="https://s21.ax1x.com/2025/07/10/pVQbWFS.png" alt="LibreTV数据源截图"></p>
+<h2 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h2><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ol>
+<li><strong>访问平台</strong> - 打开官方网址</li>
+<li><strong>输入密码</strong> - 使用提供的访问密码</li>
+<li><strong>选择内容</strong> - 浏览并选择想要观看的影视内容</li>
+<li><strong>开始观看</strong> - 点击播放即可享受观影体验</li>
+</ol>
+<h3 id="功能特点"><a href="#功能特点" class="headerlink" title="功能特点"></a>功能特点</h3><ul>
+<li><strong>搜索功能</strong> - 快速查找想要的影视内容</li>
+<li><strong>分类浏览</strong> - 按类型、年份、地区等分类查看</li>
+<li><strong>播放控制</strong> - 支持暂停、快进、音量调节等基本操作</li>
+<li><strong>画质选择</strong> - 根据网络情况选择合适的播放画质</li>
+</ul>
+<h2 id="适用人群"><a href="#适用人群" class="headerlink" title="适用人群"></a>适用人群</h2><ul>
+<li>🎭 <strong>追剧党</strong> - 及时追看最新热播剧集</li>
+<li>🎬 <strong>电影爱好者</strong> - 观看经典和最新电影作品</li>
+<li>🎪 <strong>综艺粉丝</strong> - 享受各类综艺娱乐节目</li>
+<li>🎌 <strong>动漫迷</strong> - 观看热门动漫作品</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>LibreTV影视作为一个在线影视平台，在资源丰富度、用户体验和技术稳定性方面都表现不错。平台界面设计现代化，功能完善，操作简便，为用户提供了良好的影视观看体验。</p>
+<blockquote>
+<p>💡 <strong>提示：</strong> 平台持续更新和优化，确保用户能够及时观看到最新的影视作品。</p>
+</blockquote>
 <hr>
 <h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
 <p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
@@ -418,7 +564,7 @@
     <div class="article-catelogue--wrapper">
       <div class="catelogue catelogue-1">
         <h3>目录</h3>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E5%8F%B0%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">平台简介</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E4%BF%A1%E6%81%AF"><span class="toc-number">2.</span> <span class="toc-text">访问信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%95%8C%E9%9D%A2%E9%A2%84%E8%A7%88"><span class="toc-number">3.</span> <span class="toc-text">界面预览</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%BA%90%E9%80%89%E6%8B%A9"><span class="toc-number">4.</span> <span class="toc-text">数据源选择</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-number">6.</span> <span class="toc-text">免责声明</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B9%B3%E5%8F%B0%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">平台简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B3%E5%8F%B0%E7%89%B9%E8%89%B2"><span class="toc-number">1.1.</span> <span class="toc-text">平台特色</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%AE%BF%E9%97%AE%E4%BF%A1%E6%81%AF"><span class="toc-number">2.</span> <span class="toc-text">访问信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%95%8C%E9%9D%A2%E5%B1%95%E7%A4%BA"><span class="toc-number">3.</span> <span class="toc-text">界面展示</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E7%95%8C%E9%9D%A2%E9%A2%84%E8%A7%88"><span class="toc-number">3.1.</span> <span class="toc-text">主界面预览</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%BA%90%E9%85%8D%E7%BD%AE"><span class="toc-number">3.2.</span> <span class="toc-text">数据源配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97"><span class="toc-number">4.</span> <span class="toc-text">使用指南</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C"><span class="toc-number">4.1.</span> <span class="toc-text">基本操作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%9F%E8%83%BD%E7%89%B9%E7%82%B9"><span class="toc-number">4.2.</span> <span class="toc-text">功能特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E4%BA%BA%E7%BE%A4"><span class="toc-number">5.</span> <span class="toc-text">适用人群</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">6.</span> <span class="toc-text">总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-number">7.</span> <span class="toc-text">免责声明</span></a></li></ol>
       </div>
       
         <div class="catelogue catelogue-2">

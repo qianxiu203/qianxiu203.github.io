@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>千修小站首页 | Hexo</title>
+  <title>千修Perplexica - 开源AI驱动搜索引擎 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="shortcut icon" href="/imgs/shortcut-icon.ico" type="image/x-icon">
   <link rel="stylesheet" href="/css/public.css" />
@@ -28,7 +28,7 @@
 
   <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <script>
-    document.title = `千修小站首页`
+    document.title = `千修Perplexica - 开源AI驱动搜索引擎`
   </script>
 <meta name="generator" content="Hexo 7.3.0"></head>
 
@@ -356,115 +356,302 @@
     </div>
   </div>
 </div></div>
-      <div id="main-container" class="main-container"><link rel="stylesheet" href="/css/partial/index.css" />
+      <div id="main-container" class="main-container">
 
 
+  <link rel="stylesheet" href="/css/partial/article.css" />
 
-<div class="index">
-  <div class="index-left">
-    
-      <div class="index-article">
-        <!-- <img class="index-article--cover" src="https://s21.ax1x.com/2025/07/10/pVQbNdK.jpg" alt=""> -->
-        <div class="index-article--box">
-          <img class="index-article--cover" data-cover="https://s21.ax1x.com/2025/07/10/pVQbNdK.jpg" alt="新闻快递 - 全球实时资讯聚合平台" />
-        </div>
-        <div class="index-article--content">
-          <a href="/2025/06/05/%E6%96%B0%E9%97%BB%E5%BF%AB%E9%80%92/">新闻快递 - 全球实时资讯聚合平台 </a>
-          <div>
-            
-              <p>
-                <a class="post-category-link" href="/categories/%E4%BF%A1%E6%81%AF%E6%9C%8D%E5%8A%A1/">信息服务</a>
-              </p>
-            
-            
-              <p>
-                <a class="-link" href="/tags/%E8%B5%84%E8%AE%AF/" rel="tag">资讯</a><span> ◆ </span><a class="-link" href="/tags/%E8%81%9A%E5%90%88/" rel="tag">聚合</a><span> ◆ </span><a class="-link" href="/tags/%E6%96%B0%E9%97%BB/" rel="tag">新闻</a>
-              </p>
-            
+<div class="article-container">
+  <div class="article">
+    <h1 class="article-title">Perplexica - 开源AI驱动搜索引擎</h1>
+    <div class="article-info">
+      <div class="article-info--item">
+        <div class="article-info--info">
+          
+          <div class="article-info--categories">
+            <span>分类：</span>
+            <a class="category-link" href="/categories/AI%E5%BA%94%E7%94%A8/">AI应用</a>
           </div>
-          <div class="bg"></div>
+          
+          
+          <div class="article-info--tags">
+            <span>标签：</span>
+            <a class="tag-link" href="/tags/AI/" rel="tag">AI</a><a class="tag-link" href="/tags/Perplexity/" rel="tag">Perplexity</a><a class="tag-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a><a class="tag-link" href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" rel="tag">搜索引擎</a>
+          </div>
+          
+          <p class="article-info--date">日期：2025-01-15 11:00:00</p>
         </div>
+        <!-- <img src="https://s21.ax1x.com/2025/07/12/pVlYc2q.jpg" alt="" class="article-cover"> -->
       </div>
+    </div>
+    <article class="article-content markdown-body">
+      <style>
+.terminal-block {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 10px 0;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px 6px 0 0;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27ca3f; }
+
+.terminal-content {
+    padding: 12px;
+    color: #f8f8f2;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: #50fa7b;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #44475a;
+    border: 1px solid #6272a4;
+    color: #f8f8f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #6272a4;
+    border-color: #8be9fd;
+}
+
+.copy-btn.success {
+    background: #50fa7b;
+    color: #282a36;
+    border-color: #50fa7b;
+}
+
+.copy-btn.error {
+    background: #ff5555;
+    border-color: #ff5555;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ 已复制';
+        button.className = 'copy-btn success';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✗ 失败';
+        button.className = 'copy-btn error';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    });
+}
+</script>
+
+<h2 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h2><p>Perplexica是一个开源的AI驱动搜索引擎，旨在提供类似Perplexity.ai的智能搜索体验。它结合了传统搜索引擎的信息检索能力和大语言模型的理解分析能力，为用户提供更准确、更有深度的搜索结果。</p>
+<h3 id="🎯-核心特性"><a href="#🎯-核心特性" class="headerlink" title="🎯 核心特性"></a>🎯 核心特性</h3><ul>
+<li>🤖 <strong>AI驱动</strong> - 集成多种大语言模型，提供智能化搜索体验</li>
+<li>🔍 <strong>实时搜索</strong> - 获取最新的网络信息和实时数据</li>
+<li>📊 <strong>结果聚合</strong> - 智能整合多个信息源，提供综合性答案</li>
+<li>🛠️ <strong>开源自由</strong> - 完全开源，支持自部署和定制化配置</li>
+<li>🌐 <strong>多语言支持</strong> - 支持多种语言的搜索和回答</li>
+</ul>
+<h2 id="快速体验"><a href="#快速体验" class="headerlink" title="快速体验"></a>快速体验</h2><h3 id="🌐-访问地址"><a href="#🌐-访问地址" class="headerlink" title="🌐 访问地址"></a>🌐 访问地址</h3><p><strong>🔗 自建实例：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Perplexica 自建站点</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://as.0407123.xyz/
+        <button class="copy-btn" onclick="copyTerminalContent('https://as.0407123.xyz/', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>🏢 官方对比：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Perplexity.ai 官方</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://www.perplexity.ai/
+        <button class="copy-btn" onclick="copyTerminalContent('https://www.perplexity.ai/', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="💡-使用优势"><a href="#💡-使用优势" class="headerlink" title="💡 使用优势"></a>💡 使用优势</h3><p><strong>相比传统搜索引擎：</strong></p>
+<ul>
+<li>📝 <strong>直接答案</strong> - 提供结构化的答案，而非仅仅是链接列表</li>
+<li>🔗 <strong>来源引用</strong> - 清晰标注信息来源，确保可信度</li>
+<li>💬 <strong>对话式交互</strong> - 支持追问和深入讨论</li>
+<li>🎯 <strong>上下文理解</strong> - 理解查询意图，提供更精准的结果</li>
+</ul>
+<p><strong>相比Perplexity.ai官方：</strong></p>
+<ul>
+<li>🆓 <strong>完全免费</strong> - 无使用限制和付费门槛</li>
+<li>🔧 <strong>可定制化</strong> - 支持自部署和个性化配置</li>
+<li>🔒 <strong>隐私保护</strong> - 数据完全掌控，无隐私泄露风险</li>
+<li>⚡ <strong>响应速度</strong> - 本地化部署，减少网络延迟</li>
+</ul>
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><ul>
+<li><strong>学术研究</strong> - 快速获取权威资料和最新研究进展</li>
+<li><strong>技术开发</strong> - 查找技术文档、解决方案和最佳实践</li>
+<li><strong>新闻资讯</strong> - 获取实时新闻和事件分析</li>
+<li><strong>知识学习</strong> - 深入了解复杂概念和专业知识</li>
+<li><strong>商业分析</strong> - 市场调研和竞争情报收集</li>
+</ul>
+<h2 id="技术特点"><a href="#技术特点" class="headerlink" title="技术特点"></a>技术特点</h2><h3 id="🔧-架构设计"><a href="#🔧-架构设计" class="headerlink" title="🔧 架构设计"></a>🔧 架构设计</h3><ul>
+<li><strong>模块化架构</strong> - 易于扩展和维护</li>
+<li><strong>多模型支持</strong> - 兼容OpenAI、Claude等多种AI模型</li>
+<li><strong>缓存机制</strong> - 优化响应速度和资源利用</li>
+<li><strong>API接口</strong> - 支持第三方集成和开发</li>
+</ul>
+<h3 id="🚀-性能优化"><a href="#🚀-性能优化" class="headerlink" title="🚀 性能优化"></a>🚀 性能优化</h3><ul>
+<li><strong>并行处理</strong> - 同时查询多个信息源</li>
+<li><strong>智能过滤</strong> - 自动筛选高质量内容</li>
+<li><strong>结果排序</strong> - 基于相关性和权威性排序</li>
+<li><strong>实时更新</strong> - 动态获取最新信息</li>
+</ul>
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本工具仅用于信息检索和学习研究目的。使用过程中请遵守相关法律法规，确保查询内容合法合规。</p>
+<p>搜索结果来源于公开网络信息，工具本身不对信息的准确性、完整性或时效性承担责任。用户应当独立验证重要信息的可靠性。</p>
+
+    </article>
+    
+    <div class="read-nums">
+      <!-- id 将作为查询条件 -->
+      <span id="2025/01/15/Perplexica/" class="leancloud_visitors" data-flag-title="Your Article Title">
+        <em class="post-meta-item-text">浏览量</em>
+        <i class="leancloud-visitors-count"></i>
+      </span>
+    </div>
+    <div class="comments-intro">
+      <h2>评论区</h2>
+      <p>欢迎你留下宝贵的意见，昵称输入QQ号会显示QQ头像哦~</p>
+    </div>
+    <div id="vcomments" class="vcomments"></div>
     
   </div>
-  <div class="index-center">
-    
-  </div>
-  <div class="index-right">
-    <div class="index-right-wrapper">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/AI%E5%BA%94%E7%94%A8/">AI应用</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E4%BF%A1%E6%81%AF%E6%9C%8D%E5%8A%A1/">信息服务</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E5%BD%B1%E8%A7%86%E8%B5%84%E6%BA%90/">影视资源</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E5%AE%9E%E6%88%98/">技术实战</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E7%BD%91%E7%BB%9C%E5%B7%A5%E5%85%B7/">网络工具</a></li></ul>
-      <ul class="tags" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9D%99%E6%80%81%E5%8D%9A%E5%AE%A2/" rel="tag">静态博客</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%BF%90%E7%BB%B4%E5%B7%A5%E5%85%B7/" rel="tag">运维工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%B5%84%E8%AE%AF/" rel="tag">资讯</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2/" rel="tag">订阅转换</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%8A%82%E7%82%B9/" rel="tag">节点</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%9A%E5%90%88/" rel="tag">聚合</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%81%8A%E5%A4%A9%E5%BA%94%E7%94%A8/" rel="tag">聊天应用</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%BD%91%E7%BB%9C%E4%BB%A3%E7%90%86/" rel="tag">网络代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/" rel="tag">监控系统</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%B5%81%E5%AA%92%E4%BD%93/" rel="tag">流媒体</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%96%B0%E9%97%BB/" rel="tag">新闻</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E/" rel="tag">搜索引擎</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%8F%90%E7%A4%BA%E8%AF%8D/" rel="tag">提示词</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96/" rel="tag">性能优化</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%B1%E8%A7%86%E8%B5%84%E6%BA%90/" rel="tag">影视资源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BD%B1%E8%A7%86/" rel="tag">影视</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%BC%80%E6%BA%90/" rel="tag">开源</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%9C%A8%E7%BA%BF%E8%A7%82%E7%9C%8B/" rel="tag">在线观看</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA/" rel="tag">博客搭建</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BC%98%E5%8C%96%E5%B7%A5%E5%85%B7/" rel="tag">优化工具</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E4%BB%A3%E7%90%86/" rel="tag">代理</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Perplexity/" rel="tag">Perplexity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LibreTV/" rel="tag">LibreTV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/LLM/" rel="tag">LLM</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Cloudflare/" rel="tag">Cloudflare</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/AI/" rel="tag">AI</a></li></ul>
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/06/">2025年06月</a><span class="archive-list-count">8</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2025/01/">2025年01月</a><span class="archive-list-count">2</span></li></ul>
+  <div class="article-catelogue">
+    <div class="article-catelogue--wrapper">
+      <div class="catelogue catelogue-1">
+        <h3>目录</h3>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%A1%B9%E7%9B%AE%E7%AE%80%E4%BB%8B"><span class="toc-number">1.</span> <span class="toc-text">项目简介</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8E%AF-%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7"><span class="toc-number">1.1.</span> <span class="toc-text">🎯 核心特性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BF%AB%E9%80%9F%E4%BD%93%E9%AA%8C"><span class="toc-number">2.</span> <span class="toc-text">快速体验</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%8C%90-%E8%AE%BF%E9%97%AE%E5%9C%B0%E5%9D%80"><span class="toc-number">2.1.</span> <span class="toc-text">🌐 访问地址</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%92%A1-%E4%BD%BF%E7%94%A8%E4%BC%98%E5%8A%BF"><span class="toc-number">2.2.</span> <span class="toc-text">💡 使用优势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">3.</span> <span class="toc-text">适用场景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E7%89%B9%E7%82%B9"><span class="toc-number">4.</span> <span class="toc-text">技术特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%94%A7-%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">4.1.</span> <span class="toc-text">🔧 架构设计</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%F0%9F%9A%80-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96"><span class="toc-number">4.2.</span> <span class="toc-text">🚀 性能优化</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%8D%E8%B4%A3%E5%A3%B0%E6%98%8E"><span class="toc-number">5.</span> <span class="toc-text">免责声明</span></a></li></ol>
+      </div>
+      
+        <div class="catelogue catelogue-2">
+          
+            <p>
+              <span>上一篇：</span>
+              <a href="/2025/06/05/新闻快递/">新闻快递 - 全球实时资讯聚合平台</a>
+            </p>
+           
+          
+            <p>
+              <span>下一篇</span>
+              <a href="/2025/01/15/提示词优化器/">提示词优化器 - AI对话效果提升利器</a>
+            </p>
+          
+        </div>
+      
     </div>
   </div>
 </div>
 
 
 <script>
-  var allImgBoxs = document.querySelectorAll('.index-article--box');
-  var windowHeight = window.innerHeight;
-  var boxs = Array.from(allImgBoxs);
-  var timer = null;
-  boxs.forEach((box, idx) => {
-    if (!window.loadImageSet || !window.loadImageSet.includes(idx)) {
-      box.classList.add('img-loading');
-    } else {
-      const imgDom = box.querySelector('img');
-      imgDom.src = imgDom.dataset.cover;
-    }
-  });
-
-  function scrollFn() {
-    if (timer) {
-      return;
-    }
-    timer = setTimeout(() => {
-      loadImage();
-      timer = null;
-    }, 100)
-  }
-
-  setTimeout(() => {
-    loadImage();
-  }, 100);
-  if (!window.loadedImage) {
-    document.addEventListener('scroll', scrollFn);
-  }
-
-  function loadImage() {
-    const doc = document.documentElement;
-    const scrollTop = doc.scrollTop;
-    if (boxs.every(box => box.loadedImage)) {
-      document.removeEventListener('scroll', scrollFn);
-      window.loadedImage = 1;
-      return;
-    }
-    boxs.forEach((box, idx) => {
-      if (box.loadedImage) {
-        return;
-      }
-      if (box.getBoundingClientRect().top < windowHeight) {
-        const imgDom = box.querySelector('img');
-        imgDom.src = imgDom.dataset.cover;
-        // 图片成功加载
-        imgDom.onload = () => {
-          box.classList.remove('img-loading');
-          box.loadedImage = true;
-          if (!window.loadImageSet) {
-            window.loadImageSet = [];
-          }
-          window.loadImageSet.push(idx);
-        }
-        // 图片加载失败
-        imgDom.onerror = () => {
-          box.classList.remove('img-loading');
-          box.classList.add('img-error');
-          imgDom.src = '/imgs/404.png';
-        }
-      }
-    });
-  }
+  // var定义，避免pjax重新进来造成的重复声明错误
+  var config = JSON.parse('{"enable":true,"appId":"Pf8zCXGEH1qsprnWfikVVujL-gzGzoHsz","appKey":"qOqoiUHhH1TGtLRUYURkLRQX","placeholder":"请留下你宝贵的意见吧~","meta":["nick"],"recordIP":true,"visitor":true,"enableQQ":true}')
+  new Valine({
+    el: '#vcomments',
+    appId: config.appId,
+    appKey: config.appKey,
+    placeholder: config.placeholder,
+    meta: config.meta,
+    recordIP: config.recordIP,
+    visitor: config.visitor,
+    enableQQ: config.enableQQ,
+    path: '2025/01/15/Perplexica/'
+  })
 </script>
+
+
+<script>
+  $(document).on('pjax:complete', function() {
+    const tocs = document.querySelector('.toc')
+    const links = tocs ? tocs.querySelectorAll('a') : []
+    links.forEach(link => {
+      link.addEventListener('click', e => {
+        const href = decodeURIComponent(e.href)
+        href.search(/#(.*)/)
+        const id = RegExp.$1
+        const target = document.querySelector('#' + id)
+        const top = target.offsetTop
+        document.documentElement.scrollTo({
+          top: top - 100,
+          behavior: 'smooth'
+        })
+        e.preventDefault()
+      })
+    })
+  })
+</script> 
+
 </div>
       <div class="main-right-wrapper"><div class="main-right">
   <div class="main-right--board">
