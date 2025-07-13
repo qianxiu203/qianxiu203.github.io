@@ -67,7 +67,7 @@ window.autoThemeSwitch = {
   },
 
   // 检查并切换主题
-  async checkAndSwitchTheme() {
+  async checkAndSwitchTheme(isInitialCheck = false) {
     try {
       const currentTime = await this.getChinaTime();
       const hour = currentTime.getHours();
@@ -78,8 +78,13 @@ window.autoThemeSwitch = {
       
       // 6:00-18:00 浅色主题，18:00-6:00 深色主题
       const shouldBeLightTheme = hour >= 6 && hour < 18;
-      const currentTheme = document.documentElement.getAttribute('data-theme');
+      let currentTheme = document.documentElement.getAttribute('data-theme');
       const targetTheme = shouldBeLightTheme ? 'light' : 'dark';
+      
+      // 如果是初始检查且当前主题为空或null，则设置为目标主题
+      if (isInitialCheck && (!currentTheme || currentTheme === 'null')) {
+        currentTheme = null; // 强制设置为null以触发主题设置
+      }
       
       if (currentTheme !== targetTheme) {
         document.documentElement.setAttribute('data-theme', targetTheme);
@@ -96,8 +101,8 @@ window.autoThemeSwitch = {
           handleThemeChange(targetTheme);
         }
         
-        // 显示切换提示
-        if (typeof utils !== 'undefined' && utils.snackbarShow) {
+        // 显示切换提示（初始检查时不显示提示）
+        if (!isInitialCheck && typeof utils !== 'undefined' && utils.snackbarShow) {
           utils.snackbarShow(
             `已自动切换到${targetTheme === 'light' ? '浅色' : '深色'}主题 (${timeString})`,
             false,
@@ -121,12 +126,12 @@ window.autoThemeSwitch = {
     
     console.log(`[自动主题切换] 启动自动切换，检查间隔: ${this.checkInterval / 1000}秒`);
     
-    // 立即执行一次检查
-    this.checkAndSwitchTheme();
+    // 立即执行一次检查（标记为初始检查）
+    this.checkAndSwitchTheme(true);
     
-    // 设置定时器
+    // 设置定时器（后续检查不是初始检查）
     this.timer = setInterval(() => {
-      this.checkAndSwitchTheme();
+      this.checkAndSwitchTheme(false);
     }, this.checkInterval);
   },
 
@@ -186,6 +191,37 @@ window.autoThemeSwitch = {
     }
   },
 
+  // 确保主题状态正确初始化
+  ensureThemeInitialized() {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    
+    // 如果data-theme属性不存在或为空，从localStorage获取或设置默认值
+    if (!currentTheme || currentTheme === 'null') {
+      let savedTheme = null;
+      
+      // 尝试从utils.saveToLocal获取
+      if (typeof utils !== 'undefined' && utils.saveToLocal && utils.saveToLocal.get) {
+        savedTheme = utils.saveToLocal.get('theme');
+      }
+      
+      // 如果utils不可用，从localStorage获取
+      if (!savedTheme) {
+        savedTheme = localStorage.getItem('theme');
+      }
+      
+      // 如果仍然没有保存的主题，设置默认主题为light
+      if (!savedTheme) {
+        savedTheme = 'light';
+      }
+      
+      // 设置主题属性
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      console.log(`[自动主题切换] 初始化主题为: ${savedTheme}`);
+    } else {
+      console.log(`[自动主题切换] 当前主题: ${currentTheme}`);
+    }
+  },
+
   // 初始化
   init() {
     console.log('[自动主题切换] 正在初始化...');
@@ -194,6 +230,9 @@ window.autoThemeSwitch = {
     if (typeof utils === 'undefined') {
       console.warn('[自动主题切换] utils对象未找到，部分功能可能受限');
     }
+    
+    // 确保主题状态正确初始化
+    this.ensureThemeInitialized();
     
     this.startAutoSwitch();
     
