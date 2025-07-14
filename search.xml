@@ -576,6 +576,378 @@ function copyTerminalContent(text, button) {
       </tags>
   </entry>
   <entry>
+    <title>Perplexica - 开源AI驱动搜索引擎</title>
+    <url>/2025/01/15/Perplexica/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 10px 0;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px 6px 0 0;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27ca3f; }
+
+.terminal-content {
+    padding: 12px;
+    color: #f8f8f2;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: #50fa7b;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #44475a;
+    border: 1px solid #6272a4;
+    color: #f8f8f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #6272a4;
+    border-color: #8be9fd;
+}
+
+.copy-btn.success {
+    background: #50fa7b;
+    color: #282a36;
+    border-color: #50fa7b;
+}
+
+.copy-btn.error {
+    background: #ff5555;
+    border-color: #ff5555;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ 已复制';
+        button.className = 'copy-btn success';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✗ 失败';
+        button.className = 'copy-btn error';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    });
+}
+</script>
+
+<h2 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h2><p>Perplexica是一个开源的AI驱动搜索引擎，旨在提供类似Perplexity.ai的智能搜索体验。它结合了传统搜索引擎的信息检索能力和大语言模型的理解分析能力，为用户提供更准确、更有深度的搜索结果。</p>
+<h3 id="🎯-核心特性"><a href="#🎯-核心特性" class="headerlink" title="🎯 核心特性"></a>🎯 核心特性</h3><ul>
+<li>🤖 <strong>AI驱动</strong> - 集成多种大语言模型，提供智能化搜索体验</li>
+<li>🔍 <strong>实时搜索</strong> - 获取最新的网络信息和实时数据</li>
+<li>📊 <strong>结果聚合</strong> - 智能整合多个信息源，提供综合性答案</li>
+<li>🛠️ <strong>开源自由</strong> - 完全开源，支持自部署和定制化配置</li>
+<li>🌐 <strong>多语言支持</strong> - 支持多种语言的搜索和回答</li>
+</ul>
+<h2 id="快速体验"><a href="#快速体验" class="headerlink" title="快速体验"></a>快速体验</h2><h3 id="🌐-访问地址"><a href="#🌐-访问地址" class="headerlink" title="🌐 访问地址"></a>🌐 访问地址</h3><p><strong>🔗 自建实例：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Perplexica 自建站点</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://as.0407123.xyz/
+        <button class="copy-btn" onclick="copyTerminalContent('https://as.0407123.xyz/', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>🏢 官方对比：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Perplexity.ai 官方</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://www.perplexity.ai/
+        <button class="copy-btn" onclick="copyTerminalContent('https://www.perplexity.ai/', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="💡-使用优势"><a href="#💡-使用优势" class="headerlink" title="💡 使用优势"></a>💡 使用优势</h3><p><strong>相比传统搜索引擎：</strong></p>
+<ul>
+<li>📝 <strong>直接答案</strong> - 提供结构化的答案，而非仅仅是链接列表</li>
+<li>🔗 <strong>来源引用</strong> - 清晰标注信息来源，确保可信度</li>
+<li>💬 <strong>对话式交互</strong> - 支持追问和深入讨论</li>
+<li>🎯 <strong>上下文理解</strong> - 理解查询意图，提供更精准的结果</li>
+</ul>
+<p><strong>相比Perplexity.ai官方：</strong></p>
+<ul>
+<li>🆓 <strong>完全免费</strong> - 无使用限制和付费门槛</li>
+<li>🔧 <strong>可定制化</strong> - 支持自部署和个性化配置</li>
+<li>🔒 <strong>隐私保护</strong> - 数据完全掌控，无隐私泄露风险</li>
+<li>⚡ <strong>响应速度</strong> - 本地化部署，减少网络延迟</li>
+</ul>
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><ul>
+<li><strong>学术研究</strong> - 快速获取权威资料和最新研究进展</li>
+<li><strong>技术开发</strong> - 查找技术文档、解决方案和最佳实践</li>
+<li><strong>新闻资讯</strong> - 获取实时新闻和事件分析</li>
+<li><strong>知识学习</strong> - 深入了解复杂概念和专业知识</li>
+<li><strong>商业分析</strong> - 市场调研和竞争情报收集</li>
+</ul>
+<h2 id="技术特点"><a href="#技术特点" class="headerlink" title="技术特点"></a>技术特点</h2><h3 id="🔧-架构设计"><a href="#🔧-架构设计" class="headerlink" title="🔧 架构设计"></a>🔧 架构设计</h3><ul>
+<li><strong>模块化架构</strong> - 易于扩展和维护</li>
+<li><strong>多模型支持</strong> - 兼容OpenAI、Claude等多种AI模型</li>
+<li><strong>缓存机制</strong> - 优化响应速度和资源利用</li>
+<li><strong>API接口</strong> - 支持第三方集成和开发</li>
+</ul>
+<h3 id="🚀-性能优化"><a href="#🚀-性能优化" class="headerlink" title="🚀 性能优化"></a>🚀 性能优化</h3><ul>
+<li><strong>并行处理</strong> - 同时查询多个信息源</li>
+<li><strong>智能过滤</strong> - 自动筛选高质量内容</li>
+<li><strong>结果排序</strong> - 基于相关性和权威性排序</li>
+<li><strong>实时更新</strong> - 动态获取最新信息</li>
+</ul>
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本工具仅用于信息检索和学习研究目的。使用过程中请遵守相关法律法规，确保查询内容合法合规。</p>
+<p>搜索结果来源于公开网络信息，工具本身不对信息的准确性、完整性或时效性承担责任。用户应当独立验证重要信息的可靠性。</p>
+]]></content>
+      <categories>
+        <category>AI应用</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+        <tag>开源</tag>
+        <tag>搜索引擎</tag>
+        <tag>Perplexity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LibreTV影视 - 优质在线影视平台使用指南</title>
+    <url>/2025/06/06/libretv-yingshi/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+    border-radius: 8px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #555;
+}
+
+.terminal-title {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f57; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #28ca42; }
+
+.terminal-content {
+    padding: 15px;
+    color: #00ff00;
+    font-size: 14px;
+    position: relative;
+    background: #1e1e1e;
+}
+
+.terminal-prompt {
+    color: #00ff00;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #005a9e;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.textContent;
+        button.textContent = '已复制';
+        button.style.background = '#28a745';
+        setTimeout(function() {
+            button.textContent = originalText;
+            button.style.background = '#007acc';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+    });
+}
+</script>
+<h2 id="平台简介"><a href="#平台简介" class="headerlink" title="平台简介"></a>平台简介</h2><p>LibreTV影视是一个优质的在线影视观看平台，为用户提供丰富的影视资源和流畅的观看体验。平台界面简洁美观，操作便捷，是影视爱好者的不错选择。</p>
+<h3 id="平台特色"><a href="#平台特色" class="headerlink" title="平台特色"></a>平台特色</h3><ul>
+<li>🎬 <strong>丰富资源库</strong> - 涵盖电影、电视剧、综艺、动漫等多种类型</li>
+<li>🎨 <strong>现代化设计</strong> - 简洁美观的用户界面</li>
+<li>📱 <strong>多端适配</strong> - 支持PC、手机、平板等设备</li>
+<li>⚡ <strong>流畅播放</strong> - 优化的播放体验</li>
+</ul>
+<h2 id="访问信息"><a href="#访问信息" class="headerlink" title="访问信息"></a>访问信息</h2><p><strong>🌐 官方网址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">官方网址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>http://ys.0407123.xyz/
+        <button class="copy-btn" onclick="copyTerminalContent('http://ys.0407123.xyz/', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>🔑 访问密码：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问密码</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>admin123
+        <button class="copy-btn" onclick="copyTerminalContent('admin123', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="界面展示"><a href="#界面展示" class="headerlink" title="界面展示"></a>界面展示</h2><h3 id="主界面预览"><a href="#主界面预览" class="headerlink" title="主界面预览"></a>主界面预览</h3><p><img src="https://s21.ax1x.com/2025/07/10/pVQbrQA.jpg" alt="LibreTV影视界面截图"></p>
+<h3 id="数据源配置"><a href="#数据源配置" class="headerlink" title="数据源配置"></a>数据源配置</h3><p><img src="https://s21.ax1x.com/2025/07/10/pVQbWFS.png" alt="LibreTV数据源截图"></p>
+<h2 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h2><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ol>
+<li><strong>访问平台</strong> - 打开官方网址</li>
+<li><strong>输入密码</strong> - 使用提供的访问密码</li>
+<li><strong>选择内容</strong> - 浏览并选择想要观看的影视内容</li>
+<li><strong>开始观看</strong> - 点击播放即可享受观影体验</li>
+</ol>
+<h3 id="功能特点"><a href="#功能特点" class="headerlink" title="功能特点"></a>功能特点</h3><ul>
+<li><strong>搜索功能</strong> - 快速查找想要的影视内容</li>
+<li><strong>分类浏览</strong> - 按类型、年份、地区等分类查看</li>
+<li><strong>播放控制</strong> - 支持暂停、快进、音量调节等基本操作</li>
+<li><strong>画质选择</strong> - 根据网络情况选择合适的播放画质</li>
+</ul>
+<h2 id="适用人群"><a href="#适用人群" class="headerlink" title="适用人群"></a>适用人群</h2><ul>
+<li>🎭 <strong>追剧党</strong> - 及时追看最新热播剧集</li>
+<li>🎬 <strong>电影爱好者</strong> - 观看经典和最新电影作品</li>
+<li>🎪 <strong>综艺粉丝</strong> - 享受各类综艺娱乐节目</li>
+<li>🎌 <strong>动漫迷</strong> - 观看热门动漫作品</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>LibreTV影视作为一个在线影视平台，在资源丰富度、用户体验和技术稳定性方面都表现不错。平台界面设计现代化，功能完善，操作简便，为用户提供了良好的影视观看体验。</p>
+<blockquote>
+<p>💡 <strong>提示：</strong> 平台持续更新和优化，确保用户能够及时观看到最新的影视作品。</p>
+</blockquote>
+<hr>
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
+<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
+<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
+]]></content>
+      <categories>
+        <category>影视资源</category>
+      </categories>
+      <tags>
+        <tag>影视</tag>
+        <tag>在线观看</tag>
+        <tag>LibreTV</tag>
+        <tag>流媒体</tag>
+        <tag>影视资源</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>emby影视</title>
     <url>/2025/06/08/emby%E5%BD%B1%E8%A7%86/</url>
     <content><![CDATA[<style>
@@ -1003,378 +1375,6 @@ function copyTerminalContent(text, button) {
 <p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
 <p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
 ]]></content>
-  </entry>
-  <entry>
-    <title>Perplexica - 开源AI驱动搜索引擎</title>
-    <url>/2025/01/15/Perplexica/</url>
-    <content><![CDATA[<style>
-.terminal-block {
-    background: #1e1e1e;
-    border: 1px solid #333;
-    border-radius: 6px;
-    margin: 10px 0;
-    position: relative;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-}
-
-.terminal-header {
-    background: #2d2d2d;
-    padding: 8px 12px;
-    border-bottom: 1px solid #333;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 6px 6px 0 0;
-}
-
-.terminal-title {
-    color: #888;
-    font-size: 12px;
-    font-weight: normal;
-}
-
-.terminal-buttons {
-    display: flex;
-    gap: 6px;
-}
-
-.terminal-btn {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-}
-
-.terminal-btn.close { background: #ff5f56; }
-.terminal-btn.minimize { background: #ffbd2e; }
-.terminal-btn.maximize { background: #27ca3f; }
-
-.terminal-content {
-    padding: 12px;
-    color: #f8f8f2;
-    font-size: 14px;
-    line-height: 1.4;
-    position: relative;
-}
-
-.terminal-prompt {
-    color: #50fa7b;
-    margin-right: 8px;
-}
-
-.copy-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: #44475a;
-    border: 1px solid #6272a4;
-    color: #f8f8f2;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 11px;
-    transition: all 0.2s;
-}
-
-.copy-btn:hover {
-    background: #6272a4;
-    border-color: #8be9fd;
-}
-
-.copy-btn.success {
-    background: #50fa7b;
-    color: #282a36;
-    border-color: #50fa7b;
-}
-
-.copy-btn.error {
-    background: #ff5555;
-    border-color: #ff5555;
-}
-</style>
-
-<script>
-function copyTerminalContent(text, button) {
-    navigator.clipboard.writeText(text).then(function() {
-        const originalText = button.innerHTML;
-        button.innerHTML = '✓ 已复制';
-        button.className = 'copy-btn success';
-        setTimeout(function() {
-            button.innerHTML = originalText;
-            button.className = 'copy-btn';
-        }, 2000);
-    }).catch(function(err) {
-        console.error('复制失败: ', err);
-        const originalText = button.innerHTML;
-        button.innerHTML = '✗ 失败';
-        button.className = 'copy-btn error';
-        setTimeout(function() {
-            button.innerHTML = originalText;
-            button.className = 'copy-btn';
-        }, 2000);
-    });
-}
-</script>
-
-<h2 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h2><p>Perplexica是一个开源的AI驱动搜索引擎，旨在提供类似Perplexity.ai的智能搜索体验。它结合了传统搜索引擎的信息检索能力和大语言模型的理解分析能力，为用户提供更准确、更有深度的搜索结果。</p>
-<h3 id="🎯-核心特性"><a href="#🎯-核心特性" class="headerlink" title="🎯 核心特性"></a>🎯 核心特性</h3><ul>
-<li>🤖 <strong>AI驱动</strong> - 集成多种大语言模型，提供智能化搜索体验</li>
-<li>🔍 <strong>实时搜索</strong> - 获取最新的网络信息和实时数据</li>
-<li>📊 <strong>结果聚合</strong> - 智能整合多个信息源，提供综合性答案</li>
-<li>🛠️ <strong>开源自由</strong> - 完全开源，支持自部署和定制化配置</li>
-<li>🌐 <strong>多语言支持</strong> - 支持多种语言的搜索和回答</li>
-</ul>
-<h2 id="快速体验"><a href="#快速体验" class="headerlink" title="快速体验"></a>快速体验</h2><h3 id="🌐-访问地址"><a href="#🌐-访问地址" class="headerlink" title="🌐 访问地址"></a>🌐 访问地址</h3><p><strong>🔗 自建实例：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">Perplexica 自建站点</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>https://as.0407123.xyz/
-        <button class="copy-btn" onclick="copyTerminalContent('https://as.0407123.xyz/', this)">复制</button>
-    </div>
-</div>
-
-<p><strong>🏢 官方对比：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">Perplexity.ai 官方</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>https://www.perplexity.ai/
-        <button class="copy-btn" onclick="copyTerminalContent('https://www.perplexity.ai/', this)">复制</button>
-    </div>
-</div>
-
-<h3 id="💡-使用优势"><a href="#💡-使用优势" class="headerlink" title="💡 使用优势"></a>💡 使用优势</h3><p><strong>相比传统搜索引擎：</strong></p>
-<ul>
-<li>📝 <strong>直接答案</strong> - 提供结构化的答案，而非仅仅是链接列表</li>
-<li>🔗 <strong>来源引用</strong> - 清晰标注信息来源，确保可信度</li>
-<li>💬 <strong>对话式交互</strong> - 支持追问和深入讨论</li>
-<li>🎯 <strong>上下文理解</strong> - 理解查询意图，提供更精准的结果</li>
-</ul>
-<p><strong>相比Perplexity.ai官方：</strong></p>
-<ul>
-<li>🆓 <strong>完全免费</strong> - 无使用限制和付费门槛</li>
-<li>🔧 <strong>可定制化</strong> - 支持自部署和个性化配置</li>
-<li>🔒 <strong>隐私保护</strong> - 数据完全掌控，无隐私泄露风险</li>
-<li>⚡ <strong>响应速度</strong> - 本地化部署，减少网络延迟</li>
-</ul>
-<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><ul>
-<li><strong>学术研究</strong> - 快速获取权威资料和最新研究进展</li>
-<li><strong>技术开发</strong> - 查找技术文档、解决方案和最佳实践</li>
-<li><strong>新闻资讯</strong> - 获取实时新闻和事件分析</li>
-<li><strong>知识学习</strong> - 深入了解复杂概念和专业知识</li>
-<li><strong>商业分析</strong> - 市场调研和竞争情报收集</li>
-</ul>
-<h2 id="技术特点"><a href="#技术特点" class="headerlink" title="技术特点"></a>技术特点</h2><h3 id="🔧-架构设计"><a href="#🔧-架构设计" class="headerlink" title="🔧 架构设计"></a>🔧 架构设计</h3><ul>
-<li><strong>模块化架构</strong> - 易于扩展和维护</li>
-<li><strong>多模型支持</strong> - 兼容OpenAI、Claude等多种AI模型</li>
-<li><strong>缓存机制</strong> - 优化响应速度和资源利用</li>
-<li><strong>API接口</strong> - 支持第三方集成和开发</li>
-</ul>
-<h3 id="🚀-性能优化"><a href="#🚀-性能优化" class="headerlink" title="🚀 性能优化"></a>🚀 性能优化</h3><ul>
-<li><strong>并行处理</strong> - 同时查询多个信息源</li>
-<li><strong>智能过滤</strong> - 自动筛选高质量内容</li>
-<li><strong>结果排序</strong> - 基于相关性和权威性排序</li>
-<li><strong>实时更新</strong> - 动态获取最新信息</li>
-</ul>
-<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本工具仅用于信息检索和学习研究目的。使用过程中请遵守相关法律法规，确保查询内容合法合规。</p>
-<p>搜索结果来源于公开网络信息，工具本身不对信息的准确性、完整性或时效性承担责任。用户应当独立验证重要信息的可靠性。</p>
-]]></content>
-      <categories>
-        <category>AI应用</category>
-      </categories>
-      <tags>
-        <tag>AI</tag>
-        <tag>开源</tag>
-        <tag>搜索引擎</tag>
-        <tag>Perplexity</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LibreTV影视 - 优质在线影视平台使用指南</title>
-    <url>/2025/06/06/libretv-yingshi/</url>
-    <content><![CDATA[<style>
-.terminal-block {
-    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-    border-radius: 8px;
-    margin: 15px 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-    font-family: 'Courier New', monospace;
-}
-
-.terminal-header {
-    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
-    padding: 8px 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #555;
-}
-
-.terminal-title {
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.terminal-buttons {
-    display: flex;
-    gap: 6px;
-}
-
-.terminal-btn {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-}
-
-.terminal-btn.close { background: #ff5f57; }
-.terminal-btn.minimize { background: #ffbd2e; }
-.terminal-btn.maximize { background: #28ca42; }
-
-.terminal-content {
-    padding: 15px;
-    color: #00ff00;
-    font-size: 14px;
-    position: relative;
-    background: #1e1e1e;
-}
-
-.terminal-prompt {
-    color: #00ff00;
-    margin-right: 8px;
-}
-
-.copy-btn {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #007acc;
-    color: white;
-    border: none;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 11px;
-    transition: background 0.3s;
-}
-
-.copy-btn:hover {
-    background: #005a9e;
-}
-</style>
-
-<script>
-function copyTerminalContent(text, button) {
-    navigator.clipboard.writeText(text).then(function() {
-        const originalText = button.textContent;
-        button.textContent = '已复制';
-        button.style.background = '#28a745';
-        setTimeout(function() {
-            button.textContent = originalText;
-            button.style.background = '#007acc';
-        }, 2000);
-    }).catch(function(err) {
-        console.error('复制失败: ', err);
-    });
-}
-</script>
-<h2 id="平台简介"><a href="#平台简介" class="headerlink" title="平台简介"></a>平台简介</h2><p>LibreTV影视是一个优质的在线影视观看平台，为用户提供丰富的影视资源和流畅的观看体验。平台界面简洁美观，操作便捷，是影视爱好者的不错选择。</p>
-<h3 id="平台特色"><a href="#平台特色" class="headerlink" title="平台特色"></a>平台特色</h3><ul>
-<li>🎬 <strong>丰富资源库</strong> - 涵盖电影、电视剧、综艺、动漫等多种类型</li>
-<li>🎨 <strong>现代化设计</strong> - 简洁美观的用户界面</li>
-<li>📱 <strong>多端适配</strong> - 支持PC、手机、平板等设备</li>
-<li>⚡ <strong>流畅播放</strong> - 优化的播放体验</li>
-</ul>
-<h2 id="访问信息"><a href="#访问信息" class="headerlink" title="访问信息"></a>访问信息</h2><p><strong>🌐 官方网址：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">官方网址</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>http://ys.0407123.xyz/
-        <button class="copy-btn" onclick="copyTerminalContent('http://ys.0407123.xyz/', this)">复制</button>
-    </div>
-</div>
-
-<p><strong>🔑 访问密码：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">访问密码</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>admin123
-        <button class="copy-btn" onclick="copyTerminalContent('admin123', this)">复制</button>
-    </div>
-</div>
-
-<h2 id="界面展示"><a href="#界面展示" class="headerlink" title="界面展示"></a>界面展示</h2><h3 id="主界面预览"><a href="#主界面预览" class="headerlink" title="主界面预览"></a>主界面预览</h3><p><img src="https://s21.ax1x.com/2025/07/10/pVQbrQA.jpg" alt="LibreTV影视界面截图"></p>
-<h3 id="数据源配置"><a href="#数据源配置" class="headerlink" title="数据源配置"></a>数据源配置</h3><p><img src="https://s21.ax1x.com/2025/07/10/pVQbWFS.png" alt="LibreTV数据源截图"></p>
-<h2 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h2><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ol>
-<li><strong>访问平台</strong> - 打开官方网址</li>
-<li><strong>输入密码</strong> - 使用提供的访问密码</li>
-<li><strong>选择内容</strong> - 浏览并选择想要观看的影视内容</li>
-<li><strong>开始观看</strong> - 点击播放即可享受观影体验</li>
-</ol>
-<h3 id="功能特点"><a href="#功能特点" class="headerlink" title="功能特点"></a>功能特点</h3><ul>
-<li><strong>搜索功能</strong> - 快速查找想要的影视内容</li>
-<li><strong>分类浏览</strong> - 按类型、年份、地区等分类查看</li>
-<li><strong>播放控制</strong> - 支持暂停、快进、音量调节等基本操作</li>
-<li><strong>画质选择</strong> - 根据网络情况选择合适的播放画质</li>
-</ul>
-<h2 id="适用人群"><a href="#适用人群" class="headerlink" title="适用人群"></a>适用人群</h2><ul>
-<li>🎭 <strong>追剧党</strong> - 及时追看最新热播剧集</li>
-<li>🎬 <strong>电影爱好者</strong> - 观看经典和最新电影作品</li>
-<li>🎪 <strong>综艺粉丝</strong> - 享受各类综艺娱乐节目</li>
-<li>🎌 <strong>动漫迷</strong> - 观看热门动漫作品</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>LibreTV影视作为一个在线影视平台，在资源丰富度、用户体验和技术稳定性方面都表现不错。平台界面设计现代化，功能完善，操作简便，为用户提供了良好的影视观看体验。</p>
-<blockquote>
-<p>💡 <strong>提示：</strong> 平台持续更新和优化，确保用户能够及时观看到最新的影视作品。</p>
-</blockquote>
-<hr>
-<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
-<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
-<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
-<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
-]]></content>
-      <categories>
-        <category>影视资源</category>
-      </categories>
-      <tags>
-        <tag>影视</tag>
-        <tag>在线观看</tag>
-        <tag>LibreTV</tag>
-        <tag>流媒体</tag>
-        <tag>影视资源</tag>
-      </tags>
   </entry>
   <entry>
     <title>免费节点</title>
@@ -1849,6 +1849,174 @@ function copyTerminalContent(text, button) {
       </tags>
   </entry>
   <entry>
+    <title>提示词优化器 - AI对话效果提升利器</title>
+    <url>/2025/01/15/%E6%8F%90%E7%A4%BA%E8%AF%8D%E4%BC%98%E5%8C%96%E5%99%A8/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 10px 0;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px 6px 0 0;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27ca3f; }
+
+.terminal-content {
+    padding: 12px;
+    color: #f8f8f2;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: #50fa7b;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #44475a;
+    border: 1px solid #6272a4;
+    color: #f8f8f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #6272a4;
+    border-color: #8be9fd;
+}
+
+.copy-btn.success {
+    background: #50fa7b;
+    color: #282a36;
+    border-color: #50fa7b;
+}
+
+.copy-btn.error {
+    background: #ff5555;
+    border-color: #ff5555;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ 已复制';
+        button.className = 'copy-btn success';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✗ 失败';
+        button.className = 'copy-btn error';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    });
+}
+</script>
+
+<h2 id="工具简介"><a href="#工具简介" class="headerlink" title="工具简介"></a>工具简介</h2><p>提示词优化器是一个专业的AI对话辅助工具，旨在帮助用户优化与AI模型的交互体验。通过智能分析和改进建议，让您的提示词更加精准、高效，从而获得更优质的AI响应结果。</p>
+<h3 id="🎯-核心功能"><a href="#🎯-核心功能" class="headerlink" title="🎯 核心功能"></a>🎯 核心功能</h3><ul>
+<li>🔍 <strong>智能分析</strong> - 深度分析提示词结构和语义</li>
+<li>✨ <strong>优化建议</strong> - 提供专业的改进方案和技巧</li>
+<li>📊 <strong>效果评估</strong> - 量化分析优化前后的效果差异</li>
+<li>🎨 <strong>模板库</strong> - 丰富的高质量提示词模板</li>
+</ul>
+<h2 id="快速体验"><a href="#快速体验" class="headerlink" title="快速体验"></a>快速体验</h2><h3 id="🌐-访问地址"><a href="#🌐-访问地址" class="headerlink" title="🌐 访问地址"></a>🌐 访问地址</h3><p><strong>🔗 在线工具：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">提示词优化器</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://ts.0407123.xyz/
+        <button class="copy-btn" onclick="copyTerminalContent('https://ts.0407123.xyz/', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="💡-使用技巧"><a href="#💡-使用技巧" class="headerlink" title="💡 使用技巧"></a>💡 使用技巧</h3><ol>
+<li><strong>明确目标</strong> - 清晰描述您希望AI完成的任务</li>
+<li><strong>提供上下文</strong> - 给出必要的背景信息和约束条件</li>
+<li><strong>结构化表达</strong> - 使用分点、编号等方式组织内容</li>
+<li><strong>示例引导</strong> - 提供期望输出的具体示例</li>
+</ol>
+<h3 id="🚀-优化效果"><a href="#🚀-优化效果" class="headerlink" title="🚀 优化效果"></a>🚀 优化效果</h3><p>通过使用提示词优化器，您可以：</p>
+<ul>
+<li>📈 <strong>提升响应质量</strong> - 获得更准确、相关的AI回答</li>
+<li>⚡ <strong>提高效率</strong> - 减少反复调试提示词的时间</li>
+<li>🎯 <strong>精准控制</strong> - 更好地引导AI按预期方向回答</li>
+<li>📚 <strong>学习提升</strong> - 掌握专业的提示词编写技巧</li>
+</ul>
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><ul>
+<li><strong>内容创作</strong> - 文章写作、创意策划、文案优化</li>
+<li><strong>代码开发</strong> - 编程问题解决、代码审查、技术咨询</li>
+<li><strong>学习研究</strong> - 知识问答、概念解释、学术讨论</li>
+<li><strong>商务应用</strong> - 邮件撰写、报告生成、数据分析</li>
+</ul>
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本工具仅用于提升AI对话体验，帮助用户更好地与AI模型交互。使用过程中请遵守相关AI服务的使用条款，确保内容合法合规。</p>
+<p>工具提供的优化建议仅供参考，实际效果可能因AI模型、使用场景等因素而有所差异。用户应根据具体需求和实际情况灵活调整使用策略。</p>
+]]></content>
+      <categories>
+        <category>AI应用</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+        <tag>LLM</tag>
+        <tag>提示词</tag>
+        <tag>优化工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>新闻快递 - 全球实时资讯聚合平台</title>
     <url>/2025/06/05/%E6%96%B0%E9%97%BB%E5%BF%AB%E9%80%92/</url>
     <content><![CDATA[<style>
@@ -2128,8 +2296,8 @@ function copyTerminalContent(text, button) {
       </tags>
   </entry>
   <entry>
-    <title>提示词优化器 - AI对话效果提升利器</title>
-    <url>/2025/01/15/%E6%8F%90%E7%A4%BA%E8%AF%8D%E4%BC%98%E5%8C%96%E5%99%A8/</url>
+    <title>汇聚订阅 - 在Cloudflare上高效管理节点订阅</title>
+    <url>/2025/06/08/%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2/</url>
     <content><![CDATA[<style>
 .terminal-block {
     background: #1e1e1e;
@@ -2239,18 +2407,17 @@ function copyTerminalContent(text, button) {
     });
 }
 </script>
-
-<h2 id="工具简介"><a href="#工具简介" class="headerlink" title="工具简介"></a>工具简介</h2><p>提示词优化器是一个专业的AI对话辅助工具，旨在帮助用户优化与AI模型的交互体验。通过智能分析和改进建议，让您的提示词更加精准、高效，从而获得更优质的AI响应结果。</p>
-<h3 id="🎯-核心功能"><a href="#🎯-核心功能" class="headerlink" title="🎯 核心功能"></a>🎯 核心功能</h3><ul>
-<li>🔍 <strong>智能分析</strong> - 深度分析提示词结构和语义</li>
-<li>✨ <strong>优化建议</strong> - 提供专业的改进方案和技巧</li>
-<li>📊 <strong>效果评估</strong> - 量化分析优化前后的效果差异</li>
-<li>🎨 <strong>模板库</strong> - 丰富的高质量提示词模板</li>
+<h2 id="工具简介"><a href="#工具简介" class="headerlink" title="工具简介"></a>工具简介</h2><p>CF Sub（Edge Sub）是一个基于 Cloudflare Workers 的订阅转换工具，专门用于转换各种代理节点订阅格式。该工具利用 Cloudflare 的全球边缘网络，提供快速、稳定的订阅转换服务。</p>
+<h3 id="🎯-核心优势"><a href="#🎯-核心优势" class="headerlink" title="🎯 核心优势"></a>🎯 核心优势</h3><ul>
+<li>🌐 <strong>全球加速</strong> - 基于 Cloudflare 边缘网络，全球就近访问</li>
+<li>🔄 <strong>格式丰富</strong> - 支持多种主流代理协议和客户端格式</li>
+<li>🛡️ <strong>隐私安全</strong> - 不记录用户数据，保护隐私安全</li>
+<li>⚡ <strong>实时转换</strong> - 支持实时订阅更新和动态配置</li>
 </ul>
-<h2 id="快速体验"><a href="#快速体验" class="headerlink" title="快速体验"></a>快速体验</h2><h3 id="🌐-访问地址"><a href="#🌐-访问地址" class="headerlink" title="🌐 访问地址"></a>🌐 访问地址</h3><p><strong>🔗 在线工具：</strong></p>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="🔗-工具地址"><a href="#🔗-工具地址" class="headerlink" title="🔗 工具地址"></a>🔗 工具地址</h3><p><strong>🌐 官方网站：</strong></p>
 <div class="terminal-block">
     <div class="terminal-header">
-        <span class="terminal-title">提示词优化器</span>
+        <span class="terminal-title">官方网站</span>
         <div class="terminal-buttons">
             <button class="terminal-btn close"></button>
             <button class="terminal-btn minimize"></button>
@@ -2258,41 +2425,23 @@ function copyTerminalContent(text, button) {
         </div>
     </div>
     <div class="terminal-content">
-        <span class="terminal-prompt">$</span>https://ts.0407123.xyz/
-        <button class="copy-btn" onclick="copyTerminalContent('https://ts.0407123.xyz/', this)">复制</button>
+        <span class="terminal-prompt">$</span>https://sub.0407123.xyz/admin
+        <button class="copy-btn" onclick="copyTerminalContent('https://sub.0407123.xyz/admin', this)">复制</button>
     </div>
 </div>
 
-<h3 id="💡-使用技巧"><a href="#💡-使用技巧" class="headerlink" title="💡 使用技巧"></a>💡 使用技巧</h3><ol>
-<li><strong>明确目标</strong> - 清晰描述您希望AI完成的任务</li>
-<li><strong>提供上下文</strong> - 给出必要的背景信息和约束条件</li>
-<li><strong>结构化表达</strong> - 使用分点、编号等方式组织内容</li>
-<li><strong>示例引导</strong> - 提供期望输出的具体示例</li>
-</ol>
-<h3 id="🚀-优化效果"><a href="#🚀-优化效果" class="headerlink" title="🚀 优化效果"></a>🚀 优化效果</h3><p>通过使用提示词优化器，您可以：</p>
-<ul>
-<li>📈 <strong>提升响应质量</strong> - 获得更准确、相关的AI回答</li>
-<li>⚡ <strong>提高效率</strong> - 减少反复调试提示词的时间</li>
-<li>🎯 <strong>精准控制</strong> - 更好地引导AI按预期方向回答</li>
-<li>📚 <strong>学习提升</strong> - 掌握专业的提示词编写技巧</li>
-</ul>
-<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><ul>
-<li><strong>内容创作</strong> - 文章写作、创意策划、文案优化</li>
-<li><strong>代码开发</strong> - 编程问题解决、代码审查、技术咨询</li>
-<li><strong>学习研究</strong> - 知识问答、概念解释、学术讨论</li>
-<li><strong>商务应用</strong> - 邮件撰写、报告生成、数据分析</li>
-</ul>
-<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本工具仅用于提升AI对话体验，帮助用户更好地与AI模型交互。使用过程中请遵守相关AI服务的使用条款，确保内容合法合规。</p>
-<p>工具提供的优化建议仅供参考，实际效果可能因AI模型、使用场景等因素而有所差异。用户应根据具体需求和实际情况灵活调整使用策略。</p>
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解网络技术。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
+<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
+<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
 ]]></content>
       <categories>
-        <category>AI应用</category>
+        <category>网络工具</category>
       </categories>
       <tags>
-        <tag>AI</tag>
-        <tag>LLM</tag>
-        <tag>提示词</tag>
-        <tag>优化工具</tag>
+        <tag>网络代理</tag>
+        <tag>订阅转换</tag>
+        <tag>Cloudflare</tag>
       </tags>
   </entry>
   <entry>
@@ -2581,155 +2730,6 @@ function copyTerminalContent(text, button) {
         <tag>性能优化</tag>
         <tag>监控系统</tag>
         <tag>运维工具</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>汇聚订阅 - 在Cloudflare上高效管理节点订阅</title>
-    <url>/2025/06/08/%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2/</url>
-    <content><![CDATA[<style>
-.terminal-block {
-    background: #1e1e1e;
-    border: 1px solid #333;
-    border-radius: 6px;
-    margin: 10px 0;
-    position: relative;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-}
-
-.terminal-header {
-    background: #2d2d2d;
-    padding: 8px 12px;
-    border-bottom: 1px solid #333;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 6px 6px 0 0;
-}
-
-.terminal-title {
-    color: #888;
-    font-size: 12px;
-    font-weight: normal;
-}
-
-.terminal-buttons {
-    display: flex;
-    gap: 6px;
-}
-
-.terminal-btn {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-}
-
-.terminal-btn.close { background: #ff5f56; }
-.terminal-btn.minimize { background: #ffbd2e; }
-.terminal-btn.maximize { background: #27ca3f; }
-
-.terminal-content {
-    padding: 12px;
-    color: #f8f8f2;
-    font-size: 14px;
-    line-height: 1.4;
-    position: relative;
-}
-
-.terminal-prompt {
-    color: #50fa7b;
-    margin-right: 8px;
-}
-
-.copy-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: #44475a;
-    border: 1px solid #6272a4;
-    color: #f8f8f2;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 11px;
-    transition: all 0.2s;
-}
-
-.copy-btn:hover {
-    background: #6272a4;
-    border-color: #8be9fd;
-}
-
-.copy-btn.success {
-    background: #50fa7b;
-    color: #282a36;
-    border-color: #50fa7b;
-}
-
-.copy-btn.error {
-    background: #ff5555;
-    border-color: #ff5555;
-}
-</style>
-
-<script>
-function copyTerminalContent(text, button) {
-    navigator.clipboard.writeText(text).then(function() {
-        const originalText = button.innerHTML;
-        button.innerHTML = '✓ 已复制';
-        button.className = 'copy-btn success';
-        setTimeout(function() {
-            button.innerHTML = originalText;
-            button.className = 'copy-btn';
-        }, 2000);
-    }).catch(function(err) {
-        console.error('复制失败: ', err);
-        const originalText = button.innerHTML;
-        button.innerHTML = '✗ 失败';
-        button.className = 'copy-btn error';
-        setTimeout(function() {
-            button.innerHTML = originalText;
-            button.className = 'copy-btn';
-        }, 2000);
-    });
-}
-</script>
-<h2 id="工具简介"><a href="#工具简介" class="headerlink" title="工具简介"></a>工具简介</h2><p>CF Sub（Edge Sub）是一个基于 Cloudflare Workers 的订阅转换工具，专门用于转换各种代理节点订阅格式。该工具利用 Cloudflare 的全球边缘网络，提供快速、稳定的订阅转换服务。</p>
-<h3 id="🎯-核心优势"><a href="#🎯-核心优势" class="headerlink" title="🎯 核心优势"></a>🎯 核心优势</h3><ul>
-<li>🌐 <strong>全球加速</strong> - 基于 Cloudflare 边缘网络，全球就近访问</li>
-<li>🔄 <strong>格式丰富</strong> - 支持多种主流代理协议和客户端格式</li>
-<li>🛡️ <strong>隐私安全</strong> - 不记录用户数据，保护隐私安全</li>
-<li>⚡ <strong>实时转换</strong> - 支持实时订阅更新和动态配置</li>
-</ul>
-<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="🔗-工具地址"><a href="#🔗-工具地址" class="headerlink" title="🔗 工具地址"></a>🔗 工具地址</h3><p><strong>🌐 官方网站：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">官方网站</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>https://sub.0407123.xyz/admin
-        <button class="copy-btn" onclick="copyTerminalContent('https://sub.0407123.xyz/admin', this)">复制</button>
-    </div>
-</div>
-
-<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解网络技术。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
-<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
-<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
-<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
-]]></content>
-      <categories>
-        <category>网络工具</category>
-      </categories>
-      <tags>
-        <tag>网络代理</tag>
-        <tag>订阅转换</tag>
-        <tag>Cloudflare</tag>
       </tags>
   </entry>
 </search>
