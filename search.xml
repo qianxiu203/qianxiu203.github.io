@@ -1,6 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>LobeChat - 开源AI聊天应用与开发框架完全指南</title>
+    <url>/2025/06/08/LobeChat/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 10px 0;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px 6px 0 0;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27ca3f; }
+
+.terminal-content {
+    padding: 12px;
+    color: #f8f8f2;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: #50fa7b;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #44475a;
+    border: 1px solid #6272a4;
+    color: #f8f8f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #6272a4;
+    border-color: #8be9fd;
+}
+
+.copy-btn.success {
+    background: #50fa7b;
+    color: #282a36;
+    border-color: #50fa7b;
+}
+
+.copy-btn.error {
+    background: #ff5555;
+    border-color: #ff5555;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ 已复制';
+        button.className = 'copy-btn success';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✗ 失败';
+        button.className = 'copy-btn error';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    });
+}
+</script>
+
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>探索 LobeChat：现代化设计的开源聊天应用与开发框架</p>
+<p>LobeChat 是一个现代化设计的开源 ChatGPT&#x2F;LLMs 聊天应用与开发框架，为用户提供强大的AI对话体验。</p>
+<h2 id="核心功能概览"><a href="#核心功能概览" class="headerlink" title="核心功能概览"></a>核心功能概览</h2><h3 id="多模态交互能力"><a href="#多模态交互能力" class="headerlink" title="多模态交互能力"></a>多模态交互能力</h3><ul>
+<li><strong>思维链可视化 (CoT)</strong> - 展示AI推理过程</li>
+<li><strong>分支对话管理</strong> - 支持多线程对话</li>
+<li><strong>白板内容创作 (Artifacts)</strong> - 可视化内容编辑</li>
+<li><strong>文件上传与知识库</strong> - 支持文档问答</li>
+</ul>
+<h3 id="技术特性"><a href="#技术特性" class="headerlink" title="技术特性"></a>技术特性</h3><ul>
+<li>🎨 <strong>现代化UI设计</strong> - 简洁美观的用户界面</li>
+<li>🔧 <strong>高度可定制</strong> - 支持主题和插件扩展</li>
+<li>🌐 <strong>多语言支持</strong> - 国际化界面</li>
+<li>📱 <strong>响应式设计</strong> - 完美适配各种设备</li>
+</ul>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="在线体验"><a href="#在线体验" class="headerlink" title="在线体验"></a>在线体验</h3><p><strong>访问地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://chat.0407123.xyz
+        <button class="copy-btn" onclick="copyTerminalContent('https://chat.0407123.xyz', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>登录密码：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">登录密码</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>admin
+        <button class="copy-btn" onclick="copyTerminalContent('admin', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="获取更新"><a href="#获取更新" class="headerlink" title="获取更新"></a>获取更新</h3><blockquote>
+<p>💡 <strong>提示：</strong> 关注 <a href="https://blog.lobe-chat.xyz/">官方博客</a> 获取最新功能动态和使用技巧</p>
+</blockquote>
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解网络技术。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
+<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
+<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
+]]></content>
+      <categories>
+        <category>AI应用</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+        <tag>聊天应用</tag>
+        <tag>开源</tag>
+        <tag>LLM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搭建Hexo博客</title>
     <url>/2025/06/08/HEXO%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</url>
     <content><![CDATA[<style>
@@ -396,183 +573,6 @@ function copyTerminalContent(text, button) {
         <tag>Hexo</tag>
         <tag>博客搭建</tag>
         <tag>静态博客</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>LobeChat - 开源AI聊天应用与开发框架完全指南</title>
-    <url>/2025/06/08/LobeChat/</url>
-    <content><![CDATA[<style>
-.terminal-block {
-    background: #1e1e1e;
-    border: 1px solid #333;
-    border-radius: 6px;
-    margin: 10px 0;
-    position: relative;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-}
-
-.terminal-header {
-    background: #2d2d2d;
-    padding: 8px 12px;
-    border-bottom: 1px solid #333;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 6px 6px 0 0;
-}
-
-.terminal-title {
-    color: #888;
-    font-size: 12px;
-    font-weight: normal;
-}
-
-.terminal-buttons {
-    display: flex;
-    gap: 6px;
-}
-
-.terminal-btn {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-}
-
-.terminal-btn.close { background: #ff5f56; }
-.terminal-btn.minimize { background: #ffbd2e; }
-.terminal-btn.maximize { background: #27ca3f; }
-
-.terminal-content {
-    padding: 12px;
-    color: #f8f8f2;
-    font-size: 14px;
-    line-height: 1.4;
-    position: relative;
-}
-
-.terminal-prompt {
-    color: #50fa7b;
-    margin-right: 8px;
-}
-
-.copy-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: #44475a;
-    border: 1px solid #6272a4;
-    color: #f8f8f2;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 11px;
-    transition: all 0.2s;
-}
-
-.copy-btn:hover {
-    background: #6272a4;
-    border-color: #8be9fd;
-}
-
-.copy-btn.success {
-    background: #50fa7b;
-    color: #282a36;
-    border-color: #50fa7b;
-}
-
-.copy-btn.error {
-    background: #ff5555;
-    border-color: #ff5555;
-}
-</style>
-
-<script>
-function copyTerminalContent(text, button) {
-    navigator.clipboard.writeText(text).then(function() {
-        const originalText = button.innerHTML;
-        button.innerHTML = '✓ 已复制';
-        button.className = 'copy-btn success';
-        setTimeout(function() {
-            button.innerHTML = originalText;
-            button.className = 'copy-btn';
-        }, 2000);
-    }).catch(function(err) {
-        console.error('复制失败: ', err);
-        const originalText = button.innerHTML;
-        button.innerHTML = '✗ 失败';
-        button.className = 'copy-btn error';
-        setTimeout(function() {
-            button.innerHTML = originalText;
-            button.className = 'copy-btn';
-        }, 2000);
-    });
-}
-</script>
-
-<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>探索 LobeChat：现代化设计的开源聊天应用与开发框架</p>
-<p>LobeChat 是一个现代化设计的开源 ChatGPT&#x2F;LLMs 聊天应用与开发框架，为用户提供强大的AI对话体验。</p>
-<h2 id="核心功能概览"><a href="#核心功能概览" class="headerlink" title="核心功能概览"></a>核心功能概览</h2><h3 id="多模态交互能力"><a href="#多模态交互能力" class="headerlink" title="多模态交互能力"></a>多模态交互能力</h3><ul>
-<li><strong>思维链可视化 (CoT)</strong> - 展示AI推理过程</li>
-<li><strong>分支对话管理</strong> - 支持多线程对话</li>
-<li><strong>白板内容创作 (Artifacts)</strong> - 可视化内容编辑</li>
-<li><strong>文件上传与知识库</strong> - 支持文档问答</li>
-</ul>
-<h3 id="技术特性"><a href="#技术特性" class="headerlink" title="技术特性"></a>技术特性</h3><ul>
-<li>🎨 <strong>现代化UI设计</strong> - 简洁美观的用户界面</li>
-<li>🔧 <strong>高度可定制</strong> - 支持主题和插件扩展</li>
-<li>🌐 <strong>多语言支持</strong> - 国际化界面</li>
-<li>📱 <strong>响应式设计</strong> - 完美适配各种设备</li>
-</ul>
-<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="在线体验"><a href="#在线体验" class="headerlink" title="在线体验"></a>在线体验</h3><p><strong>访问地址：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">访问地址</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>https://chat.0407123.xyz
-        <button class="copy-btn" onclick="copyTerminalContent('https://chat.0407123.xyz', this)">复制</button>
-    </div>
-</div>
-
-<p><strong>登录密码：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">登录密码</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>admin
-        <button class="copy-btn" onclick="copyTerminalContent('admin', this)">复制</button>
-    </div>
-</div>
-
-<h3 id="获取更新"><a href="#获取更新" class="headerlink" title="获取更新"></a>获取更新</h3><blockquote>
-<p>💡 <strong>提示：</strong> 关注 <a href="https://blog.lobe-chat.xyz/">官方博客</a> 获取最新功能动态和使用技巧</p>
-</blockquote>
-<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解网络技术。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
-<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
-<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
-<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
-]]></content>
-      <categories>
-        <category>AI应用</category>
-      </categories>
-      <tags>
-        <tag>AI</tag>
-        <tag>聊天应用</tag>
-        <tag>开源</tag>
-        <tag>LLM</tag>
       </tags>
   </entry>
   <entry>
@@ -2017,285 +2017,6 @@ function copyTerminalContent(text, button) {
       </tags>
   </entry>
   <entry>
-    <title>新闻快递 - 全球实时资讯聚合平台</title>
-    <url>/2025/06/05/%E6%96%B0%E9%97%BB%E5%BF%AB%E9%80%92/</url>
-    <content><![CDATA[<style>
-.terminal-block {
-    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-    border-radius: 8px;
-    margin: 15px 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-    font-family: 'Courier New', monospace;
-}
-
-.terminal-header {
-    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
-    padding: 8px 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #555;
-}
-
-.terminal-title {
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.terminal-buttons {
-    display: flex;
-    gap: 6px;
-}
-
-.terminal-btn {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-}
-
-.terminal-btn.close { background: #ff5f57; }
-.terminal-btn.minimize { background: #ffbd2e; }
-.terminal-btn.maximize { background: #28ca42; }
-
-.terminal-content {
-    padding: 15px;
-    color: #00ff00;
-    font-size: 14px;
-    position: relative;
-    background: #1e1e1e;
-}
-
-.terminal-prompt {
-    color: #00ff00;
-    margin-right: 8px;
-}
-
-.copy-btn {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #007acc;
-    color: white;
-    border: none;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 11px;
-    transition: background 0.3s;
-}
-
-.copy-btn:hover {
-    background: #005a9e;
-}
-</style>
-
-<script>
-function copyTerminalContent(text, button) {
-    navigator.clipboard.writeText(text).then(function() {
-        const originalText = button.textContent;
-        button.textContent = '已复制';
-        button.style.background = '#28a745';
-        setTimeout(function() {
-            button.textContent = originalText;
-            button.style.background = '#007acc';
-        }, 2000);
-    }).catch(function(err) {
-        console.error('复制失败: ', err);
-    });
-}
-</script>
-
-<h2 id="平台简介"><a href="#平台简介" class="headerlink" title="平台简介"></a>平台简介</h2><p>新闻快递是一个全球实时资讯聚合平台，致力于为用户提供最新、最全面的新闻资讯。平台汇聚了来自世界各地的新闻源，通过智能算法筛选和整理，为用户呈现高质量的新闻内容。</p>
-<h3 id="核心优势"><a href="#核心优势" class="headerlink" title="核心优势"></a>核心优势</h3><ul>
-<li>📰 <strong>全球覆盖</strong> - 汇聚世界各地优质新闻源</li>
-<li>⚡ <strong>实时更新</strong> - 24小时不间断资讯更新</li>
-<li>🤖 <strong>智能筛选</strong> - AI算法精选高质量内容</li>
-<li>🎯 <strong>个性推荐</strong> - 基于用户偏好的智能推荐</li>
-</ul>
-<h2 id="新闻分类"><a href="#新闻分类" class="headerlink" title="新闻分类"></a>新闻分类</h2><h3 id="📊-主要频道"><a href="#📊-主要频道" class="headerlink" title="📊 主要频道"></a>📊 主要频道</h3><table>
-<thead>
-<tr>
-<th>分类</th>
-<th>内容范围</th>
-<th>更新频率</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>🌍 <strong>国际新闻</strong></td>
-<td>全球重大事件、国际政治、外交动态</td>
-<td>实时</td>
-</tr>
-<tr>
-<td>💻 <strong>科技资讯</strong></td>
-<td>最新科技发展、产品发布、行业趋势</td>
-<td>每小时</td>
-</tr>
-<tr>
-<td>💰 <strong>财经新闻</strong></td>
-<td>股市动态、经济政策、商业资讯</td>
-<td>实时</td>
-</tr>
-<tr>
-<td>⚽ <strong>体育新闻</strong></td>
-<td>体育赛事、运动员动态、体育产业</td>
-<td>实时</td>
-</tr>
-<tr>
-<td>🎬 <strong>娱乐资讯</strong></td>
-<td>明星动态、影视资讯、娱乐八卦</td>
-<td>每日</td>
-</tr>
-<tr>
-<td>🏠 <strong>生活资讯</strong></td>
-<td>健康养生、美食旅游、生活技巧</td>
-<td>每日</td>
-</tr>
-</tbody></table>
-<h2 id="平台特色功能"><a href="#平台特色功能" class="headerlink" title="平台特色功能"></a>平台特色功能</h2><h3 id="🔄-实时更新系统"><a href="#🔄-实时更新系统" class="headerlink" title="🔄 实时更新系统"></a>🔄 实时更新系统</h3><ul>
-<li>新闻内容24小时实时更新</li>
-<li>突发新闻即时推送</li>
-<li>热点事件持续跟踪</li>
-</ul>
-<h3 id="🌐-多源聚合技术"><a href="#🌐-多源聚合技术" class="headerlink" title="🌐 多源聚合技术"></a>🌐 多源聚合技术</h3><ul>
-<li>整合全球优质新闻源</li>
-<li>提供多角度新闻视角</li>
-<li>去重算法避免重复内容</li>
-</ul>
-<h3 id="🎯-智能推荐引擎"><a href="#🎯-智能推荐引擎" class="headerlink" title="🎯 智能推荐引擎"></a>🎯 智能推荐引擎</h3><ul>
-<li>基于用户阅读习惯分析</li>
-<li>个性化内容推荐</li>
-<li>相关新闻智能关联</li>
-</ul>
-<h3 id="📱-用户体验优化"><a href="#📱-用户体验优化" class="headerlink" title="📱 用户体验优化"></a>📱 用户体验优化</h3><ul>
-<li>清爽简洁的阅读界面</li>
-<li>响应式设计适配多端</li>
-<li>快速搜索和筛选功能</li>
-</ul>
-<h2 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h2><h3 id="📖-基本操作"><a href="#📖-基本操作" class="headerlink" title="📖 基本操作"></a>📖 基本操作</h3><ol>
-<li><strong>访问平台</strong> - 打开新闻快递官网</li>
-<li><strong>选择分类</strong> - 点击感兴趣的新闻频道</li>
-<li><strong>阅读新闻</strong> - 点击标题查看详细内容</li>
-<li><strong>搜索功能</strong> - 使用关键词查找特定新闻</li>
-<li><strong>互动功能</strong> - 支持分享、收藏和评论</li>
-</ol>
-<h3 id="🔧-高级功能"><a href="#🔧-高级功能" class="headerlink" title="🔧 高级功能"></a>🔧 高级功能</h3><ul>
-<li><strong>订阅推送</strong> - 关注特定话题或关键词</li>
-<li><strong>离线阅读</strong> - 下载新闻内容离线查看</li>
-<li><strong>多语言支持</strong> - 支持多种语言界面</li>
-<li><strong>夜间模式</strong> - 护眼的深色主题</li>
-</ul>
-<h2 id="热门资讯示例"><a href="#热门资讯示例" class="headerlink" title="热门资讯示例"></a>热门资讯示例</h2><h3 id="💻-科技前沿"><a href="#💻-科技前沿" class="headerlink" title="💻 科技前沿"></a>💻 科技前沿</h3><p><strong>🔥 人工智能技术在医疗领域的最新突破</strong></p>
-<blockquote>
-<p>最新研究显示，AI技术在疾病诊断准确率方面取得重大进展，为精准医疗开辟新路径…</p>
-</blockquote>
-<h3 id="🌍-国际动态"><a href="#🌍-国际动态" class="headerlink" title="🌍 国际动态"></a>🌍 国际动态</h3><p><strong>🌱 全球气候变化应对措施新进展</strong></p>
-<blockquote>
-<p>多国领导人就气候变化问题达成新的合作协议，共同推进绿色发展目标…</p>
-</blockquote>
-<h3 id="💰-财经资讯"><a href="#💰-财经资讯" class="headerlink" title="💰 财经资讯"></a>💰 财经资讯</h3><p><strong>📈 数字货币市场最新动向分析</strong></p>
-<blockquote>
-<p>比特币价格波动引发市场关注，专家深度分析未来走势和投资机会…</p>
-</blockquote>
-<h3 id="🔗-快速访问"><a href="#🔗-快速访问" class="headerlink" title="🔗 快速访问"></a>🔗 快速访问</h3><p><strong>全球AI峰会最新成果发布：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">AI峰会链接</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>https://new.0407123.xyz/ai-summit
-        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/ai-summit', this)">复制</button>
-    </div>
-</div>
-
-<p><strong>2025年第二季度经济展望：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">经济展望链接</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>https://new.0407123.xyz/q2-economy
-        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/q2-economy', this)">复制</button>
-    </div>
-</div>
-
-<p><strong>国际电影节获奖名单：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">电影节链接</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>https://new.0407123.xyz/film-festival
-        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/film-festival', this)">复制</button>
-    </div>
-</div>
-
-<p><strong>立即体验：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">官网地址</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>https://new.0407123.xyz
-        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz', this)">复制</button>
-    </div>
-</div>
-
-<p><strong>下载APP：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">APP下载</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>https://new.0407123.xyz/app
-        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/app', this)">复制</button>
-    </div>
-</div>
-
-<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
-<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
-<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
-<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
-]]></content>
-      <categories>
-        <category>信息服务</category>
-      </categories>
-      <tags>
-        <tag>新闻</tag>
-        <tag>资讯</tag>
-        <tag>聚合</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>站点监控平台</title>
     <url>/2025/06/30/%E7%AB%99%E7%82%B9%E7%9B%91%E6%8E%A7%E5%B9%B3%E5%8F%B0/</url>
     <content><![CDATA[<style>
@@ -2581,6 +2302,285 @@ function copyTerminalContent(text, button) {
         <tag>性能优化</tag>
         <tag>监控系统</tag>
         <tag>运维工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>新闻快递 - 全球实时资讯聚合平台</title>
+    <url>/2025/06/05/%E6%96%B0%E9%97%BB%E5%BF%AB%E9%80%92/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+    border-radius: 8px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #555;
+}
+
+.terminal-title {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f57; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #28ca42; }
+
+.terminal-content {
+    padding: 15px;
+    color: #00ff00;
+    font-size: 14px;
+    position: relative;
+    background: #1e1e1e;
+}
+
+.terminal-prompt {
+    color: #00ff00;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #005a9e;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.textContent;
+        button.textContent = '已复制';
+        button.style.background = '#28a745';
+        setTimeout(function() {
+            button.textContent = originalText;
+            button.style.background = '#007acc';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+    });
+}
+</script>
+
+<h2 id="平台简介"><a href="#平台简介" class="headerlink" title="平台简介"></a>平台简介</h2><p>新闻快递是一个全球实时资讯聚合平台，致力于为用户提供最新、最全面的新闻资讯。平台汇聚了来自世界各地的新闻源，通过智能算法筛选和整理，为用户呈现高质量的新闻内容。</p>
+<h3 id="核心优势"><a href="#核心优势" class="headerlink" title="核心优势"></a>核心优势</h3><ul>
+<li>📰 <strong>全球覆盖</strong> - 汇聚世界各地优质新闻源</li>
+<li>⚡ <strong>实时更新</strong> - 24小时不间断资讯更新</li>
+<li>🤖 <strong>智能筛选</strong> - AI算法精选高质量内容</li>
+<li>🎯 <strong>个性推荐</strong> - 基于用户偏好的智能推荐</li>
+</ul>
+<h2 id="新闻分类"><a href="#新闻分类" class="headerlink" title="新闻分类"></a>新闻分类</h2><h3 id="📊-主要频道"><a href="#📊-主要频道" class="headerlink" title="📊 主要频道"></a>📊 主要频道</h3><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>内容范围</th>
+<th>更新频率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🌍 <strong>国际新闻</strong></td>
+<td>全球重大事件、国际政治、外交动态</td>
+<td>实时</td>
+</tr>
+<tr>
+<td>💻 <strong>科技资讯</strong></td>
+<td>最新科技发展、产品发布、行业趋势</td>
+<td>每小时</td>
+</tr>
+<tr>
+<td>💰 <strong>财经新闻</strong></td>
+<td>股市动态、经济政策、商业资讯</td>
+<td>实时</td>
+</tr>
+<tr>
+<td>⚽ <strong>体育新闻</strong></td>
+<td>体育赛事、运动员动态、体育产业</td>
+<td>实时</td>
+</tr>
+<tr>
+<td>🎬 <strong>娱乐资讯</strong></td>
+<td>明星动态、影视资讯、娱乐八卦</td>
+<td>每日</td>
+</tr>
+<tr>
+<td>🏠 <strong>生活资讯</strong></td>
+<td>健康养生、美食旅游、生活技巧</td>
+<td>每日</td>
+</tr>
+</tbody></table>
+<h2 id="平台特色功能"><a href="#平台特色功能" class="headerlink" title="平台特色功能"></a>平台特色功能</h2><h3 id="🔄-实时更新系统"><a href="#🔄-实时更新系统" class="headerlink" title="🔄 实时更新系统"></a>🔄 实时更新系统</h3><ul>
+<li>新闻内容24小时实时更新</li>
+<li>突发新闻即时推送</li>
+<li>热点事件持续跟踪</li>
+</ul>
+<h3 id="🌐-多源聚合技术"><a href="#🌐-多源聚合技术" class="headerlink" title="🌐 多源聚合技术"></a>🌐 多源聚合技术</h3><ul>
+<li>整合全球优质新闻源</li>
+<li>提供多角度新闻视角</li>
+<li>去重算法避免重复内容</li>
+</ul>
+<h3 id="🎯-智能推荐引擎"><a href="#🎯-智能推荐引擎" class="headerlink" title="🎯 智能推荐引擎"></a>🎯 智能推荐引擎</h3><ul>
+<li>基于用户阅读习惯分析</li>
+<li>个性化内容推荐</li>
+<li>相关新闻智能关联</li>
+</ul>
+<h3 id="📱-用户体验优化"><a href="#📱-用户体验优化" class="headerlink" title="📱 用户体验优化"></a>📱 用户体验优化</h3><ul>
+<li>清爽简洁的阅读界面</li>
+<li>响应式设计适配多端</li>
+<li>快速搜索和筛选功能</li>
+</ul>
+<h2 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h2><h3 id="📖-基本操作"><a href="#📖-基本操作" class="headerlink" title="📖 基本操作"></a>📖 基本操作</h3><ol>
+<li><strong>访问平台</strong> - 打开新闻快递官网</li>
+<li><strong>选择分类</strong> - 点击感兴趣的新闻频道</li>
+<li><strong>阅读新闻</strong> - 点击标题查看详细内容</li>
+<li><strong>搜索功能</strong> - 使用关键词查找特定新闻</li>
+<li><strong>互动功能</strong> - 支持分享、收藏和评论</li>
+</ol>
+<h3 id="🔧-高级功能"><a href="#🔧-高级功能" class="headerlink" title="🔧 高级功能"></a>🔧 高级功能</h3><ul>
+<li><strong>订阅推送</strong> - 关注特定话题或关键词</li>
+<li><strong>离线阅读</strong> - 下载新闻内容离线查看</li>
+<li><strong>多语言支持</strong> - 支持多种语言界面</li>
+<li><strong>夜间模式</strong> - 护眼的深色主题</li>
+</ul>
+<h2 id="热门资讯示例"><a href="#热门资讯示例" class="headerlink" title="热门资讯示例"></a>热门资讯示例</h2><h3 id="💻-科技前沿"><a href="#💻-科技前沿" class="headerlink" title="💻 科技前沿"></a>💻 科技前沿</h3><p><strong>🔥 人工智能技术在医疗领域的最新突破</strong></p>
+<blockquote>
+<p>最新研究显示，AI技术在疾病诊断准确率方面取得重大进展，为精准医疗开辟新路径…</p>
+</blockquote>
+<h3 id="🌍-国际动态"><a href="#🌍-国际动态" class="headerlink" title="🌍 国际动态"></a>🌍 国际动态</h3><p><strong>🌱 全球气候变化应对措施新进展</strong></p>
+<blockquote>
+<p>多国领导人就气候变化问题达成新的合作协议，共同推进绿色发展目标…</p>
+</blockquote>
+<h3 id="💰-财经资讯"><a href="#💰-财经资讯" class="headerlink" title="💰 财经资讯"></a>💰 财经资讯</h3><p><strong>📈 数字货币市场最新动向分析</strong></p>
+<blockquote>
+<p>比特币价格波动引发市场关注，专家深度分析未来走势和投资机会…</p>
+</blockquote>
+<h3 id="🔗-快速访问"><a href="#🔗-快速访问" class="headerlink" title="🔗 快速访问"></a>🔗 快速访问</h3><p><strong>全球AI峰会最新成果发布：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">AI峰会链接</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://new.0407123.xyz/ai-summit
+        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/ai-summit', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>2025年第二季度经济展望：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">经济展望链接</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://new.0407123.xyz/q2-economy
+        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/q2-economy', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>国际电影节获奖名单：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">电影节链接</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://new.0407123.xyz/film-festival
+        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/film-festival', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>立即体验：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">官网地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://new.0407123.xyz
+        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>下载APP：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">APP下载</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://new.0407123.xyz/app
+        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/app', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
+<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
+<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
+]]></content>
+      <categories>
+        <category>信息服务</category>
+      </categories>
+      <tags>
+        <tag>新闻</tag>
+        <tag>资讯</tag>
+        <tag>聚合</tag>
       </tags>
   </entry>
   <entry>
