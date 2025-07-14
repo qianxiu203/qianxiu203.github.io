@@ -1,0 +1,2735 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  <entry>
+    <title>搭建Hexo博客</title>
+    <url>/2025/06/08/HEXO%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+    border-radius: 8px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #555;
+}
+
+.terminal-title {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f57; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #28ca42; }
+
+.terminal-content {
+    padding: 15px;
+    color: #00ff00;
+    font-size: 14px;
+    position: relative;
+    background: #1e1e1e;
+}
+
+.terminal-prompt {
+    color: #00ff00;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #005a9e;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.textContent;
+        button.textContent = '已复制';
+        button.style.background = '#28a745';
+        setTimeout(function() {
+            button.textContent = originalText;
+            button.style.background = '#007acc';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+    });
+}
+</script>
+
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>快速简洁高效，零成本搭建个人博客：Hexo + GitHub Pages + Cloudflare Pages 完整指南</p>
+<p>本文详细介绍了如何使用Hexo框架搭建一个个人博客，并将其部署到GitHub Pages和Cloudflare Pages上。</p>
+<h3 id="主要内容包括"><a href="#主要内容包括" class="headerlink" title="主要内容包括"></a>主要内容包括</h3><ul>
+<li><strong>环境准备：</strong> 安装Node.js和Git</li>
+<li><strong>配置Git和GitHub：</strong> 设置SSH密钥，创建GitHub仓库</li>
+<li><strong>初始化Hexo项目：</strong> 安装Hexo，创建新博客</li>
+<li><strong>部署到GitHub Pages：</strong> 配置部署设置，推送静态文件</li>
+<li><strong>部署到Cloudflare Pages：</strong> 连接GitHub仓库，自动部署</li>
+<li><strong>基本使用方法：</strong> 创建新文章，本地预览，发布更新</li>
+</ul>
+<blockquote>
+<p>这个教程适合那些想要快速搭建个人博客，但又不想花费太多成本的人。通过使用Hexo、GitHub和Cloudflare的免费服务，您可以轻松创建一个高效、简洁的博客网站。</p>
+</blockquote>
+<h2 id="1-事前准备"><a href="#1-事前准备" class="headerlink" title="1. 事前准备"></a>1. 事前准备</h2><h3 id="必需项目"><a href="#必需项目" class="headerlink" title="必需项目"></a>必需项目</h3><ul>
+<li><strong>GitHub账号</strong> - 必须，用于代码托管和部署</li>
+</ul>
+<h3 id="可选项目"><a href="#可选项目" class="headerlink" title="可选项目"></a>可选项目</h3><ul>
+<li><strong>域名</strong> - 非必须，可使用免费域名或GitHub.io分配的域名</li>
+<li><strong>Cloudflare账号</strong> - 非必须，用于CDN加速和自定义域名</li>
+</ul>
+<h2 id="2-软件支持"><a href="#2-软件支持" class="headerlink" title="2. 软件支持"></a>2. 软件支持</h2><h3 id="必需软件"><a href="#必需软件" class="headerlink" title="必需软件"></a>必需软件</h3><ul>
+<li><strong>Node.js</strong> - JavaScript运行环境</li>
+<li><strong>Git</strong> - 版本控制工具</li>
+</ul>
+<h3 id="推荐软件"><a href="#推荐软件" class="headerlink" title="推荐软件"></a>推荐软件</h3><ul>
+<li><strong>VSCode</strong> - 轻量级代码编辑器，有助于养成良好的编程习惯</li>
+</ul>
+<h3 id="2-1-安装-Node"><a href="#2-1-安装-Node" class="headerlink" title="2.1 安装 Node"></a>2.1 安装 Node</h3><ol>
+<li>打开Node官网，下载和自己系统相配的Node的安装程序，否则会出现安装问题。</li>
+</ol>
+<p><strong>Node.js下载地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Node.js官网</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://nodejs.org/en
+        <button class="copy-btn" onclick="copyTerminalContent('https://nodejs.org/en', this)">复制</button>
+    </div>
+</div>
+2. 下载后安装，安装的目录可以使用默认目录`C:/Program Files/nodejs/`
+3. 安装完成后，检查是否安装成功。在键盘按下`win + R`键，输入`CMD`，然后回车，打开CMD窗口，执行`node -v`命令，看到版本信息，则说明安装成功。
+
+<h4 id="2-1-3-修改npm源"><a href="#2-1-3-修改npm源" class="headerlink" title="2.1.3 修改npm源"></a>2.1.3 修改npm源</h4><p>npm下载各种模块，默认是从国外服务器下载，速度较慢，建议配置成华为云镜像源。</p>
+<p>打开CMD窗口，运行如下命令:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm config <span class="built_in">set</span> registry https://mirrors.huaweicloud.com/repository/npm/</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-安装-Git"><a href="#2-2-安装-Git" class="headerlink" title="2.2 安装 Git"></a>2.2 安装 Git</h3><ol>
+<li>进入官网下载适合你当前系统的 Git：</li>
+</ol>
+<p><strong>Git下载地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Git官网</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://git-scm.com/downloads
+        <button class="copy-btn" onclick="copyTerminalContent('https://git-scm.com/downloads', this)">复制</button>
+    </div>
+</div>
+2. 下载后傻瓜式安装Git即可，安装的目录最好使用默认目录`C:/Program Files/Git`
+3. 点击电脑左下角开始即可看见Git CMD、Git Bash、Git GUI。
+   - Git CMD 是windows 命令行的指令风格
+   - Git Bash 是linux系统的指令风格（建议使用）
+   - Git GUI是图形化界面（新手学习不建议使用）
+
+<h2 id="3-配置-Git-密钥并连接至-Github"><a href="#3-配置-Git-密钥并连接至-Github" class="headerlink" title="3. 配置 Git 密钥并连接至 Github"></a>3. 配置 Git 密钥并连接至 Github</h2><p>常用 Git 命令</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config -l  //查看所有配置</span><br><span class="line">git config --system --list //查看系统配置</span><br><span class="line">git config --global --list //查看用户（全局）配置</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-1-配置用户名和邮箱"><a href="#3-1-配置用户名和邮箱" class="headerlink" title="3.1 配置用户名和邮箱"></a>3.1 配置用户名和邮箱</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config --global user.name <span class="string">&quot;你的用户名&quot;</span></span><br><span class="line">git config --global user.email <span class="string">&quot;你的邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>验证配置：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">git config -l</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-配置公钥连接Github"><a href="#3-2-配置公钥连接Github" class="headerlink" title="3.2 配置公钥连接Github"></a>3.2 配置公钥连接Github</h3><p><strong>步骤1：生成SSH公钥</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C <span class="string">&quot;你的邮箱&quot;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>提示<code>Enter file in which to save the key</code>时直接回车即可，新手不推荐设置密钥</p>
+</blockquote>
+<p><strong>步骤2：查找密钥文件</strong><br>打开 <code>C:\Users\你的用户名\.ssh</code> 文件夹，会看到：</p>
+<ul>
+<li><code>id_rsa</code> - 私钥</li>
+<li><code>id_rsa.pub</code> - 公钥</li>
+</ul>
+<p><strong>步骤3：复制公钥内容</strong><br>用记事本打开 <code>id_rsa.pub</code>，复制全部内容</p>
+<p><strong>步骤4：配置到GitHub</strong></p>
+<ol>
+<li>登录GitHub，点击右上角头像 → Settings</li>
+<li>选择 SSH and GPG keys</li>
+<li>点击 New SSH key</li>
+<li>Title随意填写，Key粘贴公钥内容</li>
+<li>点击 Add SSH key</li>
+</ol>
+<p><strong>步骤5：测试连接</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>首次连接提示时输入 <code>yes</code>，出现欢迎信息即表示配置成功</p>
+</blockquote>
+<h3 id="3-3-创建GitHub-io仓库"><a href="#3-3-创建GitHub-io仓库" class="headerlink" title="3.3 创建GitHub.io仓库"></a>3.3 创建GitHub.io仓库</h3><p><strong>创建步骤：</strong></p>
+<ol>
+<li>点击右上角 <code>+</code> 按钮 → New repository</li>
+<li>仓库名格式：<code>&lt;用户名&gt;.github.io</code></li>
+<li>设置为 Public（公开）</li>
+<li>点击 Create repository</li>
+</ol>
+<blockquote>
+<p>⚠️ <strong>注意：</strong> 仓库名必须严格按照 <code>用户名.github.io</code> 格式，这是GitHub Pages的要求</p>
+</blockquote>
+<h2 id="4-初始化-Hexo-博客"><a href="#4-初始化-Hexo-博客" class="headerlink" title="4. 初始化 Hexo 博客"></a>4. 初始化 Hexo 博客</h2><h3 id="4-1-安装-Hexo"><a href="#4-1-安装-Hexo" class="headerlink" title="4.1 安装 Hexo"></a>4.1 安装 Hexo</h3><p><strong>步骤1：创建项目目录</strong><br>创建文件夹保存博客源码（如 <code>D:/Hexo-Blog</code>），在文件夹内右键选择 <code>Open Git Bash here</code></p>
+<p><strong>步骤2：安装Hexo CLI</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install -g hexo-cli &amp;&amp; hexo -v</span><br></pre></td></tr></table></figure>
+
+<p><strong>步骤3：验证安装</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo -v</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-2-初始化项目"><a href="#4-2-初始化项目" class="headerlink" title="4.2 初始化项目"></a>4.2 初始化项目</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo init blog-demo</span><br><span class="line"><span class="built_in">cd</span> blog-demo</span><br><span class="line">npm i</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-3-项目结构说明"><a href="#4-3-项目结构说明" class="headerlink" title="4.3 项目结构说明"></a>4.3 项目结构说明</h3><p>初始化完成后，<code>blog-demo</code> 目录结构如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">blog-demo/</span><br><span class="line">├── node_modules/           # 依赖包</span><br><span class="line">├── scaffolds/              # 文章模板</span><br><span class="line">├── source/                 # 文章存放目录</span><br><span class="line">├── themes/                 # 主题目录</span><br><span class="line">├── .npmignore              # 发布时忽略的文件</span><br><span class="line">├── _config.landscape.yml   # 主题配置文件</span><br><span class="line">├── _config.yml             # 博客配置文件</span><br><span class="line">└── package.json            # 项目信息</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-4-启动本地服务"><a href="#4-4-启动本地服务" class="headerlink" title="4.4 启动本地服务"></a>4.4 启动本地服务</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo cl &amp;&amp; hexo s</span><br></pre></td></tr></table></figure>
+
+<p>打开浏览器访问本地预览地址，看到博客页面说明构建成功：</p>
+<p><strong>本地预览地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">本地服务器</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>http://localhost:4000/
+        <button class="copy-btn" onclick="copyTerminalContent('http://localhost:4000/', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="5-将静态博客挂载到-GitHub-Pages"><a href="#5-将静态博客挂载到-GitHub-Pages" class="headerlink" title="5. 将静态博客挂载到 GitHub Pages"></a>5. 将静态博客挂载到 GitHub Pages</h2><h3 id="5-1-安装部署插件"><a href="#5-1-安装部署插件" class="headerlink" title="5.1 安装部署插件"></a>5.1 安装部署插件</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-2-配置部署设置"><a href="#5-2-配置部署设置" class="headerlink" title="5.2 配置部署设置"></a>5.2 配置部署设置</h3><p>编辑 <code>_config.yml</code> 文件，修改最后的部署配置：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">git@github.com:你的用户名/你的用户名.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">main</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>⚠️ <strong>注意：</strong> 将 <code>你的用户名</code> 替换为实际的GitHub用户名</p>
+</blockquote>
+<h3 id="5-3-部署到GitHub"><a href="#5-3-部署到GitHub" class="headerlink" title="5.3 部署到GitHub"></a>5.3 部署到GitHub</h3><p><strong>Hexo三连命令：</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 完整命令</span></span><br><span class="line">hexo clean &amp;&amp; hexo generate &amp;&amp; hexo deploy</span><br><span class="line"></span><br><span class="line"><span class="comment"># 简化命令</span></span><br><span class="line">hexo cl &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure>
+
+<p><strong>命令说明：</strong></p>
+<ul>
+<li><code>hexo clean</code> (cl) - 清理缓存文件</li>
+<li><code>hexo generate</code> (g) - 生成静态文件</li>
+<li><code>hexo deploy</code> (d) - 部署到远程仓库</li>
+</ul>
+<h3 id="5-4-验证部署"><a href="#5-4-验证部署" class="headerlink" title="5.4 验证部署"></a>5.4 验证部署</h3><p>部署成功后，访问 <code>https://你的用户名.github.io</code> 查看博客</p>
+<h2 id="6-将静态博客挂载到-Cloudflare-Pages"><a href="#6-将静态博客挂载到-Cloudflare-Pages" class="headerlink" title="6. 将静态博客挂载到 Cloudflare Pages"></a>6. 将静态博客挂载到 Cloudflare Pages</h2><h3 id="6-1-连接GitHub仓库"><a href="#6-1-连接GitHub仓库" class="headerlink" title="6.1 连接GitHub仓库"></a>6.1 连接GitHub仓库</h3><ol>
+<li>登录 Cloudflare Dashboard：</li>
+</ol>
+<p><strong>Cloudflare Dashboard：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Cloudflare控制台</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://dash.cloudflare.com/
+        <button class="copy-btn" onclick="copyTerminalContent('https://dash.cloudflare.com/', this)">复制</button>
+    </div>
+</div>
+2. 进入 **Workers 和 Pages** → **Pages**
+3. 点击 **连接到 Git**
+4. 授权并选择你的GitHub仓库
+
+<h3 id="6-2-配置构建设置"><a href="#6-2-配置构建设置" class="headerlink" title="6.2 配置构建设置"></a>6.2 配置构建设置</h3><ul>
+<li><strong>框架预设：</strong> Hexo</li>
+<li><strong>构建命令：</strong> <code>hexo generate</code></li>
+<li><strong>构建输出目录：</strong> <code>public</code></li>
+</ul>
+<h3 id="6-3-部署完成"><a href="#6-3-部署完成" class="headerlink" title="6.3 部署完成"></a>6.3 部署完成</h3><p>部署成功后，你将获得一个 <code>.pages.dev</code> 域名，如：<br><code>https://你的项目名.pages.dev</code></p>
+<h3 id="6-4-可选配置"><a href="#6-4-可选配置" class="headerlink" title="6.4 可选配置"></a>6.4 可选配置</h3><p><strong>自定义域名：</strong><br>如果有自己的域名，可在 Pages 设置中绑定自定义域名</p>
+<p><strong>仓库私有化：</strong><br>部署到 Cloudflare Pages 后，可将 GitHub 仓库设为私有</p>
+<h2 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h2><h3 id="新建一篇博文"><a href="#新建一篇博文" class="headerlink" title="新建一篇博文"></a>新建一篇博文</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">hexo new 这是一篇新的博文</span><br></pre></td></tr></table></figure>
+
+<p>然后用文本编辑器去编辑<code>_posts/这是一篇新的博文.md</code>里的内容即可，注意要使用Markdown格式书写。</p>
+<p>详细使用方法可以查阅 Hexo官方文档：</p>
+<p><strong>Hexo官方文档：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Hexo文档</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://hexo.io/zh-cn/docs/writing
+        <button class="copy-btn" onclick="copyTerminalContent('https://hexo.io/zh-cn/docs/writing', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="编辑和预览"><a href="#编辑和预览" class="headerlink" title="编辑和预览"></a>编辑和预览</h3><p>编辑完文章保存后可以使用如下命令，生成本地页面进行预览：</p>
+<p><strong>本地预览地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">本地预览</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>http://localhost:4000/
+        <button class="copy-btn" onclick="copyTerminalContent('http://localhost:4000/', this)">复制</button>
+    </div>
+</div>
+
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Git BASH终端</span></span><br><span class="line">hexo cl &amp;&amp; hexo s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># VSCODE终端</span></span><br><span class="line">hexo cl; hexo s</span><br></pre></td></tr></table></figure>
+
+<p>确认无误后使用以下命令，将本地文章推送至GitHub仓库即可</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Git BASH终端</span></span><br><span class="line">hexo cl &amp;&amp; hexo g &amp;&amp; hexo d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># VSCODE终端</span></span><br><span class="line">hexo cl; hexo g; hexo d</span><br></pre></td></tr></table></figure>
+
+<p>下一期会讲讲进阶的使用方法，主题美化</p>
+<h2 id="VSCODE-终端首次执行报错"><a href="#VSCODE-终端首次执行报错" class="headerlink" title="VSCODE 终端首次执行报错"></a>VSCODE 终端首次执行报错</h2><p>使用管理员身份打开 powershell ,输入以下命令</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Set-ExecutionPolicy</span> RemoteSigned</span><br></pre></td></tr></table></figure>
+<h2 id="使用方法terminal-block格式"><a href="#使用方法terminal-block格式" class="headerlink" title="使用方法terminal-block格式"></a>使用方法terminal-block格式</h2><h1 id="创建新文章（自动应用模板）"><a href="#创建新文章（自动应用模板）" class="headerlink" title="创建新文章（自动应用模板）"></a>创建新文章（自动应用模板）</h1><p>hexo new “我的新文章”</p>
+<h1 id="或者使用代码生成器辅助"><a href="#或者使用代码生成器辅助" class="headerlink" title="或者使用代码生成器辅助"></a>或者使用代码生成器辅助</h1><p>node generate-terminal-block.js</p>
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
+<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
+<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><strong>Hexo官方文档：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Hexo官方文档</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://hexo.io/zh-cn/
+        <button class="copy-btn" onclick="copyTerminalContent('https://hexo.io/zh-cn/', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>Fomal的Hexo教程：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Fomal教程</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://www.fomal.cc/posts/e593433d.html
+        <button class="copy-btn" onclick="copyTerminalContent('https://www.fomal.cc/posts/e593433d.html', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>Anheyu文档：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Anheyu文档</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://docs.anheyu.com/
+        <button class="copy-btn" onclick="copyTerminalContent('https://docs.anheyu.com/', this)">复制</button>
+    </div>
+</div>]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+        <tag>博客搭建</tag>
+        <tag>静态博客</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LobeChat - 开源AI聊天应用与开发框架完全指南</title>
+    <url>/2025/06/08/LobeChat/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 10px 0;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px 6px 0 0;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27ca3f; }
+
+.terminal-content {
+    padding: 12px;
+    color: #f8f8f2;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: #50fa7b;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #44475a;
+    border: 1px solid #6272a4;
+    color: #f8f8f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #6272a4;
+    border-color: #8be9fd;
+}
+
+.copy-btn.success {
+    background: #50fa7b;
+    color: #282a36;
+    border-color: #50fa7b;
+}
+
+.copy-btn.error {
+    background: #ff5555;
+    border-color: #ff5555;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ 已复制';
+        button.className = 'copy-btn success';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✗ 失败';
+        button.className = 'copy-btn error';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    });
+}
+</script>
+
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>探索 LobeChat：现代化设计的开源聊天应用与开发框架</p>
+<p>LobeChat 是一个现代化设计的开源 ChatGPT&#x2F;LLMs 聊天应用与开发框架，为用户提供强大的AI对话体验。</p>
+<h2 id="核心功能概览"><a href="#核心功能概览" class="headerlink" title="核心功能概览"></a>核心功能概览</h2><h3 id="多模态交互能力"><a href="#多模态交互能力" class="headerlink" title="多模态交互能力"></a>多模态交互能力</h3><ul>
+<li><strong>思维链可视化 (CoT)</strong> - 展示AI推理过程</li>
+<li><strong>分支对话管理</strong> - 支持多线程对话</li>
+<li><strong>白板内容创作 (Artifacts)</strong> - 可视化内容编辑</li>
+<li><strong>文件上传与知识库</strong> - 支持文档问答</li>
+</ul>
+<h3 id="技术特性"><a href="#技术特性" class="headerlink" title="技术特性"></a>技术特性</h3><ul>
+<li>🎨 <strong>现代化UI设计</strong> - 简洁美观的用户界面</li>
+<li>🔧 <strong>高度可定制</strong> - 支持主题和插件扩展</li>
+<li>🌐 <strong>多语言支持</strong> - 国际化界面</li>
+<li>📱 <strong>响应式设计</strong> - 完美适配各种设备</li>
+</ul>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="在线体验"><a href="#在线体验" class="headerlink" title="在线体验"></a>在线体验</h3><p><strong>访问地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://chat.0407123.xyz
+        <button class="copy-btn" onclick="copyTerminalContent('https://chat.0407123.xyz', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>登录密码：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">登录密码</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>admin
+        <button class="copy-btn" onclick="copyTerminalContent('admin', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="获取更新"><a href="#获取更新" class="headerlink" title="获取更新"></a>获取更新</h3><blockquote>
+<p>💡 <strong>提示：</strong> 关注 <a href="https://blog.lobe-chat.xyz/">官方博客</a> 获取最新功能动态和使用技巧</p>
+</blockquote>
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解网络技术。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
+<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
+<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
+]]></content>
+      <categories>
+        <category>AI应用</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+        <tag>聊天应用</tag>
+        <tag>开源</tag>
+        <tag>LLM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Perplexica - 开源AI驱动搜索引擎</title>
+    <url>/2025/01/15/Perplexica/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 10px 0;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px 6px 0 0;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27ca3f; }
+
+.terminal-content {
+    padding: 12px;
+    color: #f8f8f2;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: #50fa7b;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #44475a;
+    border: 1px solid #6272a4;
+    color: #f8f8f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #6272a4;
+    border-color: #8be9fd;
+}
+
+.copy-btn.success {
+    background: #50fa7b;
+    color: #282a36;
+    border-color: #50fa7b;
+}
+
+.copy-btn.error {
+    background: #ff5555;
+    border-color: #ff5555;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ 已复制';
+        button.className = 'copy-btn success';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✗ 失败';
+        button.className = 'copy-btn error';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    });
+}
+</script>
+
+<h2 id="项目简介"><a href="#项目简介" class="headerlink" title="项目简介"></a>项目简介</h2><p>Perplexica是一个开源的AI驱动搜索引擎，旨在提供类似Perplexity.ai的智能搜索体验。它结合了传统搜索引擎的信息检索能力和大语言模型的理解分析能力，为用户提供更准确、更有深度的搜索结果。</p>
+<h3 id="🎯-核心特性"><a href="#🎯-核心特性" class="headerlink" title="🎯 核心特性"></a>🎯 核心特性</h3><ul>
+<li>🤖 <strong>AI驱动</strong> - 集成多种大语言模型，提供智能化搜索体验</li>
+<li>🔍 <strong>实时搜索</strong> - 获取最新的网络信息和实时数据</li>
+<li>📊 <strong>结果聚合</strong> - 智能整合多个信息源，提供综合性答案</li>
+<li>🛠️ <strong>开源自由</strong> - 完全开源，支持自部署和定制化配置</li>
+<li>🌐 <strong>多语言支持</strong> - 支持多种语言的搜索和回答</li>
+</ul>
+<h2 id="快速体验"><a href="#快速体验" class="headerlink" title="快速体验"></a>快速体验</h2><h3 id="🌐-访问地址"><a href="#🌐-访问地址" class="headerlink" title="🌐 访问地址"></a>🌐 访问地址</h3><p><strong>🔗 自建实例：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Perplexica 自建站点</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://as.0407123.xyz/
+        <button class="copy-btn" onclick="copyTerminalContent('https://as.0407123.xyz/', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>🏢 官方对比：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Perplexity.ai 官方</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://www.perplexity.ai/
+        <button class="copy-btn" onclick="copyTerminalContent('https://www.perplexity.ai/', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="💡-使用优势"><a href="#💡-使用优势" class="headerlink" title="💡 使用优势"></a>💡 使用优势</h3><p><strong>相比传统搜索引擎：</strong></p>
+<ul>
+<li>📝 <strong>直接答案</strong> - 提供结构化的答案，而非仅仅是链接列表</li>
+<li>🔗 <strong>来源引用</strong> - 清晰标注信息来源，确保可信度</li>
+<li>💬 <strong>对话式交互</strong> - 支持追问和深入讨论</li>
+<li>🎯 <strong>上下文理解</strong> - 理解查询意图，提供更精准的结果</li>
+</ul>
+<p><strong>相比Perplexity.ai官方：</strong></p>
+<ul>
+<li>🆓 <strong>完全免费</strong> - 无使用限制和付费门槛</li>
+<li>🔧 <strong>可定制化</strong> - 支持自部署和个性化配置</li>
+<li>🔒 <strong>隐私保护</strong> - 数据完全掌控，无隐私泄露风险</li>
+<li>⚡ <strong>响应速度</strong> - 本地化部署，减少网络延迟</li>
+</ul>
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><ul>
+<li><strong>学术研究</strong> - 快速获取权威资料和最新研究进展</li>
+<li><strong>技术开发</strong> - 查找技术文档、解决方案和最佳实践</li>
+<li><strong>新闻资讯</strong> - 获取实时新闻和事件分析</li>
+<li><strong>知识学习</strong> - 深入了解复杂概念和专业知识</li>
+<li><strong>商业分析</strong> - 市场调研和竞争情报收集</li>
+</ul>
+<h2 id="技术特点"><a href="#技术特点" class="headerlink" title="技术特点"></a>技术特点</h2><h3 id="🔧-架构设计"><a href="#🔧-架构设计" class="headerlink" title="🔧 架构设计"></a>🔧 架构设计</h3><ul>
+<li><strong>模块化架构</strong> - 易于扩展和维护</li>
+<li><strong>多模型支持</strong> - 兼容OpenAI、Claude等多种AI模型</li>
+<li><strong>缓存机制</strong> - 优化响应速度和资源利用</li>
+<li><strong>API接口</strong> - 支持第三方集成和开发</li>
+</ul>
+<h3 id="🚀-性能优化"><a href="#🚀-性能优化" class="headerlink" title="🚀 性能优化"></a>🚀 性能优化</h3><ul>
+<li><strong>并行处理</strong> - 同时查询多个信息源</li>
+<li><strong>智能过滤</strong> - 自动筛选高质量内容</li>
+<li><strong>结果排序</strong> - 基于相关性和权威性排序</li>
+<li><strong>实时更新</strong> - 动态获取最新信息</li>
+</ul>
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本工具仅用于信息检索和学习研究目的。使用过程中请遵守相关法律法规，确保查询内容合法合规。</p>
+<p>搜索结果来源于公开网络信息，工具本身不对信息的准确性、完整性或时效性承担责任。用户应当独立验证重要信息的可靠性。</p>
+]]></content>
+      <categories>
+        <category>AI应用</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+        <tag>开源</tag>
+        <tag>搜索引擎</tag>
+        <tag>Perplexity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>emby影视</title>
+    <url>/2025/06/08/emby%E5%BD%B1%E8%A7%86/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 10px 0;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px 6px 0 0;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27ca3f; }
+
+.terminal-content {
+    padding: 12px;
+    color: #f8f8f2;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: #50fa7b;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #44475a;
+    border: 1px solid #6272a4;
+    color: #f8f8f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #6272a4;
+    border-color: #8be9fd;
+}
+
+.copy-btn.success {
+    background: #50fa7b;
+    color: #282a36;
+    border-color: #50fa7b;
+}
+
+.copy-btn.error {
+    background: #ff5555;
+    border-color: #ff5555;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ 已复制';
+        button.className = 'copy-btn success';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✗ 失败';
+        button.className = 'copy-btn error';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    });
+}
+</script>
+<h2 id="服务简介"><a href="#服务简介" class="headerlink" title="服务简介"></a>服务简介</h2><blockquote>
+<p>💥 <strong>69云机场新增Emby权益公告</strong> 💥</p>
+<p>⚠️ <strong>重要提示：</strong> 为了更好的观影体验，建议在全局 + 69云机场的Emby节点使用emby服务！</p>
+</blockquote>
+<h2 id="服务列表"><a href="#服务列表" class="headerlink" title="服务列表"></a>服务列表</h2><p>目前，69云为用户提供三大Emby权益：</p>
+<h3 id="1️⃣-DPX-硬盘服"><a href="#1️⃣-DPX-硬盘服" class="headerlink" title="1️⃣ DPX 硬盘服"></a>1️⃣ DPX 硬盘服</h3><p><strong>权限：</strong> 全体会员尊享</p>
+<p><strong>访问地址1：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问地址1</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://emby1.69yun69.com:18690
+        <button class="copy-btn" onclick="copyTerminalContent('https://emby1.69yun69.com:18690', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>访问地址2：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问地址2</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://emby1.69yun69.com:443
+        <button class="copy-btn" onclick="copyTerminalContent('https://emby1.69yun69.com:443', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="2️⃣-50万-资源服"><a href="#2️⃣-50万-资源服" class="headerlink" title="2️⃣ 50万+资源服"></a>2️⃣ 50万+资源服</h3><p><strong>权限：</strong> 会员级别≥10专享</p>
+<p><strong>访问地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://emby3.69yun69.com:443
+        <button class="copy-btn" onclick="copyTerminalContent('https://emby3.69yun69.com:443', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="3️⃣-Porn教学服"><a href="#3️⃣-Porn教学服" class="headerlink" title="3️⃣ Porn教学服"></a>3️⃣ Porn教学服</h3><p><strong>权限：</strong> 半年卡&#x2F;年卡用户独享</p>
+<p><strong>访问地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://emby2.69yun69.com:443
+        <button class="copy-btn" onclick="copyTerminalContent('https://emby2.69yun69.com:443', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="账号信息"><a href="#账号信息" class="headerlink" title="账号信息"></a>账号信息</h2><p><strong>👤 Emby 账号：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Emby 账号</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>您注册69云机场的邮箱（示例：qianxiu48@gmail.com）
+        <button class="copy-btn" onclick="copyTerminalContent('您注册69云机场的邮箱（示例：qianxiu48@gmail.com）', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>🔑 密码：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">密码</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>空（无需密码）
+        <button class="copy-btn" onclick="copyTerminalContent('', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p><strong>购买套餐：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">购买套餐</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://china.69yun69.com
+        <button class="copy-btn" onclick="copyTerminalContent('https://china.69yun69.com', this)">复制</button>
+    </div>
+</div>
+
+<ol>
+<li>访问上述地址购买套餐</li>
+<li><strong>下载应用：</strong> 下载对应平台的Emby客户端</li>
+<li><strong>配置连接：</strong> 在应用中填写服务器地址、端口和账号信息</li>
+</ol>
+<h2 id="🔔-重要提示"><a href="#🔔-重要提示" class="headerlink" title="🔔 重要提示"></a>🔔 重要提示</h2><h3 id="❌-使用限制"><a href="#❌-使用限制" class="headerlink" title="❌ 使用限制"></a>❌ 使用限制</h3><ul>
+<li><strong>禁止网页观看</strong> - 请务必使用第三方App软件进行观看，网页端不支持播放</li>
+<li><strong>无技术支持</strong> - 69云机场不提供Emby服务的技术支持，如有问题请自行查阅资料</li>
+</ul>
+<h3 id="✅-使用建议"><a href="#✅-使用建议" class="headerlink" title="✅ 使用建议"></a>✅ 使用建议</h3><ul>
+<li>连接协议请选择 “Emby” 或 “其他Emby”</li>
+<li>建议使用推荐的客户端应用以获得最佳体验</li>
+</ul>
+<hr>
+<h2 id="📱-推荐客户端"><a href="#📱-推荐客户端" class="headerlink" title="📱 推荐客户端"></a>📱 推荐客户端</h2><blockquote>
+<p>💡 <strong>说明：</strong> 以下客户端列表仅供参考，不提供技术支持。连接协议请选择 “Emby” 或 “其他Emby”  </p>
+</blockquote>
+<h3 id="🍎-iOS-iPadOS"><a href="#🍎-iOS-iPadOS" class="headerlink" title="🍎 iOS &amp; iPadOS"></a>🍎 iOS &amp; iPadOS</h3><table>
+<thead>
+<tr>
+<th>应用名称</th>
+<th>下载链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Infuse</td>
+<td><a href="https://apps.apple.com/cn/app/id1136220934">App Store</a></td>
+</tr>
+<tr>
+<td>yybx</td>
+<td><a href="https://apps.apple.com/cn/app/yybx/id1519723194">App Store</a></td>
+</tr>
+<tr>
+<td>iemc</td>
+<td><a href="https://apps.apple.com/cn/app/iemc/id1467462861">App Store</a></td>
+</tr>
+<tr>
+<td>Fileball</td>
+<td><a href="https://apps.apple.com/cn/app/fileball/id1558391784">App Store</a></td>
+</tr>
+<tr>
+<td>HamHub</td>
+<td><a href="https://apps.apple.com/cn/app/id6458691598">App Store</a></td>
+</tr>
+<tr>
+<td>SenPlayer</td>
+<td><a href="https://apps.apple.com/cn/app/id6443975850">App Store</a></td>
+</tr>
+<tr>
+<td>Conflux</td>
+<td><a href="https://apps.apple.com/cn/app/conflux-video-player/id6450330892">App Store</a></td>
+</tr>
+<tr>
+<td>iPlay</td>
+<td><a href="https://apps.apple.com/cn/app/iplay/id6480576133">App Store</a></td>
+</tr>
+<tr>
+<td>Forward</td>
+<td><a href="https://apps.apple.com/us/app/forward-%E6%96%B0%E8%A7%86%E7%95%8C/id6503940939">App Store</a></td>
+</tr>
+</tbody></table>
+<h3 id="📺-Apple-TV"><a href="#📺-Apple-TV" class="headerlink" title="📺 Apple TV"></a>📺 Apple TV</h3><table>
+<thead>
+<tr>
+<th>应用名称</th>
+<th>下载链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Infuse</td>
+<td><a href="https://apps.apple.com/cn/app/id1136220934">App Store</a></td>
+</tr>
+<tr>
+<td>yybx</td>
+<td><a href="https://apps.apple.com/cn/app/yybx/id1519723194">App Store</a></td>
+</tr>
+<tr>
+<td>Fileball</td>
+<td><a href="https://apps.apple.com/cn/app/fileball/id1558391784">App Store</a></td>
+</tr>
+<tr>
+<td>HamHub</td>
+<td><a href="https://apps.apple.com/cn/app/id6458691598">App Store</a></td>
+</tr>
+<tr>
+<td>SenPlayer</td>
+<td><a href="https://apps.apple.com/cn/app/id6443975850">App Store</a></td>
+</tr>
+<tr>
+<td>Conflux</td>
+<td><a href="https://apps.apple.com/cn/app/conflux-video-player/id6450330892">App Store</a></td>
+</tr>
+<tr>
+<td>iPlay</td>
+<td><a href="https://apps.apple.com/cn/app/iplay/id6480576133">App Store</a></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>⚠️ <strong>使用限制：</strong> 禁止使用Vidhub登录，禁止开启Infuse的”媒体库模式”功能，禁止通过网页端登录，禁止使用Reflix连接，禁止使用Emby for Kodi登录。登录成功后，请不要新建播放列表。  </p>
+</blockquote>
+<h3 id="🤖-Android"><a href="#🤖-Android" class="headerlink" title="🤖 Android"></a>🤖 Android</h3><table>
+<thead>
+<tr>
+<th>应用名称</th>
+<th>下载链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Afusekt</td>
+<td><a href="https://github.com/AttemptD/AfuseKt-release/releases">GitHub</a></td>
+</tr>
+<tr>
+<td>Yamby</td>
+<td><a href="https://t.me/yamby_release">Telegram</a></td>
+</tr>
+<tr>
+<td>Emby 小秘版</td>
+<td><a href="https://t.me/NaoRubbish/119">Telegram</a></td>
+</tr>
+<tr>
+<td>iPlay</td>
+<td><a href="https://github.com/ourfor/iPlay/releases">GitHub</a></td>
+</tr>
+<tr>
+<td>Jellyfin</td>
+<td><a href="https://play.google.com/store/apps/details?id=org.jellyfin.mobile&hl=en_US">Google Play</a></td>
+</tr>
+<tr>
+<td>Findroid</td>
+<td><a href="https://play.google.com/store/apps/details?id=dev.jdtech.jellyfin&hl=en_US">Google Play</a></td>
+</tr>
+<tr>
+<td>Emby kirlif版</td>
+<td><a href="https://t.me/SaltSoupGarage/603">Telegram</a></td>
+</tr>
+<tr>
+<td>Femor</td>
+<td><a href="https://t.me/hkaemby/38362">Telegram</a></td>
+</tr>
+</tbody></table>
+<h3 id="📺-Android-TV"><a href="#📺-Android-TV" class="headerlink" title="📺 Android TV"></a>📺 Android TV</h3><table>
+<thead>
+<tr>
+<th>应用名称</th>
+<th>下载链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Afusekt TV版</td>
+<td><a href="https://github.com/AttemptD/AfuseKtV-release/releases">GitHub</a></td>
+</tr>
+<tr>
+<td>Jellyfin Android TV</td>
+<td><a href="https://github.com/jellyfin/jellyfin-androidtv/releases">GitHub</a></td>
+</tr>
+<tr>
+<td>Emby 小秘版</td>
+<td><a href="https://t.me/NaoRubbish/119">Telegram</a></td>
+</tr>
+<tr>
+<td>Emby kirlif版</td>
+<td><a href="https://t.me/SaltSoupGarage/615">Telegram</a></td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>💡 <strong>提示：</strong> Emby的各种改版在不同设备上兼容性表现不同，建议多次尝试后选择体验最好的版本。</p>
+</blockquote>
+<h3 id="💻-Windows"><a href="#💻-Windows" class="headerlink" title="💻 Windows"></a>💻 Windows</h3><table>
+<thead>
+<tr>
+<th>应用名称</th>
+<th>下载链接</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Emby 小秘版</td>
+<td><a href="https://t.me/NaoRubbish/119">Telegram</a></td>
+</tr>
+<tr>
+<td>Tsukimi</td>
+<td><a href="https://github.com/tsukinaha/tsukimi/releases">GitHub</a></td>
+</tr>
+<tr>
+<td>Femor</td>
+<td><a href="https://t.me/hkaemby/38362">Telegram</a></td>
+</tr>
+<tr>
+<td>Jellyfin Media Player</td>
+<td><a href="https://github.com/jellyfin/jellyfin-media-player/releases">GitHub</a></td>
+</tr>
+</tbody></table>
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
+<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
+<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
+]]></content>
+  </entry>
+  <entry>
+    <title>LibreTV影视 - 优质在线影视平台使用指南</title>
+    <url>/2025/06/06/libretv-yingshi/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+    border-radius: 8px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #555;
+}
+
+.terminal-title {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f57; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #28ca42; }
+
+.terminal-content {
+    padding: 15px;
+    color: #00ff00;
+    font-size: 14px;
+    position: relative;
+    background: #1e1e1e;
+}
+
+.terminal-prompt {
+    color: #00ff00;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #005a9e;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.textContent;
+        button.textContent = '已复制';
+        button.style.background = '#28a745';
+        setTimeout(function() {
+            button.textContent = originalText;
+            button.style.background = '#007acc';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+    });
+}
+</script>
+<h2 id="平台简介"><a href="#平台简介" class="headerlink" title="平台简介"></a>平台简介</h2><p>LibreTV影视是一个优质的在线影视观看平台，为用户提供丰富的影视资源和流畅的观看体验。平台界面简洁美观，操作便捷，是影视爱好者的不错选择。</p>
+<h3 id="平台特色"><a href="#平台特色" class="headerlink" title="平台特色"></a>平台特色</h3><ul>
+<li>🎬 <strong>丰富资源库</strong> - 涵盖电影、电视剧、综艺、动漫等多种类型</li>
+<li>🎨 <strong>现代化设计</strong> - 简洁美观的用户界面</li>
+<li>📱 <strong>多端适配</strong> - 支持PC、手机、平板等设备</li>
+<li>⚡ <strong>流畅播放</strong> - 优化的播放体验</li>
+</ul>
+<h2 id="访问信息"><a href="#访问信息" class="headerlink" title="访问信息"></a>访问信息</h2><p><strong>🌐 官方网址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">官方网址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>http://ys.0407123.xyz/
+        <button class="copy-btn" onclick="copyTerminalContent('http://ys.0407123.xyz/', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>🔑 访问密码：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问密码</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>admin123
+        <button class="copy-btn" onclick="copyTerminalContent('admin123', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="界面展示"><a href="#界面展示" class="headerlink" title="界面展示"></a>界面展示</h2><h3 id="主界面预览"><a href="#主界面预览" class="headerlink" title="主界面预览"></a>主界面预览</h3><p><img src="https://s21.ax1x.com/2025/07/10/pVQbrQA.jpg" alt="LibreTV影视界面截图"></p>
+<h3 id="数据源配置"><a href="#数据源配置" class="headerlink" title="数据源配置"></a>数据源配置</h3><p><img src="https://s21.ax1x.com/2025/07/10/pVQbWFS.png" alt="LibreTV数据源截图"></p>
+<h2 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h2><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ol>
+<li><strong>访问平台</strong> - 打开官方网址</li>
+<li><strong>输入密码</strong> - 使用提供的访问密码</li>
+<li><strong>选择内容</strong> - 浏览并选择想要观看的影视内容</li>
+<li><strong>开始观看</strong> - 点击播放即可享受观影体验</li>
+</ol>
+<h3 id="功能特点"><a href="#功能特点" class="headerlink" title="功能特点"></a>功能特点</h3><ul>
+<li><strong>搜索功能</strong> - 快速查找想要的影视内容</li>
+<li><strong>分类浏览</strong> - 按类型、年份、地区等分类查看</li>
+<li><strong>播放控制</strong> - 支持暂停、快进、音量调节等基本操作</li>
+<li><strong>画质选择</strong> - 根据网络情况选择合适的播放画质</li>
+</ul>
+<h2 id="适用人群"><a href="#适用人群" class="headerlink" title="适用人群"></a>适用人群</h2><ul>
+<li>🎭 <strong>追剧党</strong> - 及时追看最新热播剧集</li>
+<li>🎬 <strong>电影爱好者</strong> - 观看经典和最新电影作品</li>
+<li>🎪 <strong>综艺粉丝</strong> - 享受各类综艺娱乐节目</li>
+<li>🎌 <strong>动漫迷</strong> - 观看热门动漫作品</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>LibreTV影视作为一个在线影视平台，在资源丰富度、用户体验和技术稳定性方面都表现不错。平台界面设计现代化，功能完善，操作简便，为用户提供了良好的影视观看体验。</p>
+<blockquote>
+<p>💡 <strong>提示：</strong> 平台持续更新和优化，确保用户能够及时观看到最新的影视作品。</p>
+</blockquote>
+<hr>
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
+<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
+<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
+]]></content>
+      <categories>
+        <category>影视资源</category>
+      </categories>
+      <tags>
+        <tag>影视</tag>
+        <tag>在线观看</tag>
+        <tag>LibreTV</tag>
+        <tag>流媒体</tag>
+        <tag>影视资源</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>免费节点</title>
+    <url>/2025/06/27/%E5%85%8D%E8%B4%B9%E8%8A%82%E7%82%B9/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 10px 0;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px 6px 0 0;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27ca3f; }
+
+.terminal-content {
+    padding: 12px;
+    color: #f8f8f2;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: #50fa7b;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #44475a;
+    border: 1px solid #6272a4;
+    color: #f8f8f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #6272a4;
+    border-color: #8be9fd;
+}
+
+.copy-btn.success {
+    background: #50fa7b;
+    color: #282a36;
+    border-color: #50fa7b;
+}
+
+.copy-btn.error {
+    background: #ff5555;
+    border-color: #ff5555;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ 已复制';
+        button.className = 'copy-btn success';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✗ 失败';
+        button.className = 'copy-btn error';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    });
+}
+</script>
+
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解网络技术。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
+<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
+<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
+<h2 id="节点列表"><a href="#节点列表" class="headerlink" title="节点列表"></a>节点列表</h2><h3 id="1-AWS-3XUI-面板"><a href="#1-AWS-3XUI-面板" class="headerlink" title="1. AWS 3XUI 面板"></a>1. AWS 3XUI 面板</h3><p><strong>访问地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://aws.0407123.xyz:56789/qianxiu
+        <button class="copy-btn" onclick="copyTerminalContent('https://aws.0407123.xyz:56789/qianxiu', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>用户名：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">用户名</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>admin
+        <button class="copy-btn" onclick="copyTerminalContent('admin', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>密码：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">密码</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>ch123456789…,,
+        <button class="copy-btn" onclick="copyTerminalContent('ch123456789…,,', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>节点配置：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">节点配置</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>vless://144cb658-5ff0-4e86-be5a-87937198585a@aws.0407123.xyz:21556?type=ws&path=%2F&host=&security=tls&fp=chrome&alpn=#aws-gi9uftwd
+        <button class="copy-btn" onclick="copyTerminalContent('vless://144cb658-5ff0-4e86-be5a-87937198585a@aws.0407123.xyz:21556?type=ws&path=%2F&host=&security=tls&fp=chrome&alpn=#aws-gi9uftwd', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="2-atfreecloudltd-节点"><a href="#2-atfreecloudltd-节点" class="headerlink" title="2. atfreecloudltd 节点"></a>2. atfreecloudltd 节点</h3><ul>
+<li><strong>国家：</strong> 意大利</li>
+<li><strong>类型：</strong> V2Ray 节点</li>
+</ul>
+<p><strong>部署配置：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">部署配置</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>vmpt="11005" argo="y" agn="sealos.0407123.xyz" agk="eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiNTM4YmEwYTMtM2JhZi00Y2FlLTk0Y2YtOGJiM2ZiMGFjMTY0IiwicyI6Ik5EaG1NV0poWTJNdFpHVTVOQzAwTURWa0xUazBaRFV0TUdKa05qUXhZalUyTURWaiJ9" bash <(curl -Ls https://raw.githubusercontent.com/zzzhhh1/argosb/main/argosb.sh)
+        <button class="copy-btn" onclick="copyTerminalContent('vmpt=\"11005\" argo=\"y\" agn=\"sealos.0407123.xyz\" agk=\"eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiNTM4YmEwYTMtM2JhZi00Y2FlLTk0Y2YtOGJiM2ZiMGFjMTY0IiwicyI6Ik5EaG1NV0poWTJNdFpHVTVOQzAwTURWa0xUazBaRFV0TUdKa05qUXhZalUyTURWaiJ9\" bash <(curl -Ls https://raw.githubusercontent.com/zzzhhh1/argosb/main/argosb.sh)', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>节点配置：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">节点配置</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>vmess://eyAidiI6ICIyIiwgInBzIjogInZtLXdzLXNlcjEzMDA3MTM3MzA3NSIsICJhZGQiOiAiMTUyLjg5LjE3MC4xODciLCAicG9ydCI6ICIxMTAwNSIsICJpZCI6ICI0ZDg4NTIwYi05OWY3LTRiNjEtYTJlZi00NzJmYmFjMGUxOWMiLCAiYWlkIjogIjAiLCAic2N5IjogImF1dG8iLCAibmV0IjogIndzIiwgInR5cGUiOiAibm9uZSIsICJob3N0IjogInd3dy5iaW5nLmNvbSIsICJwYXRoIjogIi80ZDg4NTIwYi05OWY3LTRiNjEtYTJlZi00NzJmYmFjMGUxOWMtdm0/ZWQ9MjA0OCIsICJ0bHMiOiAiIn0K
+        <button class="copy-btn" onclick="copyTerminalContent('vmess://eyAidiI6ICIyIiwgInBzIjogInZtLXdzLXNlcjEzMDA3MTM3MzA3NSIsICJhZGQiOiAiMTUyLjg5LjE3MC4xODciLCAicG9ydCI6ICIxMTAwNSIsICJpZCI6ICI0ZDg4NTIwYi05OWY3LTRiNjEtYTJlZi00NzJmYmFjMGUxOWMiLCAiYWlkIjogIjAiLCAic2N5IjogImF1dG8iLCAibmV0IjogIndzIiwgInR5cGUiOiAibm9uZSIsICJob3N0IjogInd3dy5iaW5nLmNvbSIsICJwYXRoIjogIi80ZDg4NTIwYi05OWY3LTRiNjEtYTJlZi00NzJmYmFjMGUxOWMtdm0/ZWQ9MjA0OCIsICJ0bHMiOiAiIn0K', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="3-webhostmost-代理节点（三网优化）"><a href="#3-webhostmost-代理节点（三网优化）" class="headerlink" title="3. webhostmost 代理节点（三网优化）"></a>3. webhostmost 代理节点（三网优化）</h3><p><strong>主要节点：</strong></p>
+<p><strong>美国节点：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">美国节点</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://usa1.0407123.xyz/5a804300-404e-4bbd-b5f0-9e99c417cd69
+        <button class="copy-btn" onclick="copyTerminalContent('https://usa1.0407123.xyz/5a804300-404e-4bbd-b5f0-9e99c417cd69', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>印度节点：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">印度节点</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://in1.0407123.xyz/0e16c475-f72e-4f9e-97a1-6cfce52f34f8
+        <button class="copy-btn" onclick="copyTerminalContent('https://in1.0407123.xyz/0e16c475-f72e-4f9e-97a1-6cfce52f34f8', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>荷兰备用：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">荷兰备用</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://hl.0407123.xyz/67d1d86b-0f2d-4db9-8b8c-d886ff2f43ee
+        <button class="copy-btn" onclick="copyTerminalContent('https://hl.0407123.xyz/67d1d86b-0f2d-4db9-8b8c-d886ff2f43ee', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>备用节点：</strong></p>
+<blockquote>
+<p>当上述节点失效时使用</p>
+</blockquote>
+<p><strong>管理面板：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">管理面板</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://dl.qianxiu.ddns-ip.net/panel
+        <button class="copy-btn" onclick="copyTerminalContent('https://dl.qianxiu.ddns-ip.net/panel', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>登录密码：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">登录密码</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>Ch123456789...,,
+        <button class="copy-btn" onclick="copyTerminalContent('Ch123456789...,,', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="4-EdgeTunnel-节点"><a href="#4-EdgeTunnel-节点" class="headerlink" title="4. EdgeTunnel 节点"></a>4. EdgeTunnel 节点</h3><p><strong>自建地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">自建地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://sub.qianxiu.ddns-ip.net/9b89ed4a-6731-4d31-a143-27fe3817b981?sub
+        <button class="copy-btn" onclick="copyTerminalContent('https://sub.qianxiu.ddns-ip.net/9b89ed4a-6731-4d31-a143-27fe3817b981?sub', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>使用方法：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">使用方法模板</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://sub.qianxiu.ddns-ip.net/9b89ed4a-6731-4d31-a143-27fe3817b981?sub=订阅器地址
+        <button class="copy-btn" onclick="copyTerminalContent('https://sub.qianxiu.ddns-ip.net/9b89ed4a-6731-4d31-a143-27fe3817b981?sub=订阅器地址', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>示例：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">使用示例</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://sub.qianxiu.ddns-ip.net/9b89ed4a-6731-4d31-a143-27fe3817b981?sub=sub.cmliussss.net
+        <button class="copy-btn" onclick="copyTerminalContent('https://sub.qianxiu.ddns-ip.net/9b89ed4a-6731-4d31-a143-27fe3817b981?sub=sub.cmliussss.net', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="订阅器地址"><a href="#订阅器地址" class="headerlink" title="订阅器地址"></a>订阅器地址</h2><h3 id="可用订阅器列表"><a href="#可用订阅器列表" class="headerlink" title="可用订阅器列表"></a>可用订阅器列表</h3><h4 id="CM-订阅器"><a href="#CM-订阅器" class="headerlink" title="CM 订阅器"></a>CM 订阅器</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">CM 订阅器</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>sub.cmliussss.net
+        <button class="copy-btn" onclick="copyTerminalContent('sub.cmliussss.net', this)">复制</button>
+    </div>
+</div>
+来源：[Telegram](https://t.me/CMLiussss_channel)
+
+<h4 id="Moist-R-订阅器"><a href="#Moist-R-订阅器" class="headerlink" title="Moist_R 订阅器"></a>Moist_R 订阅器</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Moist_R 订阅器</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>owo.o00o.ooo
+        <button class="copy-btn" onclick="copyTerminalContent('owo.o00o.ooo', this)">复制</button>
+    </div>
+</div>
+
+<p>解锁GPT:</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">解锁GPT</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>sjc.o00o.ooo
+        <button class="copy-btn" onclick="copyTerminalContent('sjc.o00o.ooo', this)">复制</button>
+    </div>
+</div>
+来源：[Telegram](@mianfeicf)
+
+<h4 id="周润发-订阅器"><a href="#周润发-订阅器" class="headerlink" title="周润发 订阅器"></a>周润发 订阅器</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">周润发 订阅器</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>zrf.zrf.me
+        <button class="copy-btn" onclick="copyTerminalContent('zrf.zrf.me', this)">复制</button>
+    </div>
+</div>
+来源：[Telegram](https://t.me/lsmkc/479)
+
+<h4 id="文烨-订阅器"><a href="#文烨-订阅器" class="headerlink" title="文烨 订阅器"></a>文烨 订阅器</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">文烨 订阅器</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>sub.keaeye.icu
+        <button class="copy-btn" onclick="copyTerminalContent('sub.keaeye.icu', this)">复制</button>
+    </div>
+</div>
+来源：[Telegram](https://t.me/keaeyequn/175)
+
+<h4 id="Kristi-订阅器"><a href="#Kristi-订阅器" class="headerlink" title="Kristi 订阅器"></a>Kristi 订阅器</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">Kristi 订阅器</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>sub.mot.cloudns.biz
+        <button class="copy-btn" onclick="copyTerminalContent('sub.mot.cloudns.biz', this)">复制</button>
+    </div>
+</div>
+来源：[Telegram](https://t.me/Marisa_kristi/30)
+
+<h4 id="青云志-订阅器"><a href="#青云志-订阅器" class="headerlink" title="青云志 订阅器"></a>青云志 订阅器</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">青云志 订阅器</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>dy.yomoh.ggff.net
+        <button class="copy-btn" onclick="copyTerminalContent('dy.yomoh.ggff.net', this)">复制</button>
+    </div>
+</div>
+来源：[官网](https://dy.yomoh.ggff.net/)
+
+<h3 id="使用说明"><a href="#使用说明" class="headerlink" title="使用说明"></a>使用说明</h3><p>将上述订阅地址替换到 EdgeTunnel 节点的 <code>sub</code> 参数中即可使用。</p>
+]]></content>
+      <categories>
+        <category>网络工具</category>
+      </categories>
+      <tags>
+        <tag>代理</tag>
+        <tag>节点</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>提示词优化器 - AI对话效果提升利器</title>
+    <url>/2025/01/15/%E6%8F%90%E7%A4%BA%E8%AF%8D%E4%BC%98%E5%8C%96%E5%99%A8/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 10px 0;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px 6px 0 0;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27ca3f; }
+
+.terminal-content {
+    padding: 12px;
+    color: #f8f8f2;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: #50fa7b;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #44475a;
+    border: 1px solid #6272a4;
+    color: #f8f8f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #6272a4;
+    border-color: #8be9fd;
+}
+
+.copy-btn.success {
+    background: #50fa7b;
+    color: #282a36;
+    border-color: #50fa7b;
+}
+
+.copy-btn.error {
+    background: #ff5555;
+    border-color: #ff5555;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ 已复制';
+        button.className = 'copy-btn success';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✗ 失败';
+        button.className = 'copy-btn error';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    });
+}
+</script>
+
+<h2 id="工具简介"><a href="#工具简介" class="headerlink" title="工具简介"></a>工具简介</h2><p>提示词优化器是一个专业的AI对话辅助工具，旨在帮助用户优化与AI模型的交互体验。通过智能分析和改进建议，让您的提示词更加精准、高效，从而获得更优质的AI响应结果。</p>
+<h3 id="🎯-核心功能"><a href="#🎯-核心功能" class="headerlink" title="🎯 核心功能"></a>🎯 核心功能</h3><ul>
+<li>🔍 <strong>智能分析</strong> - 深度分析提示词结构和语义</li>
+<li>✨ <strong>优化建议</strong> - 提供专业的改进方案和技巧</li>
+<li>📊 <strong>效果评估</strong> - 量化分析优化前后的效果差异</li>
+<li>🎨 <strong>模板库</strong> - 丰富的高质量提示词模板</li>
+</ul>
+<h2 id="快速体验"><a href="#快速体验" class="headerlink" title="快速体验"></a>快速体验</h2><h3 id="🌐-访问地址"><a href="#🌐-访问地址" class="headerlink" title="🌐 访问地址"></a>🌐 访问地址</h3><p><strong>🔗 在线工具：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">提示词优化器</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://ts.0407123.xyz/
+        <button class="copy-btn" onclick="copyTerminalContent('https://ts.0407123.xyz/', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="💡-使用技巧"><a href="#💡-使用技巧" class="headerlink" title="💡 使用技巧"></a>💡 使用技巧</h3><ol>
+<li><strong>明确目标</strong> - 清晰描述您希望AI完成的任务</li>
+<li><strong>提供上下文</strong> - 给出必要的背景信息和约束条件</li>
+<li><strong>结构化表达</strong> - 使用分点、编号等方式组织内容</li>
+<li><strong>示例引导</strong> - 提供期望输出的具体示例</li>
+</ol>
+<h3 id="🚀-优化效果"><a href="#🚀-优化效果" class="headerlink" title="🚀 优化效果"></a>🚀 优化效果</h3><p>通过使用提示词优化器，您可以：</p>
+<ul>
+<li>📈 <strong>提升响应质量</strong> - 获得更准确、相关的AI回答</li>
+<li>⚡ <strong>提高效率</strong> - 减少反复调试提示词的时间</li>
+<li>🎯 <strong>精准控制</strong> - 更好地引导AI按预期方向回答</li>
+<li>📚 <strong>学习提升</strong> - 掌握专业的提示词编写技巧</li>
+</ul>
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><ul>
+<li><strong>内容创作</strong> - 文章写作、创意策划、文案优化</li>
+<li><strong>代码开发</strong> - 编程问题解决、代码审查、技术咨询</li>
+<li><strong>学习研究</strong> - 知识问答、概念解释、学术讨论</li>
+<li><strong>商务应用</strong> - 邮件撰写、报告生成、数据分析</li>
+</ul>
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本工具仅用于提升AI对话体验，帮助用户更好地与AI模型交互。使用过程中请遵守相关AI服务的使用条款，确保内容合法合规。</p>
+<p>工具提供的优化建议仅供参考，实际效果可能因AI模型、使用场景等因素而有所差异。用户应根据具体需求和实际情况灵活调整使用策略。</p>
+]]></content>
+      <categories>
+        <category>AI应用</category>
+      </categories>
+      <tags>
+        <tag>AI</tag>
+        <tag>LLM</tag>
+        <tag>提示词</tag>
+        <tag>优化工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>新闻快递 - 全球实时资讯聚合平台</title>
+    <url>/2025/06/05/%E6%96%B0%E9%97%BB%E5%BF%AB%E9%80%92/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+    border-radius: 8px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #555;
+}
+
+.terminal-title {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f57; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #28ca42; }
+
+.terminal-content {
+    padding: 15px;
+    color: #00ff00;
+    font-size: 14px;
+    position: relative;
+    background: #1e1e1e;
+}
+
+.terminal-prompt {
+    color: #00ff00;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #005a9e;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.textContent;
+        button.textContent = '已复制';
+        button.style.background = '#28a745';
+        setTimeout(function() {
+            button.textContent = originalText;
+            button.style.background = '#007acc';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+    });
+}
+</script>
+
+<h2 id="平台简介"><a href="#平台简介" class="headerlink" title="平台简介"></a>平台简介</h2><p>新闻快递是一个全球实时资讯聚合平台，致力于为用户提供最新、最全面的新闻资讯。平台汇聚了来自世界各地的新闻源，通过智能算法筛选和整理，为用户呈现高质量的新闻内容。</p>
+<h3 id="核心优势"><a href="#核心优势" class="headerlink" title="核心优势"></a>核心优势</h3><ul>
+<li>📰 <strong>全球覆盖</strong> - 汇聚世界各地优质新闻源</li>
+<li>⚡ <strong>实时更新</strong> - 24小时不间断资讯更新</li>
+<li>🤖 <strong>智能筛选</strong> - AI算法精选高质量内容</li>
+<li>🎯 <strong>个性推荐</strong> - 基于用户偏好的智能推荐</li>
+</ul>
+<h2 id="新闻分类"><a href="#新闻分类" class="headerlink" title="新闻分类"></a>新闻分类</h2><h3 id="📊-主要频道"><a href="#📊-主要频道" class="headerlink" title="📊 主要频道"></a>📊 主要频道</h3><table>
+<thead>
+<tr>
+<th>分类</th>
+<th>内容范围</th>
+<th>更新频率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>🌍 <strong>国际新闻</strong></td>
+<td>全球重大事件、国际政治、外交动态</td>
+<td>实时</td>
+</tr>
+<tr>
+<td>💻 <strong>科技资讯</strong></td>
+<td>最新科技发展、产品发布、行业趋势</td>
+<td>每小时</td>
+</tr>
+<tr>
+<td>💰 <strong>财经新闻</strong></td>
+<td>股市动态、经济政策、商业资讯</td>
+<td>实时</td>
+</tr>
+<tr>
+<td>⚽ <strong>体育新闻</strong></td>
+<td>体育赛事、运动员动态、体育产业</td>
+<td>实时</td>
+</tr>
+<tr>
+<td>🎬 <strong>娱乐资讯</strong></td>
+<td>明星动态、影视资讯、娱乐八卦</td>
+<td>每日</td>
+</tr>
+<tr>
+<td>🏠 <strong>生活资讯</strong></td>
+<td>健康养生、美食旅游、生活技巧</td>
+<td>每日</td>
+</tr>
+</tbody></table>
+<h2 id="平台特色功能"><a href="#平台特色功能" class="headerlink" title="平台特色功能"></a>平台特色功能</h2><h3 id="🔄-实时更新系统"><a href="#🔄-实时更新系统" class="headerlink" title="🔄 实时更新系统"></a>🔄 实时更新系统</h3><ul>
+<li>新闻内容24小时实时更新</li>
+<li>突发新闻即时推送</li>
+<li>热点事件持续跟踪</li>
+</ul>
+<h3 id="🌐-多源聚合技术"><a href="#🌐-多源聚合技术" class="headerlink" title="🌐 多源聚合技术"></a>🌐 多源聚合技术</h3><ul>
+<li>整合全球优质新闻源</li>
+<li>提供多角度新闻视角</li>
+<li>去重算法避免重复内容</li>
+</ul>
+<h3 id="🎯-智能推荐引擎"><a href="#🎯-智能推荐引擎" class="headerlink" title="🎯 智能推荐引擎"></a>🎯 智能推荐引擎</h3><ul>
+<li>基于用户阅读习惯分析</li>
+<li>个性化内容推荐</li>
+<li>相关新闻智能关联</li>
+</ul>
+<h3 id="📱-用户体验优化"><a href="#📱-用户体验优化" class="headerlink" title="📱 用户体验优化"></a>📱 用户体验优化</h3><ul>
+<li>清爽简洁的阅读界面</li>
+<li>响应式设计适配多端</li>
+<li>快速搜索和筛选功能</li>
+</ul>
+<h2 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h2><h3 id="📖-基本操作"><a href="#📖-基本操作" class="headerlink" title="📖 基本操作"></a>📖 基本操作</h3><ol>
+<li><strong>访问平台</strong> - 打开新闻快递官网</li>
+<li><strong>选择分类</strong> - 点击感兴趣的新闻频道</li>
+<li><strong>阅读新闻</strong> - 点击标题查看详细内容</li>
+<li><strong>搜索功能</strong> - 使用关键词查找特定新闻</li>
+<li><strong>互动功能</strong> - 支持分享、收藏和评论</li>
+</ol>
+<h3 id="🔧-高级功能"><a href="#🔧-高级功能" class="headerlink" title="🔧 高级功能"></a>🔧 高级功能</h3><ul>
+<li><strong>订阅推送</strong> - 关注特定话题或关键词</li>
+<li><strong>离线阅读</strong> - 下载新闻内容离线查看</li>
+<li><strong>多语言支持</strong> - 支持多种语言界面</li>
+<li><strong>夜间模式</strong> - 护眼的深色主题</li>
+</ul>
+<h2 id="热门资讯示例"><a href="#热门资讯示例" class="headerlink" title="热门资讯示例"></a>热门资讯示例</h2><h3 id="💻-科技前沿"><a href="#💻-科技前沿" class="headerlink" title="💻 科技前沿"></a>💻 科技前沿</h3><p><strong>🔥 人工智能技术在医疗领域的最新突破</strong></p>
+<blockquote>
+<p>最新研究显示，AI技术在疾病诊断准确率方面取得重大进展，为精准医疗开辟新路径…</p>
+</blockquote>
+<h3 id="🌍-国际动态"><a href="#🌍-国际动态" class="headerlink" title="🌍 国际动态"></a>🌍 国际动态</h3><p><strong>🌱 全球气候变化应对措施新进展</strong></p>
+<blockquote>
+<p>多国领导人就气候变化问题达成新的合作协议，共同推进绿色发展目标…</p>
+</blockquote>
+<h3 id="💰-财经资讯"><a href="#💰-财经资讯" class="headerlink" title="💰 财经资讯"></a>💰 财经资讯</h3><p><strong>📈 数字货币市场最新动向分析</strong></p>
+<blockquote>
+<p>比特币价格波动引发市场关注，专家深度分析未来走势和投资机会…</p>
+</blockquote>
+<h3 id="🔗-快速访问"><a href="#🔗-快速访问" class="headerlink" title="🔗 快速访问"></a>🔗 快速访问</h3><p><strong>全球AI峰会最新成果发布：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">AI峰会链接</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://new.0407123.xyz/ai-summit
+        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/ai-summit', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>2025年第二季度经济展望：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">经济展望链接</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://new.0407123.xyz/q2-economy
+        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/q2-economy', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>国际电影节获奖名单：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">电影节链接</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://new.0407123.xyz/film-festival
+        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/film-festival', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>立即体验：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">官网地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://new.0407123.xyz
+        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>下载APP：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">APP下载</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://new.0407123.xyz/app
+        <button class="copy-btn" onclick="copyTerminalContent('https://new.0407123.xyz/app', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
+<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
+<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
+]]></content>
+      <categories>
+        <category>信息服务</category>
+      </categories>
+      <tags>
+        <tag>新闻</tag>
+        <tag>资讯</tag>
+        <tag>聚合</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>站点监控平台</title>
+    <url>/2025/06/30/%E7%AB%99%E7%82%B9%E7%9B%91%E6%8E%A7%E5%B9%B3%E5%8F%B0/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 10px 0;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px 6px 0 0;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27ca3f; }
+
+.terminal-content {
+    padding: 12px;
+    color: #f8f8f2;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: #50fa7b;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #44475a;
+    border: 1px solid #6272a4;
+    color: #f8f8f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #6272a4;
+    border-color: #8be9fd;
+}
+
+.copy-btn.success {
+    background: #50fa7b;
+    color: #282a36;
+    border-color: #50fa7b;
+}
+
+.copy-btn.error {
+    background: #ff5555;
+    border-color: #ff5555;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ 已复制';
+        button.className = 'copy-btn success';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✗ 失败';
+        button.className = 'copy-btn error';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    });
+}
+</script>
+
+<h2 id="平台简介"><a href="#平台简介" class="headerlink" title="平台简介"></a>平台简介</h2><p>站点监控平台是一个专业的系统监控和状态检测平台，为用户提供全面的服务器监控、网站状态检测和性能分析服务。通过实时监控和智能告警，帮助用户及时发现和解决系统问题，确保业务的稳定运行。</p>
+<h3 id="🎯-核心价值"><a href="#🎯-核心价值" class="headerlink" title="🎯 核心价值"></a>🎯 核心价值</h3><ul>
+<li>🔍 <strong>全方位监控</strong> - 覆盖系统、网络、应用等多个层面</li>
+<li>⚡ <strong>实时告警</strong> - 第一时间发现并通知异常情况</li>
+<li>📊 <strong>数据可视化</strong> - 直观展示监控数据和趋势分析</li>
+<li>🛡️ <strong>高可用保障</strong> - 确保关键业务服务的稳定运行</li>
+</ul>
+<h2 id="功能特性"><a href="#功能特性" class="headerlink" title="功能特性"></a>功能特性</h2><h3 id="🖥️-系统资源监控"><a href="#🖥️-系统资源监控" class="headerlink" title="🖥️ 系统资源监控"></a>🖥️ 系统资源监控</h3><table>
+<thead>
+<tr>
+<th>监控项目</th>
+<th>功能描述</th>
+<th>监控频率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>CPU使用率</strong></td>
+<td>实时跟踪服务器CPU负载情况</td>
+<td>每分钟</td>
+</tr>
+<tr>
+<td><strong>内存使用</strong></td>
+<td>监控内存占用和可用空间</td>
+<td>每分钟</td>
+</tr>
+<tr>
+<td><strong>磁盘空间</strong></td>
+<td>跟踪磁盘使用情况和剩余空间</td>
+<td>每5分钟</td>
+</tr>
+<tr>
+<td><strong>网络流量</strong></td>
+<td>监控网络带宽使用情况</td>
+<td>每分钟</td>
+</tr>
+</tbody></table>
+<h3 id="🌐-网络服务监控"><a href="#🌐-网络服务监控" class="headerlink" title="🌐 网络服务监控"></a>🌐 网络服务监控</h3><ul>
+<li><strong>🔗 网站可用性检测</strong> - 定期检查网站是否正常访问</li>
+<li><strong>⏱️ 响应时间监控</strong> - 测量网站响应速度和性能</li>
+<li><strong>🔒 SSL证书监控</strong> - 监控SSL证书有效期和安全状态</li>
+<li><strong>🔌 API接口监控</strong> - 检测API服务的可用性和响应时间</li>
+<li><strong>📡 端口监控</strong> - 监控特定端口的连通性</li>
+</ul>
+<h3 id="📊-数据可视化与分析"><a href="#📊-数据可视化与分析" class="headerlink" title="📊 数据可视化与分析"></a>📊 数据可视化与分析</h3><h4 id="实时监控面板"><a href="#实时监控面板" class="headerlink" title="实时监控面板"></a>实时监控面板</h4><ul>
+<li><strong>📈 实时仪表板</strong> - 直观展示系统状态和性能指标</li>
+<li><strong>📉 历史数据图表</strong> - 提供详细的历史趋势分析</li>
+<li><strong>📋 自定义报表</strong> - 根据需求生成专业监控报告</li>
+<li><strong>🔍 多维度统计</strong> - 从不同角度分析系统性能</li>
+</ul>
+<h4 id="告警与通知"><a href="#告警与通知" class="headerlink" title="告警与通知"></a>告警与通知</h4><ul>
+<li><strong>🚨 智能告警</strong> - 基于阈值和异常检测的告警机制</li>
+<li><strong>📧 多渠道通知</strong> - 支持邮件、短信、Webhook等通知方式</li>
+<li><strong>⏰ 告警策略</strong> - 灵活配置告警规则和升级策略</li>
+</ul>
+<h3 id="📱-公共状态页面"><a href="#📱-公共状态页面" class="headerlink" title="📱 公共状态页面"></a>📱 公共状态页面</h3><ul>
+<li><strong>🌍 公开状态页</strong> - 向用户透明展示服务状态</li>
+<li><strong>📢 事件通知</strong> - 及时发布系统维护和故障信息</li>
+<li><strong>🔔 订阅功能</strong> - 用户可订阅状态更新通知</li>
+<li><strong>📊 可用性统计</strong> - 展示服务的历史可用性数据</li>
+</ul>
+<h2 id="快速体验"><a href="#快速体验" class="headerlink" title="快速体验"></a>快速体验</h2><h3 id="🔍-实时监控面板"><a href="#🔍-实时监控面板" class="headerlink" title="🔍 实时监控面板"></a>🔍 实时监控面板</h3><p><strong>🌐 访问地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://jk.0407123.xyz/status
+        <button class="copy-btn" onclick="copyTerminalContent('https://jk.0407123.xyz/status', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>📋 功能展示：</strong></p>
+<ul>
+<li>✅ 所有监控服务的实时状态</li>
+<li>📈 系统性能指标和趋势图</li>
+<li>📝 最近的事件和维护记录</li>
+<li>📊 各项服务的可用性统计</li>
+</ul>
+<h3 id="⚙️-管理后台"><a href="#⚙️-管理后台" class="headerlink" title="⚙️ 管理后台"></a>⚙️ 管理后台</h3><p><strong>🔗 访问地址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://jk.0407123.xyz/
+        <button class="copy-btn" onclick="copyTerminalContent('https://jk.0407123.xyz/', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>🔑 登录信息：</strong></p>
+<p><strong>用户名：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">用户名</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>admin
+        <button class="copy-btn" onclick="copyTerminalContent('admin', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>密码：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">密码</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>admin123
+        <button class="copy-btn" onclick="copyTerminalContent('admin123', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>🛠️ 管理功能：</strong></p>
+<ul>
+<li>➕ 添加和配置监控项目</li>
+<li>⚙️ 设置告警规则和通知方式</li>
+<li>📊 查看详细的监控数据和报告</li>
+<li>👥 管理用户权限和系统设置</li>
+<li>🔧 系统配置和维护工具</li>
+</ul>
+<h2 id="技术优势"><a href="#技术优势" class="headerlink" title="技术优势"></a>技术优势</h2><h3 id="🏗️-架构特点"><a href="#🏗️-架构特点" class="headerlink" title="🏗️ 架构特点"></a>🏗️ 架构特点</h3><ul>
+<li><strong>🔄 高可用架构</strong> - 采用分布式部署，确保监控服务本身的稳定性</li>
+<li><strong>⚡ 高性能处理</strong> - 支持大规模监控项目的并发处理</li>
+<li><strong>🔧 易于扩展</strong> - 模块化设计，支持功能扩展和定制</li>
+</ul>
+<h3 id="🌐-协议支持"><a href="#🌐-协议支持" class="headerlink" title="🌐 协议支持"></a>🌐 协议支持</h3><ul>
+<li><strong>HTTP&#x2F;HTTPS</strong> - 网站和API监控</li>
+<li><strong>TCP&#x2F;UDP</strong> - 端口连通性检测</li>
+<li><strong>ICMP</strong> - 网络延迟和丢包监控</li>
+<li><strong>SNMP</strong> - 网络设备监控</li>
+</ul>
+<h3 id="🔒-安全保障"><a href="#🔒-安全保障" class="headerlink" title="🔒 安全保障"></a>🔒 安全保障</h3><ul>
+<li><strong>🔐 数据加密</strong> - 采用加密传输和存储，保护监控数据安全</li>
+<li><strong>👤 权限管理</strong> - 细粒度的用户权限控制</li>
+<li><strong>🛡️ 访问控制</strong> - IP白名单和访问频率限制</li>
+</ul>
+<h3 id="🔌-集成能力"><a href="#🔌-集成能力" class="headerlink" title="🔌 集成能力"></a>🔌 集成能力</h3><ul>
+<li><strong>📡 REST API</strong> - 提供完整的API接口，支持第三方集成</li>
+<li><strong>🔗 Webhook支持</strong> - 支持自定义Webhook通知</li>
+<li><strong>📊 数据导出</strong> - 支持多种格式的数据导出</li>
+</ul>
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解网络技术。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
+<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
+<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
+]]></content>
+      <categories>
+        <category>技术实战</category>
+      </categories>
+      <tags>
+        <tag>性能优化</tag>
+        <tag>监控系统</tag>
+        <tag>运维工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>汇聚订阅 - 在Cloudflare上高效管理节点订阅</title>
+    <url>/2025/06/08/%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 10px 0;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px 6px 0 0;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27ca3f; }
+
+.terminal-content {
+    padding: 12px;
+    color: #f8f8f2;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: #50fa7b;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #44475a;
+    border: 1px solid #6272a4;
+    color: #f8f8f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #6272a4;
+    border-color: #8be9fd;
+}
+
+.copy-btn.success {
+    background: #50fa7b;
+    color: #282a36;
+    border-color: #50fa7b;
+}
+
+.copy-btn.error {
+    background: #ff5555;
+    border-color: #ff5555;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ 已复制';
+        button.className = 'copy-btn success';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✗ 失败';
+        button.className = 'copy-btn error';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    });
+}
+</script>
+<h2 id="工具简介"><a href="#工具简介" class="headerlink" title="工具简介"></a>工具简介</h2><p>CF Sub（Edge Sub）是一个基于 Cloudflare Workers 的订阅转换工具，专门用于转换各种代理节点订阅格式。该工具利用 Cloudflare 的全球边缘网络，提供快速、稳定的订阅转换服务。</p>
+<h3 id="🎯-核心优势"><a href="#🎯-核心优势" class="headerlink" title="🎯 核心优势"></a>🎯 核心优势</h3><ul>
+<li>🌐 <strong>全球加速</strong> - 基于 Cloudflare 边缘网络，全球就近访问</li>
+<li>🔄 <strong>格式丰富</strong> - 支持多种主流代理协议和客户端格式</li>
+<li>🛡️ <strong>隐私安全</strong> - 不记录用户数据，保护隐私安全</li>
+<li>⚡ <strong>实时转换</strong> - 支持实时订阅更新和动态配置</li>
+</ul>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="🔗-工具地址"><a href="#🔗-工具地址" class="headerlink" title="🔗 工具地址"></a>🔗 工具地址</h3><p><strong>🌐 官方网站：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">官方网站</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://sub.0407123.xyz/admin
+        <button class="copy-btn" onclick="copyTerminalContent('https://sub.0407123.xyz/admin', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解网络技术。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
+<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
+<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
+]]></content>
+      <categories>
+        <category>网络工具</category>
+      </categories>
+      <tags>
+        <tag>网络代理</tag>
+        <tag>订阅转换</tag>
+        <tag>Cloudflare</tag>
+      </tags>
+  </entry>
+</search>
