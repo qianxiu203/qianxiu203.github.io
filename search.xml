@@ -331,8 +331,7 @@ function copyTerminalContent(text, button) {
 <figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Git BASH终端</span></span><br><span class="line">hexo cl &amp;&amp; hexo s</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># VSCODE终端</span></span><br><span class="line">hexo cl; hexo s</span><br></pre></td></tr></table></figure>
 
 <p>确认无误后使用以下命令，将本地文章推送至GitHub仓库即可</p>
-<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Git BASH终端</span></span><br><span class="line">hexo cl &amp;&amp; hexo g &amp;&amp; hexo d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># VSCODE终端</span></span><br><span class="line">hexo cl; hexo g; hexo d</span><br></pre></td></tr></table></figure>
-
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="comment"># Git BASH终端</span></span><br><span class="line">hexo cl &amp;&amp; hexo g &amp;&amp; hexo d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># VSCODE终端</span></span><br><span class="line">hexo cl; hexo g; hexo d</span><br><span class="line"></span><br><span class="line"><span class="comment"># 备份源码到 blog-demo 仓库</span></span><br><span class="line">git push backup master --force</span><br></pre></td></tr></table></figure>
 <p>下一期会讲讲进阶的使用方法，主题美化</p>
 <h2 id="VSCODE-终端首次执行报错"><a href="#VSCODE-终端首次执行报错" class="headerlink" title="VSCODE 终端首次执行报错"></a>VSCODE 终端首次执行报错</h2><p>使用管理员身份打开 powershell ,输入以下命令</p>
 <figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">Set-ExecutionPolicy</span> RemoteSigned</span><br></pre></td></tr></table></figure>
@@ -775,179 +774,6 @@ function copyTerminalContent(text, button) {
       </tags>
   </entry>
   <entry>
-    <title>LibreTV影视 - 优质在线影视平台使用指南</title>
-    <url>/2025/06/06/libretv-yingshi/</url>
-    <content><![CDATA[<style>
-.terminal-block {
-    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-    border-radius: 8px;
-    margin: 15px 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-    font-family: 'Courier New', monospace;
-}
-
-.terminal-header {
-    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
-    padding: 8px 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #555;
-}
-
-.terminal-title {
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.terminal-buttons {
-    display: flex;
-    gap: 6px;
-}
-
-.terminal-btn {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-}
-
-.terminal-btn.close { background: #ff5f57; }
-.terminal-btn.minimize { background: #ffbd2e; }
-.terminal-btn.maximize { background: #28ca42; }
-
-.terminal-content {
-    padding: 15px;
-    color: #00ff00;
-    font-size: 14px;
-    position: relative;
-    background: #1e1e1e;
-}
-
-.terminal-prompt {
-    color: #00ff00;
-    margin-right: 8px;
-}
-
-.copy-btn {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #007acc;
-    color: white;
-    border: none;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 11px;
-    transition: background 0.3s;
-}
-
-.copy-btn:hover {
-    background: #005a9e;
-}
-</style>
-
-<script>
-function copyTerminalContent(text, button) {
-    navigator.clipboard.writeText(text).then(function() {
-        const originalText = button.textContent;
-        button.textContent = '已复制';
-        button.style.background = '#28a745';
-        setTimeout(function() {
-            button.textContent = originalText;
-            button.style.background = '#007acc';
-        }, 2000);
-    }).catch(function(err) {
-        console.error('复制失败: ', err);
-    });
-}
-</script>
-<h2 id="平台简介"><a href="#平台简介" class="headerlink" title="平台简介"></a>平台简介</h2><p>LibreTV影视是一个优质的在线影视观看平台，为用户提供丰富的影视资源和流畅的观看体验。平台界面简洁美观，操作便捷，是影视爱好者的不错选择。</p>
-<h3 id="平台特色"><a href="#平台特色" class="headerlink" title="平台特色"></a>平台特色</h3><ul>
-<li>🎬 <strong>丰富资源库</strong> - 涵盖电影、电视剧、综艺、动漫等多种类型</li>
-<li>🎨 <strong>现代化设计</strong> - 简洁美观的用户界面</li>
-<li>📱 <strong>多端适配</strong> - 支持PC、手机、平板等设备</li>
-<li>⚡ <strong>流畅播放</strong> - 优化的播放体验</li>
-</ul>
-<h2 id="访问信息"><a href="#访问信息" class="headerlink" title="访问信息"></a>访问信息</h2><p><strong>🌐 官方网址：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">官方网址</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>http://ys.0407123.xyz/
-        <button class="copy-btn" onclick="copyTerminalContent('http://ys.0407123.xyz/', this)">复制</button>
-    </div>
-</div>
-
-<p><strong>🔑 访问密码：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">访问密码</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>admin123
-        <button class="copy-btn" onclick="copyTerminalContent('admin123', this)">复制</button>
-    </div>
-</div>
-
-<h2 id="界面展示"><a href="#界面展示" class="headerlink" title="界面展示"></a>界面展示</h2><h3 id="主界面预览"><a href="#主界面预览" class="headerlink" title="主界面预览"></a>主界面预览</h3><p><img src="https://s21.ax1x.com/2025/07/10/pVQbrQA.jpg" alt="LibreTV影视界面截图"></p>
-<h3 id="数据源配置"><a href="#数据源配置" class="headerlink" title="数据源配置"></a>数据源配置</h3><p><img src="https://s21.ax1x.com/2025/07/10/pVQbWFS.png" alt="LibreTV数据源截图"></p>
-<h2 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h2><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ol>
-<li><strong>访问平台</strong> - 打开官方网址</li>
-<li><strong>输入密码</strong> - 使用提供的访问密码</li>
-<li><strong>选择内容</strong> - 浏览并选择想要观看的影视内容</li>
-<li><strong>开始观看</strong> - 点击播放即可享受观影体验</li>
-</ol>
-<h3 id="功能特点"><a href="#功能特点" class="headerlink" title="功能特点"></a>功能特点</h3><ul>
-<li><strong>搜索功能</strong> - 快速查找想要的影视内容</li>
-<li><strong>分类浏览</strong> - 按类型、年份、地区等分类查看</li>
-<li><strong>播放控制</strong> - 支持暂停、快进、音量调节等基本操作</li>
-<li><strong>画质选择</strong> - 根据网络情况选择合适的播放画质</li>
-</ul>
-<h2 id="适用人群"><a href="#适用人群" class="headerlink" title="适用人群"></a>适用人群</h2><ul>
-<li>🎭 <strong>追剧党</strong> - 及时追看最新热播剧集</li>
-<li>🎬 <strong>电影爱好者</strong> - 观看经典和最新电影作品</li>
-<li>🎪 <strong>综艺粉丝</strong> - 享受各类综艺娱乐节目</li>
-<li>🎌 <strong>动漫迷</strong> - 观看热门动漫作品</li>
-</ul>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>LibreTV影视作为一个在线影视平台，在资源丰富度、用户体验和技术稳定性方面都表现不错。平台界面设计现代化，功能完善，操作简便，为用户提供了良好的影视观看体验。</p>
-<blockquote>
-<p>💡 <strong>提示：</strong> 平台持续更新和优化，确保用户能够及时观看到最新的影视作品。</p>
-</blockquote>
-<hr>
-<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
-<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
-<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
-<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
-]]></content>
-      <categories>
-        <category>影视资源</category>
-      </categories>
-      <tags>
-        <tag>影视</tag>
-        <tag>在线观看</tag>
-        <tag>LibreTV</tag>
-        <tag>流媒体</tag>
-        <tag>影视资源</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>emby影视</title>
     <url>/2025/06/08/emby%E5%BD%B1%E8%A7%86/</url>
     <content><![CDATA[<style>
@@ -1143,7 +969,7 @@ function copyTerminalContent(text, button) {
     </div>
     <div class="terminal-content">
         <span class="terminal-prompt">$</span>您注册69云机场的邮箱（示例：qianxiu48@gmail.com）
-        <button class="copy-btn" onclick="copyTerminalContent('您注册69云机场的邮箱（示例：qianxiu48@gmail.com）', this)">复制</button>
+        <button class="copy-btn" onclick="copyTerminalContent('您注册69云机场的邮箱（示例qianxiu48@gmail.com）', this)">复制</button>
     </div>
 </div>
 
@@ -1375,9 +1201,760 @@ function copyTerminalContent(text, button) {
 <p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
 <p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
 ]]></content>
+      <categories>
+        <category>影视娱乐</category>
+      </categories>
+      <tags>
+        <tag>Emby</tag>
+        <tag>影视</tag>
+        <tag>流媒体</tag>
+      </tags>
   </entry>
   <entry>
-    <title>免费节点</title>
+    <title>github源码备份教程</title>
+    <url>/2025/01/27/github%E6%BA%90%E7%A0%81%E5%A4%87%E4%BB%BD%E6%95%99%E7%A8%8B/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+    border-radius: 8px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #555;
+}
+
+.terminal-title {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f57; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #28ca42; }
+
+.terminal-content {
+    padding: 15px;
+    color: #00ff00;
+    font-size: 14px;
+    position: relative;
+    background: #1e1e1e;
+}
+
+.terminal-prompt {
+    color: #00ff00;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #005a9e;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.textContent;
+        button.textContent = '已复制';
+        button.style.background = '#28a745';
+        setTimeout(function() {
+            button.textContent = originalText;
+            button.style.background = '#007acc';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+    });
+}
+</script>
+
+<h1 id="GitHub源码备份教程"><a href="#GitHub源码备份教程" class="headerlink" title="GitHub源码备份教程"></a>GitHub源码备份教程</h1><p>在开发过程中，定期备份源码到GitHub是一个重要的习惯。本文将详细记录完整的提交流程，方便下次操作时参考。从github下载的源码必须使用npm install安装依赖</p>
+<h2 id="1-检查远程仓库状态"><a href="#1-检查远程仓库状态" class="headerlink" title="1. 检查远程仓库状态"></a>1. 检查远程仓库状态</h2><p>首先检查当前配置的远程仓库地址：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">检查远程仓库状态</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>git remote -v
+        <button class="copy-btn" onclick="copyTerminalContent('git remote -v', this)">复制</button>
+    </div>
+</div>
+
+<p>这个命令会显示当前配置的所有远程仓库及其URL。如果显示的不是目标仓库地址，需要进行更新。</p>
+<h2 id="2-更新远程仓库地址"><a href="#2-更新远程仓库地址" class="headerlink" title="2. 更新远程仓库地址"></a>2. 更新远程仓库地址</h2><p>删除现在的仓库地址命令：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">删除远程仓库地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>git remote remove origin
+        <button class="copy-btn" onclick="copyTerminalContent('git remote remove origin', this)">复制</button>
+    </div>
+</div>
+
+<p>如果需要更改远程仓库地址，使用以下命令：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">设置远程仓库地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>git remote set-url origin https://github.com/qianxiu203/仓库名称.git
+        <button class="copy-btn" onclick="copyTerminalContent('git remote set-url origin https://github.com/qianxiu203/仓库名称.git', this)">复制</button>
+    </div>
+</div>
+
+<p>这个命令会将origin远程仓库的URL更新为指定的GitHub仓库地址。</p>
+<h2 id="3-添加文件到暂存区"><a href="#3-添加文件到暂存区" class="headerlink" title="3. 添加文件到暂存区"></a>3. 添加文件到暂存区</h2><p>将所有文件添加到Git暂存区：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">添加文件到暂存区</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>git add . --force
+        <button class="copy-btn" onclick="copyTerminalContent('git add . --force', this)">复制</button>
+    </div>
+</div>
+
+<ul>
+<li><code>.</code> 表示添加当前目录下的所有文件</li>
+<li><code>--force</code> 参数强制添加文件，即使某些文件被.gitignore忽略</li>
+</ul>
+<h2 id="4-检查仓库状态"><a href="#4-检查仓库状态" class="headerlink" title="4. 检查仓库状态"></a>4. 检查仓库状态</h2><p>在提交前，检查当前仓库的状态：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">检查仓库状态</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>git status
+        <button class="copy-btn" onclick="copyTerminalContent('git status', this)">复制</button>
+    </div>
+</div>
+
+<p>这个命令会显示：</p>
+<ul>
+<li>已暂存的文件（绿色）</li>
+<li>未暂存的修改（红色）</li>
+<li>未跟踪的文件</li>
+</ul>
+<p>确认所有需要提交的文件都已正确添加到暂存区。</p>
+<h2 id="5-提交更改"><a href="#5-提交更改" class="headerlink" title="5. 提交更改"></a>5. 提交更改</h2><p>将暂存区的文件提交到本地仓库：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">提交更改</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>git commit -m "初始化Hexo博客源码仓库"
+        <button class="copy-btn" onclick="copyTerminalContent('git commit -m \"初始化Hexo博客源码仓库\"', this)">复制</button>
+    </div>
+</div>
+
+<ul>
+<li><code>-m</code> 参数后跟提交信息</li>
+<li>提交信息应该简洁明了地描述本次提交的内容</li>
+</ul>
+<h2 id="6-推送到远程仓库"><a href="#6-推送到远程仓库" class="headerlink" title="6. 推送到远程仓库"></a>6. 推送到远程仓库</h2><p>最后，将本地提交推送到GitHub远程仓库：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">推送到远程仓库</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>git push -u origin master
+        <button class="copy-btn" onclick="copyTerminalContent('git push -u origin master', this)">复制</button>
+    </div>
+</div>
+
+<ul>
+<li><code>-u</code> 参数设置上游分支，后续可以直接使用 <code>git push</code></li>
+<li><code>origin</code> 是远程仓库的名称</li>
+<li><code>master</code> 是要推送的分支名称</li>
+</ul>
+<h2 id="提交成功确认"><a href="#提交成功确认" class="headerlink" title="提交成功确认"></a>提交成功确认</h2><p>当看到类似以下输出时，表示提交成功：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">Enumerating objects: X, done.</span><br><span class="line">Counting objects: 100% (X/X), done.</span><br><span class="line">Delta compression using up to X threads</span><br><span class="line">Compressing objects: 100% (X/X), done.</span><br><span class="line">Writing objects: 100% (X/X), X.XX KiB | X.XX MiB/s, done.</span><br><span class="line">Total X (delta X), reused X (delta X), pack-reused 0</span><br><span class="line">To https://github.com/qianxiu203/hexo-blog-source.git</span><br><span class="line"> * [new branch]      master -&gt; master</span><br><span class="line">Branch &#x27;master&#x27; set up to track remote branch &#x27;master&#x27; from &#x27;origin&#x27;.</span><br></pre></td></tr></table></figure>
+
+<h2 id="常见问题解决"><a href="#常见问题解决" class="headerlink" title="常见问题解决"></a>常见问题解决</h2><h3 id="1-推送被拒绝"><a href="#1-推送被拒绝" class="headerlink" title="1. 推送被拒绝"></a>1. 推送被拒绝</h3><p>如果遇到推送被拒绝的情况，可能是因为远程仓库有新的提交。可以先拉取远程更改：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">拉取远程更改</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>git pull origin master
+        <button class="copy-btn" onclick="copyTerminalContent('git pull origin master', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="2-认证问题"><a href="#2-认证问题" class="headerlink" title="2. 认证问题"></a>2. 认证问题</h3><p>如果遇到认证问题，确保：</p>
+<ul>
+<li>GitHub账户有仓库的写入权限</li>
+<li>使用正确的用户名和密码&#x2F;token</li>
+<li>配置了SSH密钥（如果使用SSH URL）</li>
+</ul>
+<h3 id="3-分支问题"><a href="#3-分支问题" class="headerlink" title="3. 分支问题"></a>3. 分支问题</h3><p>如果默认分支不是master，需要相应调整命令中的分支名称。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>完整的GitHub源码备份流程包括：</p>
+<ol>
+<li>检查远程仓库配置</li>
+<li>更新仓库地址（如需要）</li>
+<li>添加文件到暂存区</li>
+<li>检查状态</li>
+<li>提交更改</li>
+<li>推送到远程仓库</li>
+</ol>
+<h2 id="按照这个流程操作，可以确保源码安全地备份到GitHub仓库中。建议定期执行这个流程，保持代码的及时备份。"><a href="#按照这个流程操作，可以确保源码安全地备份到GitHub仓库中。建议定期执行这个流程，保持代码的及时备份。" class="headerlink" title="按照这个流程操作，可以确保源码安全地备份到GitHub仓库中。建议定期执行这个流程，保持代码的及时备份。"></a>按照这个流程操作，可以确保源码安全地备份到GitHub仓库中。建议定期执行这个流程，保持代码的及时备份。</h2><h2 id="⚠️-免责声明"><a href="#⚠️-免责声明" class="headerlink" title="⚠️ 免责声明"></a>⚠️ 免责声明</h2><p>本文档仅供学习和研究使用，请勿用于任何非法活动。使用者需遵守当地法律法规，作者不承担任何责任。请在24小时内删除相关内容。</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>GitHub</tag>
+        <tag>备份</tag>
+        <tag>教程</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>LibreTV影视 - 优质在线影视平台使用指南</title>
+    <url>/2025/06/06/libretv-yingshi/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+    border-radius: 8px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #555;
+}
+
+.terminal-title {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f57; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #28ca42; }
+
+.terminal-content {
+    padding: 15px;
+    color: #00ff00;
+    font-size: 14px;
+    position: relative;
+    background: #1e1e1e;
+}
+
+.terminal-prompt {
+    color: #00ff00;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #005a9e;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.textContent;
+        button.textContent = '已复制';
+        button.style.background = '#28a745';
+        setTimeout(function() {
+            button.textContent = originalText;
+            button.style.background = '#007acc';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+    });
+}
+</script>
+<h2 id="平台简介"><a href="#平台简介" class="headerlink" title="平台简介"></a>平台简介</h2><p>LibreTV影视是一个优质的在线影视观看平台，为用户提供丰富的影视资源和流畅的观看体验。平台界面简洁美观，操作便捷，是影视爱好者的不错选择。</p>
+<h3 id="平台特色"><a href="#平台特色" class="headerlink" title="平台特色"></a>平台特色</h3><ul>
+<li>🎬 <strong>丰富资源库</strong> - 涵盖电影、电视剧、综艺、动漫等多种类型</li>
+<li>🎨 <strong>现代化设计</strong> - 简洁美观的用户界面</li>
+<li>📱 <strong>多端适配</strong> - 支持PC、手机、平板等设备</li>
+<li>⚡ <strong>流畅播放</strong> - 优化的播放体验</li>
+</ul>
+<h2 id="访问信息"><a href="#访问信息" class="headerlink" title="访问信息"></a>访问信息</h2><p><strong>🌐 官方网址：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">官方网址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>http://ys.0407123.xyz/
+        <button class="copy-btn" onclick="copyTerminalContent('http://ys.0407123.xyz/', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>🔑 访问密码：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">访问密码</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>admin123
+        <button class="copy-btn" onclick="copyTerminalContent('admin123', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="界面展示"><a href="#界面展示" class="headerlink" title="界面展示"></a>界面展示</h2><h3 id="主界面预览"><a href="#主界面预览" class="headerlink" title="主界面预览"></a>主界面预览</h3><p><img src="https://s21.ax1x.com/2025/07/10/pVQbrQA.jpg" alt="LibreTV影视界面截图"></p>
+<h3 id="数据源配置"><a href="#数据源配置" class="headerlink" title="数据源配置"></a>数据源配置</h3><p><img src="https://s21.ax1x.com/2025/07/10/pVQbWFS.png" alt="LibreTV数据源截图"></p>
+<h2 id="使用指南"><a href="#使用指南" class="headerlink" title="使用指南"></a>使用指南</h2><h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><ol>
+<li><strong>访问平台</strong> - 打开官方网址</li>
+<li><strong>输入密码</strong> - 使用提供的访问密码</li>
+<li><strong>选择内容</strong> - 浏览并选择想要观看的影视内容</li>
+<li><strong>开始观看</strong> - 点击播放即可享受观影体验</li>
+</ol>
+<h3 id="功能特点"><a href="#功能特点" class="headerlink" title="功能特点"></a>功能特点</h3><ul>
+<li><strong>搜索功能</strong> - 快速查找想要的影视内容</li>
+<li><strong>分类浏览</strong> - 按类型、年份、地区等分类查看</li>
+<li><strong>播放控制</strong> - 支持暂停、快进、音量调节等基本操作</li>
+<li><strong>画质选择</strong> - 根据网络情况选择合适的播放画质</li>
+</ul>
+<h2 id="适用人群"><a href="#适用人群" class="headerlink" title="适用人群"></a>适用人群</h2><ul>
+<li>🎭 <strong>追剧党</strong> - 及时追看最新热播剧集</li>
+<li>🎬 <strong>电影爱好者</strong> - 观看经典和最新电影作品</li>
+<li>🎪 <strong>综艺粉丝</strong> - 享受各类综艺娱乐节目</li>
+<li>🎌 <strong>动漫迷</strong> - 观看热门动漫作品</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>LibreTV影视作为一个在线影视平台，在资源丰富度、用户体验和技术稳定性方面都表现不错。平台界面设计现代化，功能完善，操作简便，为用户提供了良好的影视观看体验。</p>
+<blockquote>
+<p>💡 <strong>提示：</strong> 平台持续更新和优化，确保用户能够及时观看到最新的影视作品。</p>
+</blockquote>
+<hr>
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
+<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
+<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
+]]></content>
+      <categories>
+        <category>影视资源</category>
+      </categories>
+      <tags>
+        <tag>影视</tag>
+        <tag>流媒体</tag>
+        <tag>在线观看</tag>
+        <tag>LibreTV</tag>
+        <tag>影视资源</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>参数保存</title>
+    <url>/2025/07/15/%E5%8F%82%E6%95%B0%E4%BF%9D%E5%AD%98/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+    border-radius: 8px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #555;
+}
+
+.terminal-title {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f57; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #28ca42; }
+
+.terminal-content {
+    padding: 15px;
+    color: #00ff00;
+    font-size: 14px;
+    position: relative;
+    background: #1e1e1e;
+}
+
+.terminal-prompt {
+    color: #00ff00;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #005a9e;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.textContent;
+        button.textContent = '已复制';
+        button.style.background = '#28a745';
+        setTimeout(function() {
+            button.textContent = originalText;
+            button.style.background = '#007acc';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+    });
+}
+</script>
+
+<h2 id="1-3XUI面板地址"><a href="#1-3XUI面板地址" class="headerlink" title="1. 3XUI面板地址"></a>1. 3XUI面板地址</h2><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">3XUI面板地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://aws.0407123.xyz:56789/qianxiu/
+        <button class="copy-btn" onclick="copyTerminalContent('https://aws.0407123.xyz:56789/qianxiu/', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="2-CF固定隧道密钥"><a href="#2-CF固定隧道密钥" class="headerlink" title="2. CF固定隧道密钥"></a>2. CF固定隧道密钥</h2><h3 id="网址：free-0407123-xyz"><a href="#网址：free-0407123-xyz" class="headerlink" title="网址：free.0407123.xyz"></a>网址：free.0407123.xyz</h3><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">CF隧道密钥 - free.0407123.xyz</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiMWE0OTgwNjYtYzVjNi00NGY4LTllZmItODg5YzhlOGJiMjc2IiwicyI6Ik9UQmpOalE0TmpjdE9ETTJOQzAwWVRZM0xXRmpPREl0WWpVM09UZ3dZMlk0WVRsbSJ9
+        <button class="copy-btn" onclick="copyTerminalContent('eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiMWE0OTgwNjYtYzVjNi00NGY4LTllZmItODg5YzhlOGJiMjc2IiwicyI6Ik9UQmpOalE0TmpjdE9ETTJOQzAwWVRZM0xXRmpPREl0WWpVM09UZ3dZMlk0WVRsbSJ9', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="网址：sealos-0407123-xyz"><a href="#网址：sealos-0407123-xyz" class="headerlink" title="网址：sealos.0407123.xyz"></a>网址：sealos.0407123.xyz</h3><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">CF隧道密钥 - sealos.0407123.xyz</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiNTM4YmEwYTMtM2JhZi00Y2FlLTk0Y2YtOGJiM2ZiMGFjMTY0IiwicyI6Ik5EaG1NV0poWTJNdFpHVTVOQzAwTURWa0xUazBaRFV0TUdKa05qUXhZalUyTURWaiJ9
+        <button class="copy-btn" onclick="copyTerminalContent('eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiNTM4YmEwYTMtM2JhZi00Y2FlLTk0Y2YtOGJiM2ZiMGFjMTY0IiwicyI6Ik5EaG1NV0poWTJNdFpHVTVOQzAwTURWa0xUazBaRFV0TUdKa05qUXhZalUyTURWaiJ9', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="3-ArgoSB一键无交互代理脚本"><a href="#3-ArgoSB一键无交互代理脚本" class="headerlink" title="3. ArgoSB一键无交互代理脚本"></a>3. ArgoSB一键无交互代理脚本</h2><h3 id="脚本命令"><a href="#脚本命令" class="headerlink" title="脚本命令"></a>脚本命令</h3><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">ArgoSB脚本</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>vmpt="" argo="y" agn="" agk="" bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh)
+        <button class="copy-btn" onclick="copyTerminalContent('vmpt=&quot;&quot; argo=&quot;y&quot; agn=&quot;&quot; agk=&quot;&quot; bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh)', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="AGSB快捷方式"><a href="#AGSB快捷方式" class="headerlink" title="AGSB快捷方式"></a>AGSB快捷方式</h3><h4 id="1-查看Argo信息"><a href="#1-查看Argo信息" class="headerlink" title="1. 查看Argo信息"></a>1. 查看Argo信息</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">查看Argo信息</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>agsb list
+        <button class="copy-btn" onclick="copyTerminalContent('agsb list', this)">复制</button>
+    </div>
+</div>
+
+<p>或者：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">查看Argo信息（完整命令）</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list
+        <button class="copy-btn" onclick="copyTerminalContent('bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list', this)">复制</button>
+    </div>
+</div>
+
+<h4 id="2-在线切换IPV4-IPV6节点配置（双栈VPS专享）"><a href="#2-在线切换IPV4-IPV6节点配置（双栈VPS专享）" class="headerlink" title="2. 在线切换IPV4&#x2F;IPV6节点配置（双栈VPS专享）"></a>2. 在线切换IPV4&#x2F;IPV6节点配置（双栈VPS专享）</h4><p><strong>显示IPV4节点配置：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">显示IPV4节点配置</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>ip=4 agsb list
+        <button class="copy-btn" onclick="copyTerminalContent('ip=4 agsb list', this)">复制</button>
+    </div>
+</div>
+
+<p>或者：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">显示IPV4节点配置（完整命令）</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>ip=4 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list
+        <button class="copy-btn" onclick="copyTerminalContent('ip=4 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>显示IPV6节点配置：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">显示IPV6节点配置</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>ip=6 agsb list
+        <button class="copy-btn" onclick="copyTerminalContent('ip=6 agsb list', this)">复制</button>
+    </div>
+</div>
+
+<p>或者：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">显示IPV6节点配置（完整命令）</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>ip=6 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list
+        <button class="copy-btn" onclick="copyTerminalContent('ip=6 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list', this)">复制</button>
+    </div>
+</div>
+
+<h4 id="3-卸载脚本"><a href="#3-卸载脚本" class="headerlink" title="3. 卸载脚本"></a>3. 卸载脚本</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">卸载脚本</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>agsb del
+        <button class="copy-btn" onclick="copyTerminalContent('agsb del', this)">复制</button>
+    </div>
+</div>
+
+<p>或者：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">卸载脚本（完整命令）</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) del
+        <button class="copy-btn" onclick="copyTerminalContent('bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) del', this)">复制</button>
+    </div>
+</div>
+
+<hr>
+<h2 id="⚠️-免责声明"><a href="#⚠️-免责声明" class="headerlink" title="⚠️ 免责声明"></a>⚠️ 免责声明</h2><p>本文档仅供学习和研究使用，请勿用于任何非法活动。使用者需遵守当地法律法规，作者不承担任何责任。请在24小时内删除相关内容。</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>3XUI</tag>
+        <tag>Cloudflare</tag>
+        <tag>ArgoSB</tag>
+        <tag>隧道</tag>
+        <tag>代理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>免费内容</title>
     <url>/2025/06/27/%E5%85%8D%E8%B4%B9%E8%8A%82%E7%82%B9/</url>
     <content><![CDATA[<style>
 .terminal-block {
@@ -1493,10 +2070,9 @@ function copyTerminalContent(text, button) {
 <p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
 <p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
 <p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
-<h2 id="节点列表"><a href="#节点列表" class="headerlink" title="节点列表"></a>节点列表</h2><h3 id="1-AWS-3XUI-面板"><a href="#1-AWS-3XUI-面板" class="headerlink" title="1. AWS 3XUI 面板"></a>1. AWS 3XUI 面板</h3><p><strong>访问地址：</strong></p>
-<div class="terminal-block">
+<h2 id="汇聚订阅"><a href="#汇聚订阅" class="headerlink" title="汇聚订阅"></a>汇聚订阅</h2><div class="terminal-block">
     <div class="terminal-header">
-        <span class="terminal-title">访问地址</span>
+        <span class="terminal-title">汇聚订阅地址</span>
         <div class="terminal-buttons">
             <button class="terminal-btn close"></button>
             <button class="terminal-btn minimize"></button>
@@ -1504,96 +2080,12 @@ function copyTerminalContent(text, button) {
         </div>
     </div>
     <div class="terminal-content">
-        <span class="terminal-prompt">$</span>https://aws.0407123.xyz:56789/qianxiu
-        <button class="copy-btn" onclick="copyTerminalContent('https://aws.0407123.xyz:56789/qianxiu', this)">复制</button>
+        <span class="terminal-prompt">$</span>https://sub.0407123.xyz/admin?sub
+        <button class="copy-btn" onclick="copyTerminalContent('https://sub.0407123.xyz/admin?sub', this)">复制</button>
     </div>
 </div>
 
-<p><strong>用户名：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">用户名</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>admin
-        <button class="copy-btn" onclick="copyTerminalContent('admin', this)">复制</button>
-    </div>
-</div>
-
-<p><strong>密码：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">密码</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>ch123456789…,,
-        <button class="copy-btn" onclick="copyTerminalContent('ch123456789…,,', this)">复制</button>
-    </div>
-</div>
-
-<p><strong>节点配置：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">节点配置</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>vless://144cb658-5ff0-4e86-be5a-87937198585a@aws.0407123.xyz:21556?type=ws&path=%2F&host=&security=tls&fp=chrome&alpn=#aws-gi9uftwd
-        <button class="copy-btn" onclick="copyTerminalContent('vless://144cb658-5ff0-4e86-be5a-87937198585a@aws.0407123.xyz:21556?type=ws&path=%2F&host=&security=tls&fp=chrome&alpn=#aws-gi9uftwd', this)">复制</button>
-    </div>
-</div>
-
-<h3 id="2-atfreecloudltd-节点"><a href="#2-atfreecloudltd-节点" class="headerlink" title="2. atfreecloudltd 节点"></a>2. atfreecloudltd 节点</h3><ul>
-<li><strong>国家：</strong> 意大利</li>
-<li><strong>类型：</strong> V2Ray 节点</li>
-</ul>
-<p><strong>部署配置：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">部署配置</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>vmpt="11005" argo="y" agn="sealos.0407123.xyz" agk="eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiNTM4YmEwYTMtM2JhZi00Y2FlLTk0Y2YtOGJiM2ZiMGFjMTY0IiwicyI6Ik5EaG1NV0poWTJNdFpHVTVOQzAwTURWa0xUazBaRFV0TUdKa05qUXhZalUyTURWaiJ9" bash <(curl -Ls https://raw.githubusercontent.com/zzzhhh1/argosb/main/argosb.sh)
-        <button class="copy-btn" onclick="copyTerminalContent('vmpt=\"11005\" argo=\"y\" agn=\"sealos.0407123.xyz\" agk=\"eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiNTM4YmEwYTMtM2JhZi00Y2FlLTk0Y2YtOGJiM2ZiMGFjMTY0IiwicyI6Ik5EaG1NV0poWTJNdFpHVTVOQzAwTURWa0xUazBaRFV0TUdKa05qUXhZalUyTURWaiJ9\" bash <(curl -Ls https://raw.githubusercontent.com/zzzhhh1/argosb/main/argosb.sh)', this)">复制</button>
-    </div>
-</div>
-
-<p><strong>节点配置：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">节点配置</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>vmess://eyAidiI6ICIyIiwgInBzIjogInZtLXdzLXNlcjEzMDA3MTM3MzA3NSIsICJhZGQiOiAiMTUyLjg5LjE3MC4xODciLCAicG9ydCI6ICIxMTAwNSIsICJpZCI6ICI0ZDg4NTIwYi05OWY3LTRiNjEtYTJlZi00NzJmYmFjMGUxOWMiLCAiYWlkIjogIjAiLCAic2N5IjogImF1dG8iLCAibmV0IjogIndzIiwgInR5cGUiOiAibm9uZSIsICJob3N0IjogInd3dy5iaW5nLmNvbSIsICJwYXRoIjogIi80ZDg4NTIwYi05OWY3LTRiNjEtYTJlZi00NzJmYmFjMGUxOWMtdm0/ZWQ9MjA0OCIsICJ0bHMiOiAiIn0K
-        <button class="copy-btn" onclick="copyTerminalContent('vmess://eyAidiI6ICIyIiwgInBzIjogInZtLXdzLXNlcjEzMDA3MTM3MzA3NSIsICJhZGQiOiAiMTUyLjg5LjE3MC4xODciLCAicG9ydCI6ICIxMTAwNSIsICJpZCI6ICI0ZDg4NTIwYi05OWY3LTRiNjEtYTJlZi00NzJmYmFjMGUxOWMiLCAiYWlkIjogIjAiLCAic2N5IjogImF1dG8iLCAibmV0IjogIndzIiwgInR5cGUiOiAibm9uZSIsICJob3N0IjogInd3dy5iaW5nLmNvbSIsICJwYXRoIjogIi80ZDg4NTIwYi05OWY3LTRiNjEtYTJlZi00NzJmYmFjMGUxOWMtdm0/ZWQ9MjA0OCIsICJ0bHMiOiAiIn0K', this)">复制</button>
-    </div>
-</div>
-
-<h3 id="3-webhostmost-代理节点（三网优化）"><a href="#3-webhostmost-代理节点（三网优化）" class="headerlink" title="3. webhostmost 代理节点（三网优化）"></a>3. webhostmost 代理节点（三网优化）</h3><p><strong>主要节点：</strong></p>
+<h2 id="节点列表"><a href="#节点列表" class="headerlink" title="节点列表"></a>节点列表</h2><h3 id="1-webhostmost-代理节点（三网优化）"><a href="#1-webhostmost-代理节点（三网优化）" class="headerlink" title="1. webhostmost 代理节点（三网优化）"></a>1. webhostmost 代理节点（三网优化）</h3><p><strong>主要节点：</strong></p>
 <p><strong>美国节点：</strong></p>
 <div class="terminal-block">
     <div class="terminal-header">
@@ -1678,7 +2170,7 @@ function copyTerminalContent(text, button) {
     </div>
 </div>
 
-<h3 id="4-EdgeTunnel-节点"><a href="#4-EdgeTunnel-节点" class="headerlink" title="4. EdgeTunnel 节点"></a>4. EdgeTunnel 节点</h3><p><strong>自建地址：</strong></p>
+<h3 id="2-EdgeTunnel-节点"><a href="#2-EdgeTunnel-节点" class="headerlink" title="2. EdgeTunnel 节点"></a>2. EdgeTunnel 节点</h3><p><strong>自建地址：</strong></p>
 <div class="terminal-block">
     <div class="terminal-header">
         <span class="terminal-title">自建地址</span>
@@ -2296,155 +2788,6 @@ function copyTerminalContent(text, button) {
       </tags>
   </entry>
   <entry>
-    <title>汇聚订阅 - 在Cloudflare上高效管理节点订阅</title>
-    <url>/2025/06/08/%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2/</url>
-    <content><![CDATA[<style>
-.terminal-block {
-    background: #1e1e1e;
-    border: 1px solid #333;
-    border-radius: 6px;
-    margin: 10px 0;
-    position: relative;
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-}
-
-.terminal-header {
-    background: #2d2d2d;
-    padding: 8px 12px;
-    border-bottom: 1px solid #333;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-radius: 6px 6px 0 0;
-}
-
-.terminal-title {
-    color: #888;
-    font-size: 12px;
-    font-weight: normal;
-}
-
-.terminal-buttons {
-    display: flex;
-    gap: 6px;
-}
-
-.terminal-btn {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-}
-
-.terminal-btn.close { background: #ff5f56; }
-.terminal-btn.minimize { background: #ffbd2e; }
-.terminal-btn.maximize { background: #27ca3f; }
-
-.terminal-content {
-    padding: 12px;
-    color: #f8f8f2;
-    font-size: 14px;
-    line-height: 1.4;
-    position: relative;
-}
-
-.terminal-prompt {
-    color: #50fa7b;
-    margin-right: 8px;
-}
-
-.copy-btn {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: #44475a;
-    border: 1px solid #6272a4;
-    color: #f8f8f2;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 11px;
-    transition: all 0.2s;
-}
-
-.copy-btn:hover {
-    background: #6272a4;
-    border-color: #8be9fd;
-}
-
-.copy-btn.success {
-    background: #50fa7b;
-    color: #282a36;
-    border-color: #50fa7b;
-}
-
-.copy-btn.error {
-    background: #ff5555;
-    border-color: #ff5555;
-}
-</style>
-
-<script>
-function copyTerminalContent(text, button) {
-    navigator.clipboard.writeText(text).then(function() {
-        const originalText = button.innerHTML;
-        button.innerHTML = '✓ 已复制';
-        button.className = 'copy-btn success';
-        setTimeout(function() {
-            button.innerHTML = originalText;
-            button.className = 'copy-btn';
-        }, 2000);
-    }).catch(function(err) {
-        console.error('复制失败: ', err);
-        const originalText = button.innerHTML;
-        button.innerHTML = '✗ 失败';
-        button.className = 'copy-btn error';
-        setTimeout(function() {
-            button.innerHTML = originalText;
-            button.className = 'copy-btn';
-        }, 2000);
-    });
-}
-</script>
-<h2 id="工具简介"><a href="#工具简介" class="headerlink" title="工具简介"></a>工具简介</h2><p>CF Sub（Edge Sub）是一个基于 Cloudflare Workers 的订阅转换工具，专门用于转换各种代理节点订阅格式。该工具利用 Cloudflare 的全球边缘网络，提供快速、稳定的订阅转换服务。</p>
-<h3 id="🎯-核心优势"><a href="#🎯-核心优势" class="headerlink" title="🎯 核心优势"></a>🎯 核心优势</h3><ul>
-<li>🌐 <strong>全球加速</strong> - 基于 Cloudflare 边缘网络，全球就近访问</li>
-<li>🔄 <strong>格式丰富</strong> - 支持多种主流代理协议和客户端格式</li>
-<li>🛡️ <strong>隐私安全</strong> - 不记录用户数据，保护隐私安全</li>
-<li>⚡ <strong>实时转换</strong> - 支持实时订阅更新和动态配置</li>
-</ul>
-<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="🔗-工具地址"><a href="#🔗-工具地址" class="headerlink" title="🔗 工具地址"></a>🔗 工具地址</h3><p><strong>🌐 官方网站：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">官方网站</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>https://sub.0407123.xyz/admin
-        <button class="copy-btn" onclick="copyTerminalContent('https://sub.0407123.xyz/admin', this)">复制</button>
-    </div>
-</div>
-
-<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解网络技术。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
-<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
-<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
-<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
-]]></content>
-      <categories>
-        <category>网络工具</category>
-      </categories>
-      <tags>
-        <tag>网络代理</tag>
-        <tag>订阅转换</tag>
-        <tag>Cloudflare</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>站点监控平台</title>
     <url>/2025/06/30/%E7%AB%99%E7%82%B9%E7%9B%91%E6%8E%A7%E5%B9%B3%E5%8F%B0/</url>
     <content><![CDATA[<style>
@@ -2730,6 +3073,155 @@ function copyTerminalContent(text, button) {
         <tag>性能优化</tag>
         <tag>监控系统</tag>
         <tag>运维工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>汇聚订阅 - 在Cloudflare上高效管理节点订阅</title>
+    <url>/2025/06/08/%E8%AE%A2%E9%98%85%E8%BD%AC%E6%8D%A2/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: #1e1e1e;
+    border: 1px solid #333;
+    border-radius: 6px;
+    margin: 10px 0;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: #2d2d2d;
+    padding: 8px 12px;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 6px 6px 0 0;
+}
+
+.terminal-title {
+    color: #888;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f56; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #27ca3f; }
+
+.terminal-content {
+    padding: 12px;
+    color: #f8f8f2;
+    font-size: 14px;
+    line-height: 1.4;
+    position: relative;
+}
+
+.terminal-prompt {
+    color: #50fa7b;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #44475a;
+    border: 1px solid #6272a4;
+    color: #f8f8f2;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: all 0.2s;
+}
+
+.copy-btn:hover {
+    background: #6272a4;
+    border-color: #8be9fd;
+}
+
+.copy-btn.success {
+    background: #50fa7b;
+    color: #282a36;
+    border-color: #50fa7b;
+}
+
+.copy-btn.error {
+    background: #ff5555;
+    border-color: #ff5555;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.innerHTML;
+        button.innerHTML = '✓ 已复制';
+        button.className = 'copy-btn success';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+        const originalText = button.innerHTML;
+        button.innerHTML = '✗ 失败';
+        button.className = 'copy-btn error';
+        setTimeout(function() {
+            button.innerHTML = originalText;
+            button.className = 'copy-btn';
+        }, 2000);
+    });
+}
+</script>
+<h2 id="工具简介"><a href="#工具简介" class="headerlink" title="工具简介"></a>工具简介</h2><p>CF Sub（Edge Sub）是一个基于 Cloudflare Workers 的订阅转换工具，专门用于转换各种代理节点订阅格式。该工具利用 Cloudflare 的全球边缘网络，提供快速、稳定的订阅转换服务。</p>
+<h3 id="🎯-核心优势"><a href="#🎯-核心优势" class="headerlink" title="🎯 核心优势"></a>🎯 核心优势</h3><ul>
+<li>🌐 <strong>全球加速</strong> - 基于 Cloudflare 边缘网络，全球就近访问</li>
+<li>🔄 <strong>格式丰富</strong> - 支持多种主流代理协议和客户端格式</li>
+<li>🛡️ <strong>隐私安全</strong> - 不记录用户数据，保护隐私安全</li>
+<li>⚡ <strong>实时转换</strong> - 支持实时订阅更新和动态配置</li>
+</ul>
+<h2 id="快速开始"><a href="#快速开始" class="headerlink" title="快速开始"></a>快速开始</h2><h3 id="🔗-工具地址"><a href="#🔗-工具地址" class="headerlink" title="🔗 工具地址"></a>🔗 工具地址</h3><p><strong>🌐 官方网站：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">官方网站</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://sub.0407123.xyz/admin
+        <button class="copy-btn" onclick="copyTerminalContent('https://sub.0407123.xyz/admin', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="免责声明"><a href="#免责声明" class="headerlink" title="免责声明"></a>免责声明</h2><p>本文档仅用于学习和教育目的，旨在帮助安全研究人员和开发者了解网络技术。本博文中所包含的信息和工具仅用于合法的安全测试和研究，不得用于任何非法活动。</p>
+<p>使用本文所提供的信息进行任何未经授权的行为均为非法行为，违反法律将导致严重的法律后果。读者在使用这些信息时，必须确保拥有合法的授权，并严格遵守所在国家和地区的法律法规。</p>
+<p>作者不对任何因使用本文内容而导致的直接或间接损害承担责任。所有风险和责任由用户自行承担。</p>
+<p>此外，读者必须在24小时内删除产生的内容，以确保信息不会被滥用。</p>
+]]></content>
+      <categories>
+        <category>网络工具</category>
+      </categories>
+      <tags>
+        <tag>Cloudflare</tag>
+        <tag>网络代理</tag>
+        <tag>订阅转换</tag>
       </tags>
   </entry>
 </search>
