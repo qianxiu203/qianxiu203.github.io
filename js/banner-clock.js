@@ -33,7 +33,10 @@ class BannerClock {
   // 等待横幅元素加载
   waitForBanner() {
     const checkBanner = () => {
-      const bannerContainer = document.querySelector('#banners');
+      // 优先查找新版bannerCard容器，如果没有则查找旧版banners容器
+      const bannerContainer = document.querySelector('.bannerCard-cover') || 
+                             document.querySelector('#banners') ||
+                             document.querySelector('.hometop');
       if (bannerContainer) {
         this.createClockElement(bannerContainer);
         this.isInitialized = true;
