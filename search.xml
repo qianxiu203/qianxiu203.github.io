@@ -1660,300 +1660,6 @@ function copyTerminalContent(text, button) {
       </tags>
   </entry>
   <entry>
-    <title>参数保存</title>
-    <url>/2025/07/15/%E5%8F%82%E6%95%B0%E4%BF%9D%E5%AD%98/</url>
-    <content><![CDATA[<style>
-.terminal-block {
-    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
-    border-radius: 8px;
-    margin: 15px 0;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-    font-family: 'Courier New', monospace;
-}
-
-.terminal-header {
-    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
-    padding: 8px 15px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #555;
-}
-
-.terminal-title {
-    color: #ffffff;
-    font-size: 12px;
-    font-weight: bold;
-}
-
-.terminal-buttons {
-    display: flex;
-    gap: 6px;
-}
-
-.terminal-btn {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-}
-
-.terminal-btn.close { background: #ff5f57; }
-.terminal-btn.minimize { background: #ffbd2e; }
-.terminal-btn.maximize { background: #28ca42; }
-
-.terminal-content {
-    padding: 15px;
-    color: #00ff00;
-    font-size: 14px;
-    position: relative;
-    background: #1e1e1e;
-}
-
-.terminal-prompt {
-    color: #00ff00;
-    margin-right: 8px;
-}
-
-.copy-btn {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #007acc;
-    color: white;
-    border: none;
-    padding: 4px 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 11px;
-    transition: background 0.3s;
-}
-
-.copy-btn:hover {
-    background: #005a9e;
-}
-</style>
-
-<script>
-function copyTerminalContent(text, button) {
-    navigator.clipboard.writeText(text).then(function() {
-        const originalText = button.textContent;
-        button.textContent = '已复制';
-        button.style.background = '#28a745';
-        setTimeout(function() {
-            button.textContent = originalText;
-            button.style.background = '#007acc';
-        }, 2000);
-    }).catch(function(err) {
-        console.error('复制失败: ', err);
-    });
-}
-</script>
-
-<h2 id="1-3XUI面板地址"><a href="#1-3XUI面板地址" class="headerlink" title="1. 3XUI面板地址"></a>1. 3XUI面板地址</h2><div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">3XUI面板地址</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>https://aws.0407123.xyz:56789/qianxiu/
-        <button class="copy-btn" onclick="copyTerminalContent('https://aws.0407123.xyz:56789/qianxiu/', this)">复制</button>
-    </div>
-</div>
-
-<h2 id="2-CF固定隧道密钥"><a href="#2-CF固定隧道密钥" class="headerlink" title="2. CF固定隧道密钥"></a>2. CF固定隧道密钥</h2><h3 id="网址：free-0407123-xyz"><a href="#网址：free-0407123-xyz" class="headerlink" title="网址：free.0407123.xyz"></a>网址：free.0407123.xyz</h3><div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">CF隧道密钥 - free.0407123.xyz</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiMWE0OTgwNjYtYzVjNi00NGY4LTllZmItODg5YzhlOGJiMjc2IiwicyI6Ik9UQmpOalE0TmpjdE9ETTJOQzAwWVRZM0xXRmpPREl0WWpVM09UZ3dZMlk0WVRsbSJ9
-        <button class="copy-btn" onclick="copyTerminalContent('eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiMWE0OTgwNjYtYzVjNi00NGY4LTllZmItODg5YzhlOGJiMjc2IiwicyI6Ik9UQmpOalE0TmpjdE9ETTJOQzAwWVRZM0xXRmpPREl0WWpVM09UZ3dZMlk0WVRsbSJ9', this)">复制</button>
-    </div>
-</div>
-
-<h3 id="网址：sealos-0407123-xyz"><a href="#网址：sealos-0407123-xyz" class="headerlink" title="网址：sealos.0407123.xyz"></a>网址：sealos.0407123.xyz</h3><div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">CF隧道密钥 - sealos.0407123.xyz</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiNTM4YmEwYTMtM2JhZi00Y2FlLTk0Y2YtOGJiM2ZiMGFjMTY0IiwicyI6Ik5EaG1NV0poWTJNdFpHVTVOQzAwTURWa0xUazBaRFV0TUdKa05qUXhZalUyTURWaiJ9
-        <button class="copy-btn" onclick="copyTerminalContent('eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiNTM4YmEwYTMtM2JhZi00Y2FlLTk0Y2YtOGJiM2ZiMGFjMTY0IiwicyI6Ik5EaG1NV0poWTJNdFpHVTVOQzAwTURWa0xUazBaRFV0TUdKa05qUXhZalUyTURWaiJ9', this)">复制</button>
-    </div>
-</div>
-
-<h2 id="3-ArgoSB一键无交互代理脚本"><a href="#3-ArgoSB一键无交互代理脚本" class="headerlink" title="3. ArgoSB一键无交互代理脚本"></a>3. ArgoSB一键无交互代理脚本</h2><h3 id="脚本命令"><a href="#脚本命令" class="headerlink" title="脚本命令"></a>脚本命令</h3><div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">ArgoSB脚本</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>vmpt="" argo="y" agn="" agk="" bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh)
-        <button class="copy-btn" onclick="copyTerminalContent('vmpt=&quot;&quot; argo=&quot;y&quot; agn=&quot;&quot; agk=&quot;&quot; bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh)', this)">复制</button>
-    </div>
-</div>
-
-<h3 id="AGSB快捷方式"><a href="#AGSB快捷方式" class="headerlink" title="AGSB快捷方式"></a>AGSB快捷方式</h3><h4 id="1-查看Argo信息"><a href="#1-查看Argo信息" class="headerlink" title="1. 查看Argo信息"></a>1. 查看Argo信息</h4><div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">查看Argo信息</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>agsb list
-        <button class="copy-btn" onclick="copyTerminalContent('agsb list', this)">复制</button>
-    </div>
-</div>
-
-<p>或者：</p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">查看Argo信息（完整命令）</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list
-        <button class="copy-btn" onclick="copyTerminalContent('bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list', this)">复制</button>
-    </div>
-</div>
-
-<h4 id="2-在线切换IPV4-IPV6节点配置（双栈VPS专享）"><a href="#2-在线切换IPV4-IPV6节点配置（双栈VPS专享）" class="headerlink" title="2. 在线切换IPV4&#x2F;IPV6节点配置（双栈VPS专享）"></a>2. 在线切换IPV4&#x2F;IPV6节点配置（双栈VPS专享）</h4><p><strong>显示IPV4节点配置：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">显示IPV4节点配置</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>ip=4 agsb list
-        <button class="copy-btn" onclick="copyTerminalContent('ip=4 agsb list', this)">复制</button>
-    </div>
-</div>
-
-<p>或者：</p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">显示IPV4节点配置（完整命令）</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>ip=4 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list
-        <button class="copy-btn" onclick="copyTerminalContent('ip=4 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list', this)">复制</button>
-    </div>
-</div>
-
-<p><strong>显示IPV6节点配置：</strong></p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">显示IPV6节点配置</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>ip=6 agsb list
-        <button class="copy-btn" onclick="copyTerminalContent('ip=6 agsb list', this)">复制</button>
-    </div>
-</div>
-
-<p>或者：</p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">显示IPV6节点配置（完整命令）</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>ip=6 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list
-        <button class="copy-btn" onclick="copyTerminalContent('ip=6 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list', this)">复制</button>
-    </div>
-</div>
-
-<h4 id="3-卸载脚本"><a href="#3-卸载脚本" class="headerlink" title="3. 卸载脚本"></a>3. 卸载脚本</h4><div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">卸载脚本</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>agsb del
-        <button class="copy-btn" onclick="copyTerminalContent('agsb del', this)">复制</button>
-    </div>
-</div>
-
-<p>或者：</p>
-<div class="terminal-block">
-    <div class="terminal-header">
-        <span class="terminal-title">卸载脚本（完整命令）</span>
-        <div class="terminal-buttons">
-            <button class="terminal-btn close"></button>
-            <button class="terminal-btn minimize"></button>
-            <button class="terminal-btn maximize"></button>
-        </div>
-    </div>
-    <div class="terminal-content">
-        <span class="terminal-prompt">$</span>bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) del
-        <button class="copy-btn" onclick="copyTerminalContent('bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) del', this)">复制</button>
-    </div>
-</div>
-
-<hr>
-<h2 id="⚠️-免责声明"><a href="#⚠️-免责声明" class="headerlink" title="⚠️ 免责声明"></a>⚠️ 免责声明</h2><p>本文档仅供学习和研究使用，请勿用于任何非法活动。使用者需遵守当地法律法规，作者不承担任何责任。请在24小时内删除相关内容。</p>
-]]></content>
-      <categories>
-        <category>技术教程</category>
-      </categories>
-      <tags>
-        <tag>3XUI</tag>
-        <tag>Cloudflare</tag>
-        <tag>ArgoSB</tag>
-        <tag>隧道</tag>
-        <tag>代理</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>免费内容</title>
     <url>/2025/06/27/%E5%85%8D%E8%B4%B9%E8%8A%82%E7%82%B9/</url>
     <content><![CDATA[<style>
@@ -2506,6 +2212,300 @@ function copyTerminalContent(text, button) {
         <tag>LLM</tag>
         <tag>提示词</tag>
         <tag>优化工具</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>参数保存</title>
+    <url>/2025/07/15/%E5%8F%82%E6%95%B0%E4%BF%9D%E5%AD%98/</url>
+    <content><![CDATA[<style>
+.terminal-block {
+    background: linear-gradient(135deg, #1e1e1e 0%, #2d2d2d 100%);
+    border-radius: 8px;
+    margin: 15px 0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    font-family: 'Courier New', monospace;
+}
+
+.terminal-header {
+    background: linear-gradient(90deg, #3a3a3a 0%, #4a4a4a 100%);
+    padding: 8px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #555;
+}
+
+.terminal-title {
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+}
+
+.terminal-btn.close { background: #ff5f57; }
+.terminal-btn.minimize { background: #ffbd2e; }
+.terminal-btn.maximize { background: #28ca42; }
+
+.terminal-content {
+    padding: 15px;
+    color: #00ff00;
+    font-size: 14px;
+    position: relative;
+    background: #1e1e1e;
+}
+
+.terminal-prompt {
+    color: #00ff00;
+    margin-right: 8px;
+}
+
+.copy-btn {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #007acc;
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 11px;
+    transition: background 0.3s;
+}
+
+.copy-btn:hover {
+    background: #005a9e;
+}
+</style>
+
+<script>
+function copyTerminalContent(text, button) {
+    navigator.clipboard.writeText(text).then(function() {
+        const originalText = button.textContent;
+        button.textContent = '已复制';
+        button.style.background = '#28a745';
+        setTimeout(function() {
+            button.textContent = originalText;
+            button.style.background = '#007acc';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('复制失败: ', err);
+    });
+}
+</script>
+
+<h2 id="1-3XUI面板地址"><a href="#1-3XUI面板地址" class="headerlink" title="1. 3XUI面板地址"></a>1. 3XUI面板地址</h2><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">3XUI面板地址</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>https://aws.0407123.xyz:56789/qianxiu/
+        <button class="copy-btn" onclick="copyTerminalContent('https://aws.0407123.xyz:56789/qianxiu/', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="2-CF固定隧道密钥"><a href="#2-CF固定隧道密钥" class="headerlink" title="2. CF固定隧道密钥"></a>2. CF固定隧道密钥</h2><h3 id="网址：free-0407123-xyz"><a href="#网址：free-0407123-xyz" class="headerlink" title="网址：free.0407123.xyz"></a>网址：free.0407123.xyz</h3><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">CF隧道密钥 - free.0407123.xyz</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiMWE0OTgwNjYtYzVjNi00NGY4LTllZmItODg5YzhlOGJiMjc2IiwicyI6Ik9UQmpOalE0TmpjdE9ETTJOQzAwWVRZM0xXRmpPREl0WWpVM09UZ3dZMlk0WVRsbSJ9
+        <button class="copy-btn" onclick="copyTerminalContent('eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiMWE0OTgwNjYtYzVjNi00NGY4LTllZmItODg5YzhlOGJiMjc2IiwicyI6Ik9UQmpOalE0TmpjdE9ETTJOQzAwWVRZM0xXRmpPREl0WWpVM09UZ3dZMlk0WVRsbSJ9', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="网址：sealos-0407123-xyz"><a href="#网址：sealos-0407123-xyz" class="headerlink" title="网址：sealos.0407123.xyz"></a>网址：sealos.0407123.xyz</h3><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">CF隧道密钥 - sealos.0407123.xyz</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiNTM4YmEwYTMtM2JhZi00Y2FlLTk0Y2YtOGJiM2ZiMGFjMTY0IiwicyI6Ik5EaG1NV0poWTJNdFpHVTVOQzAwTURWa0xUazBaRFV0TUdKa05qUXhZalUyTURWaiJ9
+        <button class="copy-btn" onclick="copyTerminalContent('eyJhIjoiY2YxNzgzMzU3ODliNjA0ZTc5N2NjMmEwMTZiZGU4YzEiLCJ0IjoiNTM4YmEwYTMtM2JhZi00Y2FlLTk0Y2YtOGJiM2ZiMGFjMTY0IiwicyI6Ik5EaG1NV0poWTJNdFpHVTVOQzAwTURWa0xUazBaRFV0TUdKa05qUXhZalUyTURWaiJ9', this)">复制</button>
+    </div>
+</div>
+
+<h2 id="3-ArgoSB一键无交互代理脚本"><a href="#3-ArgoSB一键无交互代理脚本" class="headerlink" title="3. ArgoSB一键无交互代理脚本"></a>3. ArgoSB一键无交互代理脚本</h2><h3 id="脚本命令"><a href="#脚本命令" class="headerlink" title="脚本命令"></a>脚本命令</h3><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">ArgoSB脚本</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>vmpt="" argo="y" agn="" agk="" bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh)
+        <button class="copy-btn" onclick="copyTerminalContent('vmpt=&quot;&quot; argo=&quot;y&quot; agn=&quot;&quot; agk=&quot;&quot; bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh)', this)">复制</button>
+    </div>
+</div>
+
+<h3 id="AGSB快捷方式"><a href="#AGSB快捷方式" class="headerlink" title="AGSB快捷方式"></a>AGSB快捷方式</h3><h4 id="1-查看Argo信息"><a href="#1-查看Argo信息" class="headerlink" title="1. 查看Argo信息"></a>1. 查看Argo信息</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">查看Argo信息</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>agsb list
+        <button class="copy-btn" onclick="copyTerminalContent('agsb list', this)">复制</button>
+    </div>
+</div>
+
+<p>或者：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">查看Argo信息（完整命令）</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list
+        <button class="copy-btn" onclick="copyTerminalContent('bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list', this)">复制</button>
+    </div>
+</div>
+
+<h4 id="2-在线切换IPV4-IPV6节点配置（双栈VPS专享）"><a href="#2-在线切换IPV4-IPV6节点配置（双栈VPS专享）" class="headerlink" title="2. 在线切换IPV4&#x2F;IPV6节点配置（双栈VPS专享）"></a>2. 在线切换IPV4&#x2F;IPV6节点配置（双栈VPS专享）</h4><p><strong>显示IPV4节点配置：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">显示IPV4节点配置</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>ip=4 agsb list
+        <button class="copy-btn" onclick="copyTerminalContent('ip=4 agsb list', this)">复制</button>
+    </div>
+</div>
+
+<p>或者：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">显示IPV4节点配置（完整命令）</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>ip=4 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list
+        <button class="copy-btn" onclick="copyTerminalContent('ip=4 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list', this)">复制</button>
+    </div>
+</div>
+
+<p><strong>显示IPV6节点配置：</strong></p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">显示IPV6节点配置</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>ip=6 agsb list
+        <button class="copy-btn" onclick="copyTerminalContent('ip=6 agsb list', this)">复制</button>
+    </div>
+</div>
+
+<p>或者：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">显示IPV6节点配置（完整命令）</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>ip=6 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list
+        <button class="copy-btn" onclick="copyTerminalContent('ip=6 bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) list', this)">复制</button>
+    </div>
+</div>
+
+<h4 id="3-卸载脚本"><a href="#3-卸载脚本" class="headerlink" title="3. 卸载脚本"></a>3. 卸载脚本</h4><div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">卸载脚本</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>agsb del
+        <button class="copy-btn" onclick="copyTerminalContent('agsb del', this)">复制</button>
+    </div>
+</div>
+
+<p>或者：</p>
+<div class="terminal-block">
+    <div class="terminal-header">
+        <span class="terminal-title">卸载脚本（完整命令）</span>
+        <div class="terminal-buttons">
+            <button class="terminal-btn close"></button>
+            <button class="terminal-btn minimize"></button>
+            <button class="terminal-btn maximize"></button>
+        </div>
+    </div>
+    <div class="terminal-content">
+        <span class="terminal-prompt">$</span>bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) del
+        <button class="copy-btn" onclick="copyTerminalContent('bash <(curl -Ls https://raw.githubusercontent.com/yonggekkk/argosb/main/argosb.sh) del', this)">复制</button>
+    </div>
+</div>
+
+<hr>
+<h2 id="⚠️-免责声明"><a href="#⚠️-免责声明" class="headerlink" title="⚠️ 免责声明"></a>⚠️ 免责声明</h2><p>本文档仅供学习和研究使用，请勿用于任何非法活动。使用者需遵守当地法律法规，作者不承担任何责任。请在24小时内删除相关内容。</p>
+]]></content>
+      <categories>
+        <category>技术教程</category>
+      </categories>
+      <tags>
+        <tag>代理</tag>
+        <tag>3XUI</tag>
+        <tag>Cloudflare</tag>
+        <tag>ArgoSB</tag>
+        <tag>隧道</tag>
       </tags>
   </entry>
   <entry>
